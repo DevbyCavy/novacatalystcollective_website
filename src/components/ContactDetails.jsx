@@ -20,15 +20,15 @@ export default function ContactDetails({ compact = false }) {
             </span>
           )}
           <div>
-            <p className="eyebrow text-white/50">{label}</p>
+            <p className="eyebrow text-haze">{label}</p>
             {value ? (
               href ? (
-                <a href={href} className="mt-1.5 block text-white transition-colors hover:text-accent">{value}</a>
+                <a href={href} className="mt-1.5 block text-white transition-colors hover:text-glow">{value}</a>
               ) : (
                 <p className="mt-1.5 text-white">{value}</p>
               )
             ) : (
-              <p className="mt-1.5 text-white/50">Details to be confirmed</p>
+              <p className="mt-1.5 text-haze">Details to be confirmed</p>
             )}
           </div>
         </li>
@@ -41,8 +41,8 @@ export default function ContactDetails({ compact = false }) {
             </span>
           )}
           <div>
-            <p className="eyebrow text-white/50">WhatsApp</p>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-1.5 block text-white transition-colors hover:text-accent">
+            <p className="eyebrow text-haze">WhatsApp</p>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-1.5 block text-white transition-colors hover:text-glow">
               Message us on WhatsApp
             </a>
           </div>

@@ -8,6 +8,7 @@ import CtaBand from '../components/CtaBand'
 import { useSeo } from '../components/Seo'
 import { images } from '../data/images'
 import { philosophy, approachSteps } from '../data/content'
+import { site } from '../data/site'
 
 export default function About() {
   useSeo({
@@ -41,7 +42,7 @@ export default function About() {
             </Reveal>
           </div>
           <div className="lg:col-span-5 lg:col-start-8">
-            <RevealImage image={images.aboutPrimary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/5]" imgClassName="opacity-85" />
+            <RevealImage image={images.aboutPrimary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/5]" />
           </div>
         </div>
       </section>
@@ -49,7 +50,7 @@ export default function About() {
       {/* Vision & mission */}
       <section aria-label="Vision and mission" className="pb-24 sm:pb-32">
         <div className="container-x grid gap-4 lg:grid-cols-2">
-          <Reveal className="relative overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-brand/70 to-night-2 p-8 sm:p-12">
+          <Reveal style={{ '--color-white': '#ffffff', '--color-haze': '#ddd3ec', '--color-glow': '#cdbdf0' }} className="relative overflow-hidden rounded-[28px] bg-brand p-8 text-white sm:p-12">
             <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-60" />
             <p className="eyebrow relative">Our vision</p>
             <p className="relative mt-6 font-geo text-[1.7rem] leading-snug font-medium tracking-[-0.02em] sm:text-[2.1rem]">
@@ -134,7 +135,10 @@ export default function About() {
               centres on helping organisations and individuals understand the power of digital innovation,
               strategic communication and purposeful brand positioning.
             </p>
-            <TextLink to="/digital-bae" className="mt-6">Discover Digital Bae</TextLink>
+            <div className="mt-6 flex flex-wrap gap-6">
+              <TextLink to="/digital-bae">Discover Digital Bae</TextLink>
+              <TextLink href={site.digitalBae.url} external>{site.digitalBae.label}</TextLink>
+            </div>
           </Reveal>
         </div>
       </section>

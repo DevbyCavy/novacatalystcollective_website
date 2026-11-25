@@ -4,3 +4,6 @@ dist
 .env.local
 .DS_Store
 Thumbs.db
+
+# Claude Code local settings (machine-specific permissions and hooks)
+.claude/settings.local.json

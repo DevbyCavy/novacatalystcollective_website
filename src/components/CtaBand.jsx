@@ -15,7 +15,7 @@ export default function CtaBand({
 }) {
   return (
     <section className="relative overflow-hidden px-5 py-28 sm:py-36">
-      <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-1/2 h-[28rem] w-[58rem] -translate-x-1/2 translate-y-1/2 rounded-full bg-brand/55 blur-[140px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-1/2 h-[28rem] w-[58rem] -translate-x-1/2 translate-y-1/2 rounded-full bg-accent/45 blur-[140px]" />
       <div className="relative mx-auto max-w-4xl text-center">
         <Reveal as="h2" className="text-[2.5rem] leading-[1.04] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
           {title}

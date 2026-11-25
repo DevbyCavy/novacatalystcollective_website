@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
 import Logo from './Logo'
 import { easeOut } from './Reveal'
 import { navItems, site } from '../data/site'
 
-const primaryLinks = navItems.filter((n) => n.to !== '/contact')
+const primaryLinks = [{ label: 'Home', to: '/' }, ...navItems.filter((n) => n.to !== '/contact')]
 
 /**
  * Full-width header bar.
@@ -61,7 +60,7 @@ export default function Navbar() {
     }
   }, [open])
 
-  const activeTo = primaryLinks.find((n) => pathname.startsWith(n.to))?.to
+  const activeTo = primaryLinks.find((n) => (n.to === '/' ? pathname === '/' : pathname.startsWith(n.to)))?.to
   const highlight = hovered ?? activeTo
   const isHidden = hidden && !open
 
@@ -76,7 +75,7 @@ export default function Navbar() {
       >
         <nav aria-label="Primary" className="container-x flex h-[4.5rem] items-center justify-between gap-6 lg:h-20">
           <Link to="/" aria-label={`${site.name} — home`} className="press shrink-0">
-            <Logo compact />
+            <Logo tone="dark" compact />
           </Link>
 
           <ul className="hidden items-center xl:flex" onMouseLeave={() => setHovered(null)}>
@@ -84,24 +83,22 @@ export default function Navbar() {
               const isActive = n.to === activeTo
               return (
                 <li key={n.to} className="relative">
-                  {highlight === n.to && (
-                    <motion.span
-                      layoutId="nav-highlight"
-                      aria-hidden="true"
-                      className="absolute inset-0 rounded-full bg-white/[0.07] ring-1 ring-white/10"
-                      transition={{ type: 'spring', stiffness: 520, damping: 40 }}
-                    />
-                  )}
                   <NavLink
                     to={n.to}
                     onMouseEnter={() => setHovered(n.to)}
                     onFocus={() => setHovered(n.to)}
                     onBlur={() => setHovered(null)}
-                    className={`relative block px-4 py-2 font-geo text-[0.9rem] transition-colors duration-200 ${isActive || hovered === n.to ? 'text-white' : 'text-haze'}`}
+                    className={`relative block px-3.5 py-2 font-geo text-[0.9rem] transition-colors duration-200 ${isActive || hovered === n.to ? 'text-white' : 'text-haze'}`}
                   >
                     {n.label}
-                    {isActive && (
-                      <span aria-hidden="true" className="absolute bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-glow shadow-[0_0_8px_rgba(185,156,240,0.9)]" />
+                    {/* Underline only: rests on the active page, glides to the hovered link */}
+                    {highlight === n.to && (
+                      <motion.span
+                        layoutId="nav-underline"
+                        aria-hidden="true"
+                        className="absolute inset-x-3.5 -bottom-px h-[2px] bg-glow"
+                        transition={{ type: 'spring', stiffness: 520, damping: 40 }}
+                      />
                     )}
                   </NavLink>
                 </li>
@@ -112,12 +109,9 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <Link
               to="/contact"
-              className="press group hidden items-center gap-2 rounded-full border border-white/15 py-2 pr-2 pl-4 font-geo text-[0.9rem] text-white transition-colors duration-200 hover:border-white/40 sm:inline-flex"
+              className="press group hidden items-stretch overflow-hidden rounded-md bg-white font-geo text-[0.9rem] font-medium text-night transition-colors duration-200 hover:bg-brand sm:inline-flex"
             >
-              Let&rsquo;s talk
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-night transition-colors duration-200 group-hover:bg-glow">
-                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
-              </span>
+              <span className="flex items-center px-4 py-2.5">Let&rsquo;s talk</span>
             </Link>
             <button
               ref={toggleRef}
@@ -126,7 +120,7 @@ export default function Navbar() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? 'Close menu' : 'Open menu'}
-              className="press -mr-2 flex h-11 w-11 items-center justify-center rounded-full text-white hover:bg-white/[0.06] xl:hidden"
+              className="press -mr-2 flex h-11 w-11 items-center justify-center rounded-md text-white hover:bg-white/[0.06] xl:hidden"
             >
               <span className="relative block h-3 w-5" aria-hidden="true">
                 <span className={`absolute left-0 h-[1.5px] w-5 bg-current transition-transform duration-300 ease-[var(--ease-out)] ${open ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'}`} />
@@ -148,7 +142,7 @@ export default function Navbar() {
             className="fixed inset-0 z-40 flex h-dvh flex-col overflow-y-auto overscroll-contain bg-night/95 pt-[calc(5.5rem+env(safe-area-inset-top))] backdrop-blur-xl xl:hidden"
           >
             <div aria-hidden="true" className="grid-lines grid-fade pointer-events-none absolute inset-0" />
-            <div aria-hidden="true" className="pointer-events-none absolute -top-20 left-1/2 h-80 w-[36rem] -translate-x-1/2 rounded-full bg-brand/40 blur-[110px]" />
+            <div aria-hidden="true" className="pointer-events-none absolute -top-20 left-1/2 h-80 w-[36rem] -translate-x-1/2 rounded-full bg-accent/45 blur-[110px]" />
             <ul className="container-x relative flex flex-col">
               {[{ label: 'Home', to: '/' }, ...navItems].map((item, i) => (
                 <motion.li
@@ -175,8 +169,8 @@ export default function Navbar() {
               transition={{ delay: 0.35 }}
               className="container-x relative mt-auto pt-10 pb-[max(2.5rem,env(safe-area-inset-bottom))]"
             >
-              <Link to="/contact" className="press flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-4 font-geo font-medium text-night">
-                Let&rsquo;s talk <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              <Link to="/contact" className="press flex w-full items-center justify-center gap-2 rounded-md bg-white px-6 py-4 font-geo font-medium text-night">
+                Let&rsquo;s talk
               </Link>
               <p className="mt-6 text-center font-geo text-sm text-haze">{site.tagline}</p>
             </motion.div>

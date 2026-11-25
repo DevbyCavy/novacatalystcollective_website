@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import { Mic, Sparkles } from 'lucide-react'
 import Reveal, { RevealImage, easeOut } from '../components/Reveal'
-import Button from '../components/Button'
+import Button, { TextLink } from '../components/Button'
 import GlowCard from '../components/GlowCard'
 import EnquiryForm from '../components/EnquiryForm'
 import { useSeo } from '../components/Seo'
 import { images } from '../data/images'
 import { digitalBae } from '../data/content'
+import { site } from '../data/site'
 
 const speakingFields = [
   { name: 'name', label: 'Full name', type: 'text', required: true, autoComplete: 'name' },
@@ -32,11 +33,11 @@ export default function DigitalBae() {
       {/* Sub-brand hero */}
       <section aria-labelledby="db-hero-title" className="relative overflow-hidden pt-36 pb-16 sm:pt-44 sm:pb-24">
         <img src={images.speakingAudience.src} srcSet={images.speakingAudience.srcSet} sizes="100vw" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-30" />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night via-night/75 to-brand/50" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night via-night/75 to-brand/15" />
         <div aria-hidden="true" className="grid-lines grid-fade pointer-events-none absolute inset-0" />
         <div className="container-x relative">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15, duration: 0.6 }} className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1 font-geo text-sm text-glow backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5" aria-hidden="true" /> Personal brand platform
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15, duration: 0.6 }} className="inline-flex items-center gap-2.5 font-geo text-[0.72rem] font-semibold tracking-[0.18em] text-glow uppercase">
+            <span aria-hidden="true" className="h-px w-6 bg-glow" /><Sparkles className="h-3.5 w-3.5" aria-hidden="true" /> Personal brand platform
           </motion.p>
           <h1 id="db-hero-title" className="mt-6 overflow-hidden pb-2 font-brand text-[3.6rem] leading-[0.92] font-black tracking-tight sm:text-8xl lg:text-[9.5rem]">
             <motion.span className="block" initial={{ y: '100%' }} animate={{ y: 0 }} transition={{ duration: 1, delay: 0.2, ease: easeOut }}>
@@ -50,8 +51,11 @@ export default function DigitalBae() {
             <p className="font-geo text-3xl leading-tight font-medium tracking-[-0.03em] sm:text-[2.6rem] lg:col-span-7">
               The future is digital. <span className="text-glow">The opportunity is yours.</span>
             </p>
-            <div className="lg:col-span-5 lg:text-right">
+            <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:justify-end">
               <Button href="#speaking-enquiry">Invite Digital Bae to speak</Button>
+              <Button href={site.digitalBae.url} target="_blank" rel="noopener noreferrer" variant="ghost" arrow={false}>
+                Visit {site.digitalBae.label} ↗<span className="sr-only"> (opens in a new tab)</span>
+              </Button>
             </div>
           </motion.div>
         </div>
@@ -79,6 +83,11 @@ export default function DigitalBae() {
               Through speaking engagements, masterclasses, media contributions and strategic conversations,
               Digital Bae inspires audiences to think differently, adapt confidently and use digital tools to
               create meaningful impact.
+            </Reveal>
+            <Reveal delay={0.16}>
+              <TextLink href={site.digitalBae.url} external className="text-glow! hover:text-white!">
+                Explore the platform at {site.digitalBae.label}
+              </TextLink>
             </Reveal>
           </div>
         </div>
@@ -119,7 +128,7 @@ export default function DigitalBae() {
             </ul>
           </div>
           <div className="lg:col-span-6">
-            <RevealImage image={images.speakingStage} sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/5]" imgClassName="opacity-80" />
+            <RevealImage image={images.speakingStage} sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/5]" />
           </div>
         </div>
       </section>

@@ -26,9 +26,9 @@ export default function WorkCard({ item, index = 0, featured = false, detailed =
           <span className="font-geo text-xs tracking-[0.18em] text-glow uppercase">{item.sector}</span>
           <h3 className={`mt-6 tracking-[-0.02em] ${featured ? 'text-4xl' : 'text-2xl'}`}>{item.client}</h3>
           <p className="mt-1 text-haze">{item.project}</p>
-          <ul className="mt-5 flex flex-wrap gap-1.5">
+          <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-2">
             {item.scope.map((s) => (
-              <li key={s} className="rounded-full bg-white/[0.06] px-2.5 py-1 text-xs text-white/80">{s}</li>
+              <li key={s} className="font-geo font-medium text-white after:ml-3 after:font-normal after:text-glow after:content-['/'] last:after:content-none text-sm">{s}</li>
             ))}
           </ul>
           {detailed && caseStudy.length > 0 && (

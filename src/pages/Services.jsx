@@ -21,7 +21,7 @@ export default function Services() {
       >
         <nav aria-label="Jump to a service" className="flex flex-wrap gap-2">
           {services.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className="press rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 font-geo text-sm text-haze transition-colors duration-200 hover:border-white/30 hover:text-white">
+            <a key={s.id} href={`#${s.id}`} className="press rounded-md border border-white/12 bg-night-2 px-3.5 py-2 font-geo text-sm text-haze transition-colors duration-200 hover:border-glow hover:text-white">
               <span className="mr-1.5 text-glow">{s.number}</span>
               {s.shortTitle}
             </a>

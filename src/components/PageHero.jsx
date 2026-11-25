@@ -25,8 +25,8 @@ export default function PageHero({ eyebrow, title, intro, children }) {
     <section onPointerMove={onMove} className="relative overflow-hidden border-b border-white/[0.06] pt-36 pb-20 sm:pt-44 sm:pb-24">
       <div aria-hidden="true" className="grid-lines grid-fade pointer-events-none absolute inset-0" />
       <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: spotlight }} />
-      <div aria-hidden="true" className="pointer-events-none absolute -top-40 left-1/2 h-[30rem] w-[50rem] -translate-x-1/2 rounded-full bg-brand/35 blur-[130px]" />
-      <LogoMark className="pointer-events-none absolute -right-28 -bottom-40 h-[30rem] w-[30rem] opacity-[0.05]" arc="#fff" mark="transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute -top-40 left-1/2 h-[30rem] w-[50rem] -translate-x-1/2 rounded-full bg-accent/45 blur-[130px]" />
+      <LogoMark className="pointer-events-none absolute -right-28 -bottom-40 h-[30rem] w-[30rem] opacity-[0.05]" arc="#441E6B" mark="transparent" />
 
       <div className="container-x relative">
         <motion.nav aria-label="Breadcrumb" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>

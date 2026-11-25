@@ -1,26 +1,34 @@
 @import 'tailwindcss';
 
 /*
- * Nova Catalyst Collective — "Midnight Boardroom" design system
- * Direction: refined dark theme + geometric type (ui-ux-pro-max), patterns from 21st.dev
+ * Nova Catalyst Collective — design system (light theme)
+ * Direction: geometric type (ui-ux-pro-max), patterns from 21st.dev
  * (cursor spotlight, kinetic type, glow cards), motion per Emil Kowalski's design engineering:
  * strong ease-out, short distances, UI motion < 300ms, exit faster than enter, reduced motion respected.
  */
 @theme {
-  /* Surfaces */
-  --color-night: #0d0714; /* page background */
-  --color-night-2: #150b20; /* raised surface */
-  --color-night-3: #1c1029; /* cards, inputs */
+  /*
+   * LIGHT THEME (semantic remap).
+   * The layout was built dark, so tokens are used semantically:
+   *   night / night-2 / night-3 = page / raised / sunken surfaces
+   *   white                     = foreground (ink) — text, hairlines (white/10), tints (white/[0.05])
+   *   snow                      = true white, for text on purple panels (or scope --color-white: #fff)
+   */
+  --color-night: #f7f5fa; /* page background — soft lilac-white */
+  --color-night-2: #ffffff; /* raised surface — cards */
+  --color-night-3: #efeaf5; /* sunken surface — inputs, image placeholders */
+  --color-white: #1d1428; /* foreground ink */
+  --color-snow: #ffffff;
   /* Brand (logo) */
   --color-brand: #441e6b;
   --color-brand-soft: #5a2c8a;
-  --color-glow: #b99cf0; /* lilac accent — highlights, links, focus */
-  --color-accent: #cdbdf0;
+  --color-glow: #5f3393; /* accent — links, highlights, focus (AA on light) */
+  --color-accent: #cdbdf0; /* decorative lilac */
   /* Text */
-  --color-haze: #a59cb4; /* secondary text on night (AA) */
+  --color-haze: #5c5668; /* secondary text (AA on #f7f5fa) */
   --color-grey: #646369; /* logo grey */
-  --color-ink: #0d0714;
-  --color-error: #f0a8a8;
+  --color-ink: #1d1428;
+  --color-error: #b42323;
 
   --font-geo: 'Outfit', 'Manrope', system-ui, sans-serif;
   --font-display: 'Outfit', 'Manrope', system-ui, sans-serif;
@@ -36,7 +44,7 @@
   html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
-    color-scheme: dark;
+    color-scheme: light;
   }
   @media (prefers-reduced-motion: no-preference) {
     html {
@@ -98,10 +106,6 @@
   .press:active {
     transform: scale(0.97);
   }
-  /* Native date picker icon visible on dark inputs */
-  input[type='date']::-webkit-calendar-picker-indicator {
-    filter: invert(0.8);
-  }
 }
 
 @utility container-x {
@@ -124,8 +128,8 @@
 /* Fine architectural grid */
 @utility grid-lines {
   background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgb(68 30 107 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(68 30 107 / 0.06) 1px, transparent 1px);
   background-size: 88px 88px;
 }
 
@@ -134,10 +138,11 @@
   mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
 }
 
-/* Glass surface */
+/* Raised card surface */
 @utility glass {
-  background: linear-gradient(to bottom, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
-  border: 1px solid rgb(255 255 255 / 0.1);
+  background: #ffffff;
+  border: 1px solid rgb(29 20 40 / 0.08);
+  box-shadow: 0 1px 2px rgb(29 20 40 / 0.04), 0 12px 32px -16px rgb(68 30 107 / 0.18);
 }
 
 @keyframes slow-spin {

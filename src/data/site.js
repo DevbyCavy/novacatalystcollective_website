@@ -33,6 +33,12 @@ export const site = {
     instagram: null,
   },
 
+  // Digital Bae — the founder's thought leadership platform (external site).
+  digitalBae: {
+    url: 'https://www.digitalbae.online',
+    label: 'digitalbae.online',
+  },
+
   // Downloadable company credentials profile (PDF). Put the file in /public and set
   // e.g. '/nova-catalyst-collective-profile.pdf'. Download buttons appear once set.
   credentialsProfile: null,

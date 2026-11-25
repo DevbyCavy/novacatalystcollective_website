@@ -500,7 +500,7 @@ export default function ConceptBento() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-canvas font-inter text-plum-ink selection:bg-brand selection:text-white">
+    <div style={{ '--color-white': '#ffffff' }} className="min-h-screen bg-canvas font-inter text-plum-ink selection:bg-brand selection:text-white">
       <Header />
       <main id="main">
         <BentoHero />

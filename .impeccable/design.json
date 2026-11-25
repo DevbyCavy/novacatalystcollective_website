@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-25T10:00:00Z",
+  "title": "Design System: Nova Catalyst Collective",
+  "extensions": {
+    "colorMeta": {
+      "catalyst-plum": { "role": "primary", "displayName": "Catalyst Plum", "canonical": "#441e6b", "tonalRamp": ["#1c0c2e", "#2c1446", "#441e6b", "#5a2c8a", "#7a52a8", "#a084c6", "#cdbdf0", "#efe8fa"] },
+      "catalyst-plum-soft": { "role": "primary", "displayName": "Catalyst Plum Soft", "canonical": "#5a2c8a", "tonalRamp": ["#22103a", "#351a57", "#4a2475", "#5a2c8a", "#7650a6", "#9c80c2", "#c6b5e0", "#ece5f6"] },
+      "blueprint-violet": { "role": "secondary", "displayName": "Blueprint Violet", "canonical": "#5f3393", "tonalRamp": ["#22113a", "#3a1d60", "#5f3393", "#7a4fae", "#9673c4", "#b59cd8", "#d6c8ec", "#f1ecf9"] },
+      "lilac-haze": { "role": "secondary", "displayName": "Lilac Haze", "canonical": "#cdbdf0", "tonalRamp": ["#3b2a63", "#5d488f", "#8670bd", "#a893d8", "#cdbdf0", "#ddd2f5", "#ebe4f9", "#f7f3fd"] },
+      "boardroom-ink": { "role": "neutral", "displayName": "Boardroom Ink", "canonical": "#1d1428", "tonalRamp": ["#0d0814", "#1d1428", "#332a3f", "#4b4258", "#6b6377", "#938c9e", "#c3bdcb", "#ece9f0"] },
+      "slate-haze": { "role": "neutral", "displayName": "Slate Haze", "canonical": "#5c5668", "tonalRamp": ["#1f1c24", "#35303d", "#4a4554", "#5c5668", "#79738a", "#9a95a8", "#c2bdcc", "#ebe9f0"] },
+      "logo-grey": { "role": "neutral", "displayName": "Logo Grey", "canonical": "#646369", "tonalRamp": ["#222226", "#38373c", "#4e4d53", "#646369", "#807f85", "#a2a1a6", "#c9c8cc", "#efeff1"] },
+      "lilac-paper": { "role": "neutral", "displayName": "Lilac Paper", "canonical": "#f7f5fa" },
+      "card-white": { "role": "neutral", "displayName": "Card White", "canonical": "#ffffff" },
+      "sunken-lilac": { "role": "neutral", "displayName": "Sunken Lilac", "canonical": "#efeaf5" },
+      "signal-red": { "role": "neutral", "displayName": "Signal Red", "canonical": "#b42323" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Homepage hero headline only (2.75rem → 6.2rem)." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles; inner-page heroes run 2.7rem → 4.6rem." },
+      "title": { "displayName": "Title", "purpose": "Card, service and client titles." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs in Slate Haze; 65–75ch measure." },
+      "body-lead": { "displayName": "Body Lead", "purpose": "Intro paragraphs." },
+      "label": { "displayName": "Label", "purpose": "Uppercase violet labels; type only, never boxed." },
+      "eyebrow": { "displayName": "Eyebrow", "purpose": "Violet kicker above section headlines." },
+      "wordmark": { "displayName": "Wordmark", "purpose": "Logo lockup and the DIGITAL BAE sub-brand (black weight)." }
+    },
+    "shadows": [
+      { "name": "raised-card", "value": "0 1px 2px rgb(29 20 40 / 0.04), 0 12px 32px -16px rgb(68 30 107 / 0.18)", "purpose": "Glass/raised surfaces: service card, tiles, form panels." },
+      { "name": "floating-bar", "value": "0 16px 40px -16px rgba(29,20,40,0.28)", "purpose": "Bottom action bar." },
+      { "name": "plum-glass", "value": "0 16px 40px -16px rgba(68,30,107,0.6)", "purpose": "Purple frosted overlays on imagery." },
+      { "name": "preview-window", "value": "0 30px 60px -24px rgba(29,20,40,0.45)", "purpose": "Browser-frame previews of external sites." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Default for entrances and UI feedback." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "On-screen movement: image clip reveals, timeline lines." },
+      { "name": "ease-drawer", "value": "cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "Navbar hide/show and drawers (300ms)." },
+      { "name": "press", "value": "transform 160ms cubic-bezier(0.23, 1, 0.32, 1); scale(0.97) on :active", "purpose": "Every pressable control." },
+      { "name": "reveal", "value": "opacity 0→1, translateY 14px→0, 700ms ease-out", "purpose": "Section content entering on scroll (once)." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Squared ink button; turns Catalyst Plum on hover. Text only.",
+      "html": "<button class=\"ds-btn-primary\">Book a consultation</button>",
+      "css": ".ds-btn-primary { background: #1d1428; color: #f7f5fa; font-family: Outfit, Manrope, system-ui, sans-serif; font-weight: 500; font-size: 0.95rem; padding: 14px 20px; border: 1px solid transparent; border-radius: 6px; cursor: pointer; transition: background-color 200ms, transform 160ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-primary:hover { background: #441e6b; color: #ffffff; } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid #5f3393; outline-offset: 3px; }"
+    },
+    {
+      "name": "Hero CTA (arrow cell)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The only button with an arrow: arrow in its own cell behind a hairline.",
+      "html": "<a class=\"ds-btn-cta\" href=\"#\"><span class=\"ds-btn-cta__label\">Start a conversation</span><span class=\"ds-btn-cta__arrow\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></span></a>",
+      "css": ".ds-btn-cta { display: inline-flex; align-items: stretch; background: #1d1428; color: #f7f5fa; border-radius: 6px; font-family: Outfit, Manrope, system-ui, sans-serif; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: background-color 200ms, transform 160ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-cta__label { display: flex; align-items: center; padding: 14px 20px; } .ds-btn-cta__arrow { display: flex; align-items: center; padding: 0 14px; border-left: 1px solid rgba(247,245,250,0.2); } .ds-btn-cta__arrow svg { transition: transform 200ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-cta:hover { background: #441e6b; color: #fff; } .ds-btn-cta:hover .ds-btn-cta__arrow svg { transform: translateX(2px); } .ds-btn-cta:active { transform: scale(0.97); } .ds-btn-cta:focus-visible { outline: 2px solid #5f3393; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action: hairline border, ink text.",
+      "html": "<button class=\"ds-btn-ghost\">Explore our expertise</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #1d1428; font-family: Outfit, Manrope, system-ui, sans-serif; font-weight: 500; font-size: 0.95rem; padding: 14px 20px; border: 1px solid rgba(29,20,40,0.2); border-radius: 6px; cursor: pointer; transition: border-color 200ms, background-color 200ms, transform 160ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-ghost:hover { border-color: rgba(29,20,40,0.5); background: rgba(29,20,40,0.04); } .ds-btn-ghost:active { transform: scale(0.97); } .ds-btn-ghost:focus-visible { outline: 2px solid #5f3393; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Sunken lilac field with a violet focus ring.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field__label\">Email address</span><input class=\"ds-input\" type=\"email\" placeholder=\"name@organisation.com\"></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; font-family: Outfit, Manrope, system-ui, sans-serif; } .ds-field__label { font-size: 0.875rem; font-weight: 500; color: rgba(29,20,40,0.75); } .ds-input { background: #efeaf5; color: #1d1428; font-family: Manrope, system-ui, sans-serif; font-size: 1rem; padding: 14px 16px; border: 1px solid rgba(29,20,40,0.1); border-radius: 12px; outline: none; transition: border-color 200ms, box-shadow 200ms; } .ds-input::placeholder { color: rgba(29,20,40,0.3); } .ds-input:hover { border-color: rgba(29,20,40,0.25); } .ds-input:focus { border-color: #5f3393; box-shadow: 0 0 0 4px rgba(95,51,147,0.15); }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Text links with a single gliding violet underline; no background shapes.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav__link is-active\" href=\"#\">Home</a><a class=\"ds-nav__link\" href=\"#\">About</a><a class=\"ds-nav__link\" href=\"#\">Services</a><a class=\"ds-nav__link\" href=\"#\">Insights</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 2px; font-family: Outfit, Manrope, system-ui, sans-serif; } .ds-nav__link { position: relative; padding: 8px 14px; font-size: 0.9rem; color: #5c5668; text-decoration: none; transition: color 200ms; } .ds-nav__link:hover, .ds-nav__link.is-active { color: #1d1428; } .ds-nav__link::after { content: ''; position: absolute; left: 14px; right: 14px; bottom: -1px; height: 2px; background: #5f3393; transform: scaleX(0); transform-origin: left; transition: transform 300ms cubic-bezier(0.23,1,0.32,1); } .ds-nav__link:hover::after, .ds-nav__link.is-active::after { transform: scaleX(1); } .ds-nav__link:focus-visible { outline: 2px solid #5f3393; outline-offset: 3px; }"
+    },
+    {
+      "name": "Tag List",
+      "kind": "chip",
+      "description": "Labels without containers: ink text joined by violet slashes.",
+      "html": "<ul class=\"ds-tags\"><li>Strategic growth planning</li><li>Business development</li><li>Market expansion</li></ul>",
+      "css": ".ds-tags { display: flex; flex-wrap: wrap; gap: 8px 12px; list-style: none; margin: 0; padding: 0; font-family: Outfit, Manrope, system-ui, sans-serif; font-weight: 500; font-size: 0.95rem; color: #1d1428; } .ds-tags li:not(:last-child)::after { content: '/'; margin-left: 12px; font-weight: 400; color: #5f3393; }"
+    },
+    {
+      "name": "Raised Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "White card on lilac paper with a soft plum-tinted lift.",
+      "html": "<article class=\"ds-card\"><p class=\"ds-card__label\">Sport</p><h3 class=\"ds-card__title\">Team Zimbabwe</h3><p class=\"ds-card__body\">National sports marketing strategy / Brand development</p><p class=\"ds-card__stat\">1.3M <span>reported impressions</span></p></article>",
+      "css": ".ds-card { background: #ffffff; border: 1px solid rgba(29,20,40,0.08); border-radius: 24px; padding: 32px; box-shadow: 0 1px 2px rgb(29 20 40 / 0.04), 0 12px 32px -16px rgb(68 30 107 / 0.18); font-family: Manrope, system-ui, sans-serif; color: #1d1428; transition: transform 300ms cubic-bezier(0.23,1,0.32,1); } .ds-card:hover { transform: translateY(-4px); } .ds-card__label { margin: 0; font-family: Outfit, sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #5f3393; } .ds-card__title { margin: 24px 0 4px; font-family: Outfit, sans-serif; font-weight: 600; font-size: 1.75rem; letter-spacing: -0.02em; } .ds-card__body { margin: 0; color: #5c5668; } .ds-card__stat { margin: 32px 0 0; font-family: Outfit, sans-serif; font-weight: 600; font-size: 3rem; letter-spacing: -0.03em; color: #5f3393; } .ds-card__stat span { font-family: Manrope, sans-serif; font-size: 0.875rem; font-weight: 400; letter-spacing: 0; color: #5c5668; }"
+    },
+    {
+      "name": "Plum Statement Panel",
+      "kind": "card",
+      "refersTo": "panel-plum",
+      "description": "Solid Catalyst Plum panel with white text for vision/contact statements.",
+      "html": "<section class=\"ds-panel\"><p class=\"ds-panel__eyebrow\">Our vision</p><p class=\"ds-panel__text\">To become a leading African-origin strategic advisory firm connecting businesses, markets and opportunities across Africa and internationally.</p></section>",
+      "css": ".ds-panel { background: #441e6b; color: #ffffff; border-radius: 28px; padding: 48px; font-family: Outfit, Manrope, system-ui, sans-serif; } .ds-panel__eyebrow { margin: 0; font-size: 0.875rem; font-weight: 500; color: #cdbdf0; } .ds-panel__text { margin: 24px 0 0; font-size: 1.9rem; line-height: 1.3; font-weight: 500; letter-spacing: -0.02em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Strategy Blueprint",
+    "overview": "Drafting-table precision: grids, hairlines and measured purple ink. The site should feel like strategy you can see the structure of. A faint 88px architectural grid sits behind heroes and dark-tone bands; headlines are set in a tight geometric sans; colour is spent sparingly, so that Catalyst Plum and Blueprint Violet read as decisions, not decoration. Surfaces are light, calm and lilac-tinted, with depth expressed through soft, plum-tinted shadows and a cursor-following glow on cards rather than heavy fills.\n\nDensity is spacious and editorial: large type, generous section rhythm (96–128px), and short, confident copy. Motion is quiet and purposeful: content rises 10–14px into place with a strong ease-out, headlines come into focus from a light blur, and interactive feedback is immediate (press scale 0.97). Nothing bounces, nothing loops for attention except the very slow logo ring in the hero.\n\nConfirmed rejections: the firm must never look like a social media agency (founder's direction). Gradient text is not used (removed on the Impeccable detector finding). Pill-shaped buttons, boxed labels and chip backgrounds were explicitly removed by the user.",
+    "keyCharacteristics": [
+      "Light lilac-paper canvas with white cards and a faint plum blueprint grid.",
+      "Outfit geometric headlines (600, tight negative tracking) over Manrope body text.",
+      "One accent family: Catalyst Plum for fills and panels, Blueprint Violet for emphasis text, links, underlines and focus.",
+      "Squared controls (6px), soft card radii (24–32px), no pills.",
+      "Labels stand out through type alone: colour, weight, uppercase tracking, slashes and hairlines.",
+      "Subtle, interruptible motion with a strong ease-out and full reduced-motion support."
+    ],
+    "rules": [
+      { "name": "The Inverted Name Rule", "body": "The codebase was built dark and re-themed by remapping tokens, so the Tailwind names are semantic, not literal: `white` is Boardroom Ink (foreground), `night` / `night-2` / `night-3` are Lilac Paper / Card White / Sunken Lilac, `glow` is Blueprint Violet, and `snow` is true white. `text-white` means ink; `border-white/10` is an ink hairline. Inside a Catalyst Plum panel, re-scope `--color-white: #ffffff` (and lighten `--color-haze` and `--color-glow`) on the panel so the same classes render white.", "section": "colors" },
+      { "name": "The Spent Accent Rule", "body": "Blueprint Violet marks one idea per block: the emphasised phrase, the active state, the next step. If more than about a tenth of a viewport is violet, it has stopped meaning anything.", "section": "colors" },
+      { "name": "The Type-Not-Boxes Rule", "body": "Labels, tags and badges stand out through type alone: Blueprint Violet, weight, uppercase tracking, a leading hairline, or purple slash separators between items (`Strategic growth planning / Business development`). Never wrap them in chips, pills or tinted boxes.", "section": "typography" },
+      { "name": "The One Display Rule", "body": "Display size appears once per site, in the homepage hero. Everything else steps down to Headline.", "section": "typography" },
+      { "name": "The Tinted Shadow Rule", "body": "Shadows are tinted with ink or plum, never pure black, and always long and soft (negative spread). A hard, short shadow breaks the blueprint calm.", "section": "elevation" },
+      { "name": "The No-Pill Rule", "body": "Nothing interactive is fully rounded. Pill buttons, pill tabs and pill chips were removed at the user's request and must not return.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do set emphasis words in Blueprint Violet as solid colour.",
+      "Do keep controls squared at 6px and containers soft at 24–32px.",
+      "Do let labels stand out through type: violet, weight, uppercase tracking, hairlines and slashes.",
+      "Do tint shadows with ink or plum and keep them long and soft.",
+      "Do use the strong ease-out (`cubic-bezier(0.23, 1, 0.32, 1)`), keep UI transitions under 300ms, make exits faster than entrances, and respect `prefers-reduced-motion`.",
+      "Do re-scope `--color-white: #ffffff` inside Catalyst Plum panels instead of hard-coding white text.",
+      "Do keep the Digital Bae sub-brand bolder (Montserrat black) than the firm."
+    ],
+    "donts": [
+      "Don't use gradient text.",
+      "Don't use pill-shaped buttons, pill tabs, chips with backgrounds, or boxed badges.",
+      "Don't add arrows to buttons other than the hero's primary call to action.",
+      "Don't put a background shape behind navbar links; the underline is the only indicator.",
+      "Don't read `text-white` or `bg-white` literally; they are Boardroom Ink (the Inverted Name Rule).",
+      "Don't use Lilac Haze for text on light surfaces.",
+      "Don't make the firm look like a social media agency: no stickers, emoji, neon or playful bounce."
+    ]
+  }
+}

@@ -2,28 +2,33 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 
 const variants = {
-  // White pill — primary action
-  primary: 'bg-white text-night hover:bg-glow',
-  light: 'bg-white text-night hover:bg-glow',
-  // Brand purple pill
-  brand: 'bg-brand text-white hover:bg-brand-soft',
+  // Solid ink — primary action
+  primary: 'border border-transparent bg-white text-night hover:bg-brand',
+  light: 'border border-transparent bg-white text-night hover:bg-brand',
+  // Brand purple
+  brand: 'border border-transparent bg-brand text-snow hover:bg-brand-soft',
   // Quiet outline
-  ghost: 'border border-white/15 text-white hover:border-white/40 hover:bg-white/[0.04]',
-  outlineLight: 'border border-white/15 text-white hover:border-white/40 hover:bg-white/[0.04]',
-  outlineDark: 'border border-white/15 text-white hover:border-white/40 hover:bg-white/[0.04]',
+  ghost: 'border border-white/20 text-white hover:border-white/50 hover:bg-white/[0.04]',
+  outlineLight: 'border border-white/20 text-white hover:border-white/50 hover:bg-white/[0.04]',
+  outlineDark: 'border border-white/20 text-white hover:border-white/50 hover:bg-white/[0.04]',
 }
 
 /**
- * Pill button. Colour transitions 200ms; press scale 0.97 (160ms ease-out);
- * arrow nudges on hover (Tailwind v4 gates hover to pointer devices).
+ * Squared button (6px corners). With an arrow, the arrow sits in its own cell
+ * behind a hairline divider: [ Label │ → ].
+ * Colour transitions 200ms; press scale 0.97 (160ms ease-out); arrow nudges on hover.
  */
-export default function Button({ to, href, variant = 'primary', arrow = true, size = 'md', className = '', children, ...rest }) {
-  const sizes = size === 'sm' ? 'px-4 py-2.5 text-sm' : 'px-6 py-3.5 text-[0.95rem]'
-  const classes = `press group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-geo font-medium transition-[background-color,border-color,color] duration-200 disabled:cursor-not-allowed disabled:opacity-60 ${sizes} ${variants[variant] ?? variants.primary} ${className}`
+export default function Button({ to, href, variant = 'primary', arrow = false, size = 'md', className = '', children, ...rest }) {
+  const pad = size === 'sm' ? 'px-4 py-2.5 text-sm' : 'px-5 py-3.5 text-[0.95rem]'
+  const classes = `press group inline-flex items-stretch justify-center whitespace-nowrap rounded-md font-geo font-medium transition-[background-color,border-color,color] duration-200 disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant] ?? variants.primary} ${className}`
   const content = (
     <>
-      <span>{children}</span>
-      {arrow && <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0 transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-0.5" strokeWidth={1.75} />}
+      <span className={`flex items-center ${pad}`}>{children}</span>
+      {arrow && (
+        <span aria-hidden="true" className={`flex items-center border-l border-current/20 ${size === 'sm' ? 'px-3' : 'px-3.5'}`}>
+          <ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-0.5" strokeWidth={1.75} />
+        </span>
+      )}
     </>
   )
   if (to) return <Link to={to} className={classes} {...rest}>{content}</Link>
@@ -31,14 +36,20 @@ export default function Button({ to, href, variant = 'primary', arrow = true, si
   return <button className={classes} {...rest}>{content}</button>
 }
 
-/** Quiet text link with a diagonal arrow. */
-export function TextLink({ to, href, children, className = '' }) {
+/** Quiet text link with a diagonal arrow. `external` opens in a new tab. */
+export function TextLink({ to, href, external = false, children, className = '' }) {
   const cls = `press group inline-flex items-center gap-1.5 font-geo text-sm font-medium text-haze transition-colors duration-200 hover:text-white ${className}`
   const inner = (
     <>
       {children}
+      {external && <span className="sr-only"> (opens in a new tab)</span>}
       <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
     </>
   )
-  return to ? <Link to={to} className={cls}>{inner}</Link> : <a href={href} className={cls}>{inner}</a>
+  if (to) return <Link to={to} className={cls}>{inner}</Link>
+  return (
+    <a href={href} className={cls} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+      {inner}
+    </a>
+  )
 }

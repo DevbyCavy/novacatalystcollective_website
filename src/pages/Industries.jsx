@@ -24,7 +24,7 @@ export default function Industries() {
 
       <section aria-label="Industries" className="py-20 sm:py-28">
         <div className="container-x">
-          <RevealImage image={images.johannesburg} sizes="(min-width: 1216px) 1150px, 100vw" className="aspect-[16/9] sm:aspect-[21/8]" imgClassName="opacity-70" />
+          <RevealImage image={images.johannesburg} sizes="(min-width: 1216px) 1150px, 100vw" className="aspect-[16/9] sm:aspect-[21/8]" />
 
           <ul className="mt-6 grid gap-4 md:grid-cols-2">
             {industries.map((ind, i) => {
@@ -38,9 +38,9 @@ export default function Industries() {
                     </div>
                     <h2 className="mt-10 text-[1.8rem] leading-tight sm:text-[2.1rem]">{ind.title}</h2>
                     <p className="mt-6 font-geo text-sm text-haze">How we help</p>
-                    <ul className="mt-3 flex flex-wrap gap-2">
+                    <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-2">
                       {ind.focus.map((f) => (
-                        <li key={f} className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-sm text-white/85">{f}</li>
+                        <li key={f} className="font-geo font-medium text-white after:ml-3 after:font-normal after:text-glow after:content-['/'] last:after:content-none text-[0.95rem]">{f}</li>
                       ))}
                     </ul>
                   </GlowCard>

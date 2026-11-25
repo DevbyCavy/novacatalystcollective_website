@@ -22,7 +22,7 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-white/[0.07] bg-night-2">
       <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-60" />
-      <LogoMark className="pointer-events-none absolute -right-24 -bottom-32 h-[28rem] w-[28rem] opacity-[0.04]" arc="#fff" mark="#fff" />
+      <LogoMark className="pointer-events-none absolute -right-24 -bottom-32 h-[28rem] w-[28rem] opacity-[0.04]" arc="#441E6B" mark="#441E6B" />
       <div className="container-x relative">
         <div className="grid gap-12 border-b border-white/[0.07] py-16 sm:py-20 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
@@ -43,9 +43,17 @@ export default function Footer() {
         <div className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
             <Link to="/" aria-label={`${site.name} — home`} className="press inline-block">
-              <Logo />
+              <Logo tone="dark" />
             </Link>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-haze">{site.description}</p>
+            <a
+              href={site.digitalBae.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-1.5 font-geo text-sm font-medium text-glow transition-colors hover:text-white"
+            >
+              Digital Bae · {site.digitalBae.label} ↗<span className="sr-only"> (opens in a new tab)</span>
+            </a>
             {hasSocials && <SocialIcons className="mt-7" />}
             {site.credentialsProfile && (
               <a href={site.credentialsProfile} download className="mt-7 inline-block font-geo text-sm font-medium text-glow hover:text-white">

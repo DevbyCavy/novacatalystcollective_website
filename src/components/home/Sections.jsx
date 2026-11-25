@@ -9,6 +9,7 @@ import GlowCard from '../GlowCard'
 import WorkCard from '../WorkCard'
 import InsightCard from '../InsightCard'
 import { images } from '../../data/images'
+import digitalBaeHero from '../../assets/digitalbae-hero.jpg'
 import { services } from '../../data/services'
 import { industries, work, philosophy } from '../../data/content'
 import { insights } from '../../data/insights'
@@ -36,10 +37,14 @@ export function Introduction() {
           </Reveal>
         </div>
         <div className="relative lg:col-span-5 lg:col-start-8">
-          <RevealImage image={images.aboutSecondary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/5]" imgClassName="opacity-85" />
-          <Reveal delay={0.4} className="glass absolute -bottom-6 -left-4 rounded-2xl px-5 py-4 backdrop-blur-xl sm:-left-8">
-            <p className="font-geo text-sm text-haze">Our philosophy</p>
-            <p className="mt-1 font-geo text-lg font-medium">{philosophy.map((p) => p.word).join(' · ')}</p>
+          <RevealImage image={images.aboutSecondary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/5]" />
+          {/* Purple frosted glass: the photo shows through, blurred and tinted */}
+          <Reveal
+            delay={0.4}
+            className="absolute -bottom-6 -left-4 rounded-2xl border border-snow/20 bg-brand/65 px-5 py-4 text-snow shadow-[0_16px_40px_-16px_rgba(68,30,107,0.6)] backdrop-blur-xl backdrop-saturate-150 sm:-left-8"
+          >
+            <p className="font-geo text-sm text-snow/75">Our philosophy</p>
+            <p className="mt-1 font-geo text-lg font-medium text-snow">{philosophy.map((p) => p.word).join(' · ')}</p>
           </Reveal>
         </div>
       </div>
@@ -74,7 +79,7 @@ export function PinnedServices() {
               <h2 id="expertise-title" className="mt-4 text-5xl leading-[1.05]">Five disciplines. One growth partner.</h2>
               <ol className="mt-10 space-y-1.5">
                 {services.map((item, i) => (
-                  <li key={item.id} className={`flex items-center gap-4 font-geo text-[0.95rem] transition-colors duration-300 ${i === active ? 'text-white' : 'text-white/35'}`}>
+                  <li key={item.id} className={`flex items-center gap-4 font-geo text-[0.95rem] transition-colors duration-300 ${i === active ? 'text-white' : 'text-haze'}`}>
                     <span className={`h-px transition-[width,background-color] duration-500 ease-[var(--ease-out)] ${i === active ? 'w-10 bg-glow' : 'w-4 bg-white/25'}`} />
                     {item.shortTitle}
                   </li>
@@ -102,9 +107,9 @@ export function PinnedServices() {
                   </div>
                   <h3 className="mt-8 text-4xl tracking-[-0.02em]">{s.title}</h3>
                   <p className="mt-4 max-w-lg text-lg leading-relaxed text-haze">{s.summary}</p>
-                  <ul className="mt-8 flex flex-wrap gap-2">
+                  <ul className="mt-8 flex flex-wrap gap-x-3 gap-y-2">
                     {s.offerings.map((o) => (
-                      <li key={o} className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-sm text-white/85">{o}</li>
+                      <li key={o} className="font-geo font-medium text-white after:ml-3 after:font-normal after:text-glow after:content-['/'] last:after:content-none text-[0.95rem]">{o}</li>
                     ))}
                   </ul>
                   <div className="mt-10 flex items-center justify-between border-t border-white/10 pt-6">
@@ -238,10 +243,10 @@ export function DigitalBaeBand() {
   return (
     <section aria-labelledby="db-title" className="pb-28 sm:pb-36">
       <div className="container-x">
-        <div className="relative grid overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-brand/60 via-night-2 to-night-2 lg:grid-cols-2">
+        <div className="relative grid overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-brand/10 via-night-2 to-night-2 lg:grid-cols-2">
           <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-60" />
           <div className="relative p-8 sm:p-12 lg:p-14">
-            <Reveal as="p" className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1 font-geo text-sm text-glow">
+            <Reveal as="p" className="inline-flex items-center gap-2.5 font-geo text-[0.72rem] font-semibold tracking-[0.18em] text-glow uppercase">
               <Mic className="h-3.5 w-3.5" aria-hidden="true" /> Available to speak
             </Reveal>
             <Reveal as="h2" id="db-title" delay={0.05} className="mt-6 font-brand text-5xl font-black tracking-tight sm:text-6xl">
@@ -258,11 +263,43 @@ export function DigitalBaeBand() {
             <Reveal delay={0.2} className="mt-9 flex flex-wrap items-center gap-5">
               <Button to="/digital-bae">Discover Digital Bae</Button>
               <TextLink to="/digital-bae#speaking-enquiry">Invite to speak</TextLink>
+              <TextLink href={site.digitalBae.url} external>{site.digitalBae.label}</TextLink>
             </Reveal>
           </div>
-          <div className="relative min-h-[18rem] lg:min-h-0">
-            <img src={images.speakingStage.src} srcSet={images.speakingStage.srcSet} sizes="(min-width: 1024px) 40vw, 100vw" alt={images.speakingStage.alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-70" />
-            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-night-2 via-night-2/30 to-transparent max-lg:bg-gradient-to-t" />
+          {/* Live-site preview: digitalbae.online hero in a browser frame */}
+          <div className="relative flex items-center px-6 pb-8 sm:px-10 sm:pb-12 lg:py-12 lg:pr-12 lg:pl-0">
+            <motion.a
+              href={site.digitalBae.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${site.digitalBae.label} (opens in a new tab)`}
+              initial={{ opacity: 0, y: 24, rotate: -1.5 }}
+              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+              viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+              transition={{ duration: 0.8, delay: 0.15, ease: easeOut }}
+              className="group block w-full overflow-hidden rounded-xl border border-white/10 bg-[#1b1218] shadow-[0_30px_60px_-24px_rgba(29,20,40,0.45)] transition-transform duration-500 ease-[var(--ease-out)] hover:-translate-y-1"
+            >
+              <div className="flex items-center gap-3 border-b border-snow/10 bg-[#241a22] px-4 py-2.5">
+                <span aria-hidden="true" className="flex gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+                </span>
+                <span className="flex-1 truncate rounded-md bg-snow/10 px-3 py-1 text-center font-geo text-xs text-snow/70">
+                  {site.digitalBae.label}
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-snow/60 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+              </div>
+              <img
+                src={digitalBaeHero}
+                alt="Preview of the digitalbae.online homepage: Bold ideas. Digital influence. Meaningful impact. — with Taffy L. Gotora"
+                width="1568"
+                height="753"
+                loading="lazy"
+                decoding="async"
+                className="block aspect-[1568/753] w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.02]"
+              />
+            </motion.a>
           </div>
         </div>
       </div>

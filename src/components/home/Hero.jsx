@@ -33,9 +33,9 @@ export default function Hero() {
     <section aria-labelledby="hero-title" onPointerMove={onMove} className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-32 pb-20">
       <div aria-hidden="true" className="grid-lines grid-fade pointer-events-none absolute inset-0 opacity-80" />
       <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: spotlight }} />
-      <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 h-[46rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/40 blur-[160px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 h-[46rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/45 blur-[160px]" />
       <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <LogoMark className="animate-slow-spin h-[34rem] w-[34rem] opacity-[0.07] sm:h-[44rem] sm:w-[44rem]" arc="#fff" mark="transparent" />
+        <LogoMark className="animate-slow-spin h-[34rem] w-[34rem] opacity-[0.07] sm:h-[44rem] sm:w-[44rem]" arc="#441E6B" mark="transparent" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-5 text-center">
@@ -43,9 +43,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: easeOut }}
-          className="mx-auto inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pr-4 pl-4 font-geo text-sm text-haze backdrop-blur sm:pl-1.5"
+          className="mx-auto inline-flex items-center gap-3 font-geo text-sm text-haze"
         >
-          <span className="hidden rounded-full bg-glow/15 px-2.5 py-1 text-xs font-medium text-glow sm:inline">Nova Catalyst Collective</span>
+          <span className="hidden text-[0.85rem] font-bold tracking-[0.16em] text-glow uppercase sm:inline">Nova Catalyst Collective</span>
           Strategic advisory · Africa &amp; international
         </motion.div>
 
@@ -57,7 +57,7 @@ export default function Hero() {
           className="mt-8 text-[2.75rem] leading-[1.02] tracking-[-0.045em] sm:text-7xl lg:text-[6.2rem]"
         >
           We turn strategic ambition into{' '}
-          <span className="bg-gradient-to-r from-white via-glow to-[#8d6bd1] bg-clip-text text-transparent">commercial impact.</span>
+          <span className="text-glow">commercial impact.</span>
         </motion.h1>
 
         <motion.p
@@ -76,8 +76,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6, ease: easeOut }}
           className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
         >
-          <Button to="/contact" className="px-7! py-4!">Start a conversation</Button>
-          <Button href="#expertise" variant="ghost" arrow={false} className="px-7! py-4!">Explore our expertise</Button>
+          <Button to="/contact" arrow>Start a conversation</Button>
+          <Button href="#expertise" variant="ghost" arrow={false}>Explore our expertise</Button>
         </motion.div>
 
         <motion.p
@@ -88,7 +88,7 @@ export default function Hero() {
           aria-label="Built on clarity, credibility and impact"
         >
           <span aria-hidden="true">Built on</span>
-          <span aria-hidden="true" className="relative inline-flex h-7 w-32 overflow-hidden rounded-full border border-white/10 bg-white/[0.04]">
+          <span aria-hidden="true" className="relative inline-flex h-7 w-28 overflow-hidden">
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
                 key={words[w]}
@@ -96,7 +96,7 @@ export default function Hero() {
                 animate={{ y: '0%', opacity: 1, filter: 'blur(0px)' }}
                 exit={{ y: '-100%', opacity: 0, filter: 'blur(4px)', transition: { duration: 0.2 } }}
                 transition={{ duration: 0.4, ease: easeOut }}
-                className="absolute inset-0 flex items-center justify-center font-medium text-glow"
+                className="absolute inset-0 flex items-center justify-start font-semibold text-glow"
               >
                 {words[w]}
               </motion.span>

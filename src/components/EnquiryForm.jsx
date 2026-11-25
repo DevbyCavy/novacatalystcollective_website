@@ -157,7 +157,7 @@ export default function EnquiryForm({
             {types.map((opt) => (
               <label
                 key={opt.value}
-                className={`cursor-pointer rounded-full border px-4 py-2.5 font-geo text-sm font-medium transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent ${
+                className={`cursor-pointer rounded-md border px-4 py-2.5 font-geo text-sm font-medium transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent ${
                   type === opt.value ? t.chipActive : t.chip
                 }`}
               >
@@ -238,7 +238,7 @@ export default function EnquiryForm({
 
       <div className="flex flex-col gap-6 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <p className={`max-w-sm text-sm leading-relaxed ${t.note}`}>We use your details only to respond to your enquiry.</p>
-        <Button type="submit" variant={t.submit} disabled={status === 'submitting'} arrow={status !== 'submitting'}>
+        <Button type="submit" variant={t.submit} disabled={status === 'submitting'}>
           {status === 'submitting' ? (
             <span className="flex items-center gap-3">
               <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" /> Sending

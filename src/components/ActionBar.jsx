@@ -6,7 +6,7 @@ import { whatsappUrl, WhatsAppGlyph } from './WhatsAppButton'
 import { site } from '../data/site'
 
 const iconBtn =
-  'press relative flex h-10 w-10 items-center justify-center rounded-full text-haze transition-colors duration-200 hover:bg-white/10 hover:text-white'
+  'press relative flex h-10 w-10 items-center justify-center rounded-md text-haze transition-colors duration-200 hover:bg-white/10 hover:text-white'
 
 /** Small tooltip that appears on hover/focus (pointer devices), 125ms ease-out. */
 function Tip({ label }) {
@@ -49,9 +49,9 @@ export default function ActionBar() {
           transition={{ type: 'spring', stiffness: 420, damping: 32 }}
           className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 z-30 -translate-x-1/2"
         >
-          <div role="toolbar" aria-label="Quick actions" className="relative flex items-center gap-1 rounded-full border border-white/12 bg-night/80 p-1.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.85)] backdrop-blur-xl">
+          <div role="toolbar" aria-label="Quick actions" className="relative flex items-center gap-1 rounded-xl border border-white/12 bg-night-2/90 p-1.5 shadow-[0_16px_40px_-16px_rgba(29,20,40,0.28)] backdrop-blur-xl">
             {!onContact && (
-              <Link to="/contact?type=consultation" className="press inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 font-geo text-sm font-medium whitespace-nowrap text-night transition-colors duration-200 hover:bg-glow">
+              <Link to="/contact?type=consultation" className="press inline-flex items-center gap-2 rounded-md bg-white px-4 py-2.5 font-geo text-sm font-medium whitespace-nowrap text-night transition-colors duration-200 hover:bg-brand">
                 <CalendarCheck className="h-4 w-4" aria-hidden="true" /> <span className="hidden sm:inline">Book a</span> consultation
               </Link>
             )}
@@ -82,7 +82,7 @@ export default function ActionBar() {
               <ArrowUp className="h-4 w-4" aria-hidden="true" />
               <Tip label="Back to top" />
             </button>
-            <motion.span aria-hidden="true" className="absolute inset-x-5 bottom-0 h-[2px] origin-left rounded-full bg-glow" style={{ scaleX: progress }} />
+            <motion.span aria-hidden="true" className="absolute inset-x-3 bottom-0 h-[2px] origin-left bg-glow" style={{ scaleX: progress }} />
           </div>
         </motion.div>
       )}

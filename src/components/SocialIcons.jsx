@@ -28,7 +28,7 @@ export default function SocialIcons({ className = '' }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${site.name} on ${labels[key]}`}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 text-white/70 transition-colors hover:border-accent hover:text-accent"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 text-white/70 transition-colors hover:border-glow hover:text-glow"
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
               {glyphs[key]}

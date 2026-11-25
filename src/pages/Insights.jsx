@@ -27,7 +27,7 @@ export default function Insights() {
       <section aria-label="Articles" className="py-16 sm:py-24">
         <div className="container-x">
           <div className="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
-            <div role="group" aria-label="Filter insights by category" className="flex w-max gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1 sm:w-auto sm:flex-wrap sm:rounded-3xl">
+            <div role="group" aria-label="Filter insights by category" className="flex w-max gap-6 border-b border-white/10 sm:w-auto sm:flex-wrap">
               {['All', ...insightCategories].map((c) => {
                 const active = c === category
                 return (
@@ -36,9 +36,9 @@ export default function Insights() {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setCategory(c)}
-                    className={`press relative rounded-full px-4 py-2 font-geo text-sm whitespace-nowrap transition-colors duration-200 ${active ? 'text-night' : 'text-haze hover:text-white'}`}
+                    className={`relative py-3 font-geo text-sm whitespace-nowrap transition-colors duration-200 ${active ? 'text-white' : 'text-haze hover:text-white'}`}
                   >
-                    {active && <motion.span layoutId="insight-pill" aria-hidden="true" className="absolute inset-0 rounded-full bg-white" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
+                    {active && <motion.span layoutId="insight-tab" aria-hidden="true" className="absolute inset-x-0 -bottom-px h-[2px] bg-glow" transition={{ type: 'spring', stiffness: 500, damping: 40 }} />}
                     <span className="relative">{c}</span>
                   </button>
                 )
@@ -68,7 +68,7 @@ export default function Insights() {
 
       <section aria-labelledby="newsletter-title" className="pb-24 sm:pb-32">
         <div className="container-x">
-          <div className="relative grid gap-10 overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-brand/60 to-night-2 p-8 sm:p-12 lg:grid-cols-12 lg:items-center">
+          <div className="relative grid gap-10 overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-brand/10 to-night-2 p-8 sm:p-12 lg:grid-cols-12 lg:items-center">
             <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-60" />
             <div className="relative lg:col-span-6">
               <Reveal as="p" className="eyebrow">Newsletter</Reveal>

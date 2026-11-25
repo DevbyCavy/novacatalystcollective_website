@@ -62,9 +62,9 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={0.08} as="aside" aria-label="Contact details" className="lg:col-span-4">
-            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-b from-brand/60 to-night-2 p-8 sm:p-10 lg:sticky lg:top-32">
+            <div style={{ '--color-white': '#ffffff', '--color-haze': '#ddd3ec', '--color-glow': '#cdbdf0' }} className="relative overflow-hidden rounded-[28px] bg-brand p-8 text-white sm:p-10 lg:sticky lg:top-32">
               <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-60" />
-              <LogoMark className="pointer-events-none absolute -right-12 -bottom-12 h-48 w-48 opacity-[0.08]" arc="#fff" mark="#fff" />
+              <LogoMark className="pointer-events-none absolute -right-12 -bottom-12 h-48 w-48 opacity-[0.1]" arc="#fff" mark="#fff" />
               <p className="eyebrow relative">Get in touch</p>
               <p className="relative mt-3 font-geo text-[1.9rem] leading-tight font-semibold tracking-[-0.03em]">
                 Clarity. Credibility. <span className="text-glow">Impact.</span>

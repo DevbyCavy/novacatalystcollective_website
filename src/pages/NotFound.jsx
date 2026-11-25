@@ -10,8 +10,8 @@ export default function NotFound() {
   return (
     <section className="relative flex min-h-[90svh] items-center justify-center overflow-hidden px-5 pt-32 pb-24 text-center">
       <div aria-hidden="true" className="grid-lines grid-fade pointer-events-none absolute inset-0" />
-      <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/40 blur-[140px]" />
-      <LogoMark className="animate-slow-spin pointer-events-none absolute top-1/2 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 opacity-[0.07]" arc="#fff" mark="transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/45 blur-[140px]" />
+      <LogoMark className="animate-slow-spin pointer-events-none absolute top-1/2 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 opacity-[0.07]" arc="#441E6B" mark="transparent" />
       <div className="relative">
         <p className="eyebrow">Error 404</p>
         <motion.h1

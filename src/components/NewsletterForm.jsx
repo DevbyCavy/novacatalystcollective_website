@@ -42,7 +42,7 @@ export default function NewsletterForm({ idPrefix = 'newsletter' }) {
   return (
     <form onSubmit={onSubmit} noValidate className="relative">
       <label htmlFor={id} className="sr-only">Email address</label>
-      <div className={`flex rounded-full border bg-white/[0.06] p-1 pl-5 ${error ? 'border-error' : 'border-white/20 focus-within:border-accent'}`}>
+      <div className={`flex rounded-md border bg-night-2 p-1 pl-4 ${error ? 'border-error' : 'border-white/20 focus-within:border-glow'}`}>
         <input
           id={id}
           type="email"
@@ -53,13 +53,13 @@ export default function NewsletterForm({ idPrefix = 'newsletter' }) {
           aria-invalid={Boolean(error)}
           aria-describedby={error ? `${id}-error` : undefined}
           enterKeyHint="send"
-          className="min-w-0 flex-1 bg-transparent py-2 text-base text-white placeholder:text-white/40 focus:outline-none"
+          className="min-w-0 flex-1 bg-transparent py-2 text-base text-white placeholder:text-white/50 focus:outline-none"
         />
         <button
           type="submit"
           disabled={status === 'submitting'}
           aria-label="Subscribe to insights"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand transition-colors hover:bg-accent"
+          className="flex h-10 w-10 items-center justify-center rounded-[4px] bg-white text-night transition-colors hover:bg-brand"
         >
           {status === 'submitting' ? (
             <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" />

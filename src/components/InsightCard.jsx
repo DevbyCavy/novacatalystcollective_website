@@ -29,15 +29,16 @@ const InsightCard = forwardRef(function InsightCard({ article }, ref) {
             alt={article.image.alt}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover opacity-80 transition-[transform,opacity] duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04] group-hover:opacity-100"
+            className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]"
           />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night-2 via-transparent to-transparent" />
-          <span className="absolute top-4 left-4 rounded-full border border-white/10 bg-night/70 px-3 py-1 font-geo text-xs text-glow backdrop-blur">
-            {published ? 'Article' : 'Coming soon'}
-          </span>
         </div>
         <div className="flex flex-1 flex-col p-6 sm:p-7">
-          <p className="font-geo text-xs tracking-[0.16em] text-haze uppercase">{article.category}</p>
+          <p className="flex flex-wrap items-center gap-x-2 font-geo text-xs tracking-[0.16em] text-haze uppercase">
+            <span className="font-semibold text-glow">{published ? 'Article' : 'Coming soon'}</span>
+            <span aria-hidden="true" className="h-px w-4 bg-white/25" />
+            {article.category}
+          </p>
           <h3 className="mt-3 text-xl leading-snug tracking-[-0.02em] sm:text-[1.4rem]">{article.title}</h3>
           <p className="mt-3 text-[0.95rem] leading-relaxed text-haze">{article.excerpt}</p>
           {published && (
