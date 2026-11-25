@@ -15,7 +15,7 @@ export default function ContactDetails({ compact = false }) {
       {rows.map(({ icon: Icon, label, value, href }) => (
         <li key={label} className="flex items-start gap-4">
           {!compact && (
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-white/15 text-accent">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/15 text-accent">
               <Icon className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
             </span>
           )}
@@ -28,7 +28,7 @@ export default function ContactDetails({ compact = false }) {
                 <p className="mt-1.5 text-white">{value}</p>
               )
             ) : (
-              <p className="mt-1.5 text-white/50 italic">Details to be confirmed</p>
+              <p className="mt-1.5 text-white/50">Details to be confirmed</p>
             )}
           </div>
         </li>
@@ -36,7 +36,7 @@ export default function ContactDetails({ compact = false }) {
       {whatsappUrl && (
         <li className="flex items-start gap-4">
           {!compact && (
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-white/15 text-accent">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/15 text-accent">
               <WhatsAppGlyph className="h-4 w-4" />
             </span>
           )}

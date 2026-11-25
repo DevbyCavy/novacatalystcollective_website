@@ -22,12 +22,12 @@ export default function Legal({ kind }) {
   return (
     <>
       <PageHero eyebrow="Legal" title={page.title} />
-      <section className="bg-ivory py-20 sm:py-28">
-        <Reveal className="container-x max-w-3xl space-y-6 text-lg leading-relaxed text-slate">
+      <section className="py-20 sm:py-28">
+        <Reveal className="container-x max-w-3xl space-y-6 text-lg leading-relaxed text-haze">
           <p>{page.intro}</p>
           <p>
             Questions in the meantime?{' '}
-            <Link to="/contact" className="text-ink underline decoration-brand underline-offset-4">Contact us</Link>.
+            <Link to="/contact" className="text-white underline decoration-glow underline-offset-4">Contact us</Link>.
           </p>
         </Reveal>
       </section>

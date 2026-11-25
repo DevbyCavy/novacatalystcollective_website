@@ -33,7 +33,7 @@ export default function NewsletterForm({ idPrefix = 'newsletter' }) {
 
   if (status === 'success') {
     return (
-      <p role="status" className="border-l border-accent pl-4 text-sm leading-relaxed text-white/80">
+      <p role="status" className="rounded-2xl bg-white/10 px-4 py-3 text-sm leading-relaxed text-white/80">
         Thank you for subscribing. New perspectives will arrive in your inbox.
       </p>
     )
@@ -42,7 +42,7 @@ export default function NewsletterForm({ idPrefix = 'newsletter' }) {
   return (
     <form onSubmit={onSubmit} noValidate className="relative">
       <label htmlFor={id} className="sr-only">Email address</label>
-      <div className={`flex border-b ${error ? 'border-error' : 'border-white/25 focus-within:border-accent'}`}>
+      <div className={`flex rounded-full border bg-white/[0.06] p-1 pl-5 ${error ? 'border-error' : 'border-white/20 focus-within:border-accent'}`}>
         <input
           id={id}
           type="email"
@@ -52,13 +52,14 @@ export default function NewsletterForm({ idPrefix = 'newsletter' }) {
           onChange={(e) => setEmail(e.target.value)}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? `${id}-error` : undefined}
-          className="min-w-0 flex-1 bg-transparent py-3 text-sm text-white placeholder:text-white/40 focus:outline-none"
+          enterKeyHint="send"
+          className="min-w-0 flex-1 bg-transparent py-2 text-base text-white placeholder:text-white/40 focus:outline-none"
         />
         <button
           type="submit"
           disabled={status === 'submitting'}
           aria-label="Subscribe to insights"
-          className="flex w-11 items-center justify-center text-accent transition-colors hover:text-white"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand transition-colors hover:bg-accent"
         >
           {status === 'submitting' ? (
             <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" />

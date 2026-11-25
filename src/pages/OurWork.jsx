@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import WorkCard from '../components/WorkCard'
@@ -16,33 +17,29 @@ export default function OurWork() {
   return (
     <>
       <PageHero
-        eyebrow="Our Work and Experience"
-        title="Strategy in Action."
+        eyebrow="Our work"
+        title={<>Strategy <span className="text-glow">in action.</span></>}
         intro="Selected assignments that show how strategic thinking, communications and market development translate into visible, commercial results."
       />
 
-      <section aria-label="Selected work" className="bg-ink pb-24 text-white sm:pb-32">
-        <div className="container-x">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {work.map((w, i) => (
-              <div key={w.id} className={i === 0 ? 'md:col-span-2 lg:col-span-2' : ''}>
-                <WorkCard item={w} index={i} detailed />
-              </div>
-            ))}
-            <Reveal className="flex flex-col justify-between border border-dashed border-white/15 p-8 sm:p-10">
-              <p className="eyebrow text-accent">Your organisation</p>
-              <div className="mt-10">
-                <p className="font-display text-3xl leading-tight">Could your story be next?</p>
-                <Link to="/contact?type=project" className="mt-6 inline-block border-b border-accent pb-1 text-[0.75rem] font-semibold tracking-[0.16em] text-accent uppercase">
-                  Discuss a project
-                </Link>
-              </div>
-            </Reveal>
-          </div>
+      <section aria-label="Selected work" className="py-20 sm:py-28">
+        <div className="container-x grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {work.map((w, i) => (
+            <WorkCard key={w.id} item={w} index={i} featured={i === 0} detailed className={i === 0 ? 'md:col-span-2 lg:col-span-1 lg:row-span-2' : ''} />
+          ))}
+          <Reveal className="flex flex-col justify-between rounded-[24px] border border-dashed border-white/15 p-8">
+            <p className="font-geo text-xs tracking-[0.18em] text-glow uppercase">Your organisation</p>
+            <div className="mt-12">
+              <p className="font-geo text-2xl font-semibold tracking-[-0.02em]">Could your story be next?</p>
+              <Link to="/contact?type=project" className="press group mt-5 inline-flex items-center gap-2 font-geo text-sm font-medium text-glow">
+                Discuss a project <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      <CtaBand primary={{ label: 'Discuss a Project', to: '/contact?type=project' }} />
+      <CtaBand primary={{ label: 'Discuss a project', to: '/contact?type=project' }} />
     </>
   )
 }

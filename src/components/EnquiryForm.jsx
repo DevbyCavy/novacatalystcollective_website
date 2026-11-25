@@ -8,25 +8,25 @@ import { validateFields, submitForm } from './forms'
 
 const themes = {
   dark: {
-    label: 'text-white/60',
-    optional: 'text-white/45',
-    input: 'text-white placeholder:text-white/30 border-white/20 hover:border-white/40 focus:border-accent',
-    option: 'bg-plum text-white',
+    label: 'text-white/75',
+    optional: 'text-haze',
+    input: 'bg-night-3 text-white placeholder:text-white/30 border-white/10 hover:border-white/25 focus:border-glow focus:ring-glow/15',
+    option: 'bg-night-3 text-white',
     error: 'text-error',
     errorBorder: 'border-error',
-    note: 'text-white/50',
-    chip: 'border-white/20 text-white/70 hover:border-white/50',
-    chipActive: 'border-accent bg-accent text-ink',
-    success: 'border-white/10 text-white',
-    successText: 'text-white/70',
-    icon: 'text-accent',
-    alert: 'border-error/40 bg-error/5 text-white/80',
-    submit: 'light',
+    note: 'text-haze',
+    chip: 'border-white/12 text-haze hover:border-white/35 hover:text-white',
+    chipActive: 'border-white bg-white text-night',
+    success: 'border-white/10 bg-night-2 text-white',
+    successText: 'text-haze',
+    icon: 'text-glow',
+    alert: 'border-error/40 bg-error/5 text-white/85',
+    submit: 'primary',
   },
   light: {
     label: 'text-slate',
     optional: 'text-slate/80',
-    input: 'text-ink placeholder:text-slate/50 border-ink/20 hover:border-ink/40 focus:border-brand',
+    input: 'bg-ivory text-ink placeholder:text-slate/60 border-mist hover:border-brand/30 focus:border-brand focus:ring-brand/10',
     option: 'bg-white text-ink',
     error: 'text-[#a12c2c]',
     errorBorder: 'border-[#a12c2c]',
@@ -127,7 +127,7 @@ export default function EnquiryForm({
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: easePremium }}
-        className={`flex flex-col items-start border p-10 focus:outline-none sm:p-14 ${t.success}`}
+        className={`flex flex-col items-start rounded-[24px] border p-10 focus:outline-none sm:p-14 ${t.success}`}
       >
         <CircleCheck className={`h-10 w-10 ${t.icon}`} strokeWidth={1.25} aria-hidden="true" />
         <h3 className="mt-8 text-4xl">{successTitle}</h3>
@@ -138,7 +138,7 @@ export default function EnquiryForm({
             startedAt.current = Date.now()
             setStatus('idle')
           }}
-          className={`mt-10 text-[0.78rem] font-semibold tracking-[0.16em] uppercase underline-offset-8 hover:underline ${t.icon}`}
+          className={`mt-10 font-geo text-sm font-medium underline-offset-8 hover:underline ${t.icon}`}
         >
           Send another message
         </button>
@@ -146,18 +146,18 @@ export default function EnquiryForm({
     )
   }
 
-  const inputBase = `mt-3 w-full border-0 border-b bg-transparent px-0 py-3 text-base transition-colors focus:outline-none focus:ring-0`
+  const inputBase = `mt-2 w-full rounded-xl border px-4 py-3.5 text-base transition-all focus:ring-4 focus:outline-none`
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="relative grid gap-9 sm:grid-cols-2">
+    <form ref={formRef} onSubmit={onSubmit} noValidate className="relative grid gap-6 sm:grid-cols-2">
       {types && (
         <fieldset className="sm:col-span-2">
-          <legend className={`eyebrow ${t.label}`}>I&rsquo;d like to</legend>
+          <legend className={`font-geo text-sm font-medium ${t.label}`}>I&rsquo;d like to</legend>
           <div className="mt-4 flex flex-wrap gap-2">
             {types.map((opt) => (
               <label
                 key={opt.value}
-                className={`cursor-pointer border px-4 py-2.5 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent ${
+                className={`cursor-pointer rounded-full border px-4 py-2.5 font-geo text-sm font-medium transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent ${
                   type === opt.value ? t.chipActive : t.chip
                 }`}
               >
@@ -194,21 +194,21 @@ export default function EnquiryForm({
         }
         return (
           <div key={f.name} className={`flex flex-col ${f.full || f.type === 'textarea' ? 'sm:col-span-2' : ''}`}>
-            <label htmlFor={id} className={`eyebrow flex justify-between ${t.label}`}>
+            <label htmlFor={id} className={`flex justify-between font-geo text-sm font-medium ${t.label}`}>
               <span>{f.label}</span>
-              {!f.required && <span className={`tracking-[0.15em] normal-case ${t.optional}`}>Optional</span>}
+              {!f.required && <span className={`text-xs font-medium ${t.optional}`}>Optional</span>}
             </label>
             {f.type === 'textarea' ? (
               <textarea rows={5} {...common} className={`${cls} resize-y`} />
             ) : f.type === 'select' ? (
               <div className="relative">
-                <select {...common} className={`${cls} cursor-pointer appearance-none pr-8 ${values[f.name] ? '' : 'opacity-60'}`}>
+                <select {...common} className={`${cls} cursor-pointer appearance-none pr-11 ${values[f.name] ? '' : 'opacity-70'}`}>
                   <option value="" disabled className={t.option}>Select…</option>
                   {f.options.map((o) => (
                     <option key={o} value={o} className={t.option}>{o}</option>
                   ))}
                 </select>
-                <ChevronDown className={`pointer-events-none absolute right-0 bottom-3.5 h-4 w-4 ${t.icon}`} strokeWidth={1.5} aria-hidden="true" />
+                <ChevronDown className={`pointer-events-none absolute top-[calc(50%+4px)] right-4 h-4 w-4 -translate-y-1/2 ${t.icon}`} strokeWidth={1.5} aria-hidden="true" />
               </div>
             ) : (
               <input type={f.type || 'text'} inputMode={f.type === 'tel' ? 'tel' : undefined} {...common} className={cls} />
@@ -258,7 +258,7 @@ export default function EnquiryForm({
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className={`flex items-start gap-4 border p-5 text-sm focus:outline-none sm:col-span-2 ${t.alert}`}
+            className={`flex items-start gap-4 rounded-lg border p-5 text-sm focus:outline-none sm:col-span-2 ${t.alert}`}
           >
             <CircleAlert className={`mt-0.5 h-5 w-5 shrink-0 ${t.error}`} strokeWidth={1.5} aria-hidden="true" />
             <div>

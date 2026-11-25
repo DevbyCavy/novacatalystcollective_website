@@ -1,61 +1,45 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
-import Reveal, { RevealImage, easePremium } from '../Reveal'
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
+import { ArrowUpRight, Mic } from 'lucide-react'
+import Reveal, { RevealImage, easeOut } from '../Reveal'
 import SectionHeading from '../SectionHeading'
-import Button from '../Button'
+import Button, { TextLink } from '../Button'
+import GlowCard from '../GlowCard'
 import WorkCard from '../WorkCard'
 import InsightCard from '../InsightCard'
-import { LogoMark } from '../Logo'
 import { images } from '../../data/images'
 import { services } from '../../data/services'
-import { industries, work } from '../../data/content'
+import { industries, work, philosophy } from '../../data/content'
 import { insights } from '../../data/insights'
+import { site } from '../../data/site'
 
-/* ---------------- Introduction ---------------- */
+/* ───────── Introduction ───────── */
 export function Introduction() {
   return (
-    <section id="introduction" aria-labelledby="intro-title" className="bg-ivory py-24 sm:py-32 lg:py-40">
-      <div className="container-x grid gap-16 lg:grid-cols-12 lg:gap-12">
-        <div className="relative order-2 lg:order-1 lg:col-span-5">
-          <div className="relative mr-10 sm:mr-24 lg:mr-0">
-            <RevealImage image={images.aboutPrimary} sizes="(min-width: 1024px) 34vw, 80vw" className="aspect-[4/5]" />
-            <span aria-hidden="true" className="absolute -top-4 -left-4 h-24 w-24 border-t border-l border-brand" />
-          </div>
-          <div className="relative -mt-24 ml-auto w-[58%] sm:-mt-40 lg:-mr-16 lg:w-[62%]">
-            <RevealImage
-              image={images.aboutSecondary}
-              sizes="(min-width: 1024px) 22vw, 55vw"
-              className="aspect-[4/3] ring-[10px] ring-ivory"
-              delay={0.2}
-            />
-          </div>
+    <section aria-labelledby="intro-title" className="py-24 sm:py-32">
+      <div className="container-x grid items-center gap-14 lg:grid-cols-12">
+        <div className="lg:col-span-6">
+          <SectionHeading id="intro-title" eyebrow="Introduction" title="Growth requires more than ambition." />
+          <Reveal as="p" delay={0.1} className="mt-6 text-lg leading-relaxed text-white/80">
+            It requires clarity of direction, credibility in the marketplace, meaningful relationships and
+            the ability to recognise and act on opportunity.
+          </Reveal>
+          <Reveal as="p" delay={0.14} className="mt-4 leading-relaxed text-haze">
+            Nova Catalyst Collective partners with ambitious organisations to strengthen their market
+            position, elevate their influence and unlock new pathways for growth, bringing together
+            strategic thinking, communications expertise, commercial insight and relationship capital.
+          </Reveal>
+          <Reveal delay={0.18} className="mt-9 flex flex-wrap items-center gap-6">
+            <Button to="/about">About the firm</Button>
+            <TextLink to="/our-work">See our work</TextLink>
+          </Reveal>
         </div>
-
-        <div className="order-1 lg:order-2 lg:col-span-6 lg:col-start-7 lg:pt-8">
-          <SectionHeading
-            id="intro-title"
-            eyebrow="Introduction"
-            title="Growth requires more than ambition."
-          />
-          <div className="mt-10 space-y-6 text-lg leading-relaxed text-slate">
-            <Reveal as="p">
-              It requires clarity of direction, credibility in the marketplace, meaningful
-              relationships and the ability to recognise and act on opportunity.
-            </Reveal>
-            <Reveal as="p" delay={0.06}>
-              Nova Catalyst Collective partners with ambitious organisations to strengthen their
-              market position, elevate their influence and unlock new pathways for growth.
-            </Reveal>
-            <Reveal as="p" delay={0.12}>
-              We bring together strategic thinking, communications expertise, commercial insight and
-              relationship capital to help businesses navigate complexity and move forward with
-              purpose.
-            </Reveal>
-          </div>
-          <Reveal delay={0.1} className="mt-12 flex flex-col gap-3 sm:flex-row">
-            <Button to="/about" variant="brand">About Us</Button>
-            <Button to="/contact" variant="outlineDark" arrow={false}>Start a Conversation</Button>
+        <div className="relative lg:col-span-5 lg:col-start-8">
+          <RevealImage image={images.aboutSecondary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/5]" imgClassName="opacity-85" />
+          <Reveal delay={0.4} className="glass absolute -bottom-6 -left-4 rounded-2xl px-5 py-4 backdrop-blur-xl sm:-left-8">
+            <p className="font-geo text-sm text-haze">Our philosophy</p>
+            <p className="mt-1 font-geo text-lg font-medium">{philosophy.map((p) => p.word).join(' · ')}</p>
           </Reveal>
         </div>
       </div>
@@ -63,43 +47,91 @@ export function Introduction() {
   )
 }
 
-/* ---------------- Our expertise ---------------- */
-export function Expertise() {
-  return (
-    <section aria-labelledby="expertise-title" className="bg-white py-24 sm:py-32 lg:py-40">
-      <div className="container-x">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-          <SectionHeading
-            id="expertise-title"
-            eyebrow="Our Expertise"
-            title="Strategic Expertise. Commercial Perspective."
-            className="lg:col-span-7"
-          />
-          <Reveal as="p" delay={0.15} className="text-lg leading-relaxed text-slate lg:col-span-4 lg:col-start-9">
-            Five integrated disciplines that help organisations grow, lead and compete.
-          </Reveal>
-        </div>
+/* ───────── Services: pinned scroll story (desktop) / cards (mobile) ───────── */
+export function PinnedServices() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+  const [active, setActive] = useState(0)
+  const bar = useSpring(scrollYProgress, { stiffness: 200, damping: 40 })
+  useEffect(
+    () =>
+      scrollYProgress.on('change', (v) => {
+        setActive(Math.min(services.length - 1, Math.max(0, Math.floor(v * services.length))))
+      }),
+    [scrollYProgress],
+  )
+  const s = services[active]
+  const Icon = s.icon
 
-        <ul className="mt-16 border-t border-mist lg:mt-20">
-          {services.map((s, i) => {
-            const Icon = s.icon
-            return (
-              <Reveal as="li" key={s.id} delay={i * 0.05} className="border-b border-mist">
-                <Link
-                  to={`/services#${s.id}`}
-                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-7 sm:gap-8 sm:py-9 lg:grid-cols-[5rem_1.1fr_1.4fr_auto]"
+  return (
+    <section id="expertise" aria-labelledby="expertise-title" className="relative">
+      <div ref={ref} className="relative hidden lg:block" style={{ height: `${services.length * 75}vh` }}>
+        <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
+          <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-50" />
+          <div className="container-x relative grid grid-cols-12 gap-10">
+            <div className="col-span-5">
+              <p className="eyebrow">Our expertise</p>
+              <h2 id="expertise-title" className="mt-4 text-5xl leading-[1.05]">Five disciplines. One growth partner.</h2>
+              <ol className="mt-10 space-y-1.5">
+                {services.map((item, i) => (
+                  <li key={item.id} className={`flex items-center gap-4 font-geo text-[0.95rem] transition-colors duration-300 ${i === active ? 'text-white' : 'text-white/35'}`}>
+                    <span className={`h-px transition-[width,background-color] duration-500 ease-[var(--ease-out)] ${i === active ? 'w-10 bg-glow' : 'w-4 bg-white/25'}`} />
+                    {item.shortTitle}
+                  </li>
+                ))}
+              </ol>
+              <div className="mt-10 h-px w-full bg-white/10">
+                <motion.div className="h-px origin-left bg-glow" style={{ scaleX: bar }} />
+              </div>
+            </div>
+            <div className="col-span-7">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.article
+                  key={s.id}
+                  initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -16, filter: 'blur(6px)', transition: { duration: 0.15 } }}
+                  transition={{ duration: 0.4, ease: easeOut }}
+                  className="glass rounded-[28px] p-10 backdrop-blur"
                 >
-                  <span className="font-display text-3xl text-brand/40 italic transition-colors duration-500 group-hover:text-brand sm:text-4xl">
-                    {s.number}
-                  </span>
-                  <h3 className="text-2xl leading-tight text-ink transition-transform duration-500 group-hover:translate-x-1 sm:text-[2rem]">
-                    {s.title}
-                  </h3>
-                  <p className="hidden leading-relaxed text-slate lg:block">{s.summary}</p>
-                  <span className="flex h-12 w-12 items-center justify-center border border-ink/10 text-brand transition-all duration-500 group-hover:border-brand group-hover:bg-brand group-hover:text-white">
-                    <Icon className="h-5 w-5 group-hover:hidden" strokeWidth={1.4} aria-hidden="true" />
-                    <ArrowUpRight className="hidden h-5 w-5 group-hover:block" strokeWidth={1.4} aria-hidden="true" />
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-glow/15 text-glow">
+                      <Icon className="h-6 w-6" strokeWidth={1.5} aria-hidden="true" />
+                    </span>
+                    <span className="font-geo text-7xl font-semibold text-white/[0.07]">{s.number}</span>
+                  </div>
+                  <h3 className="mt-8 text-4xl tracking-[-0.02em]">{s.title}</h3>
+                  <p className="mt-4 max-w-lg text-lg leading-relaxed text-haze">{s.summary}</p>
+                  <ul className="mt-8 flex flex-wrap gap-2">
+                    {s.offerings.map((o) => (
+                      <li key={o} className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-sm text-white/85">{o}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-10 flex items-center justify-between border-t border-white/10 pt-6">
+                    <p className="max-w-sm text-sm text-glow">{s.outcome}</p>
+                    <TextLink to={`/services#${s.id}`}>Learn more</TextLink>
+                  </div>
+                </motion.article>
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-x py-24 lg:hidden">
+        <SectionHeading id="expertise-title-m" eyebrow="Our expertise" title="Five disciplines. One growth partner." />
+        <ul className="mt-10 space-y-4">
+          {services.map((item, i) => {
+            const I = item.icon
+            return (
+              <Reveal as="li" key={item.id} delay={(i % 2) * 0.05}>
+                <Link to={`/services#${item.id}`} className="press glass block rounded-3xl p-6">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-glow/15 text-glow"><I className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" /></span>
+                    <span className="font-geo text-sm text-white/40">{item.number}</span>
+                  </div>
+                  <h3 className="mt-5 text-2xl">{item.title}</h3>
+                  <p className="mt-2 text-haze">{item.summary}</p>
                 </Link>
               </Reveal>
             )
@@ -110,78 +142,68 @@ export function Expertise() {
   )
 }
 
-/* ---------------- Why Nova Catalysts ---------------- */
-const whyLines = [
-  { a: 'Strategy', b: 'execution' },
-  { a: 'Visibility', b: 'credibility' },
-  { a: 'Relationships', b: 'commercial opportunity' },
-]
+/* ───────── Statement that lights up word by word ───────── */
+function LitWord({ children, progress, range }) {
+  const opacity = useTransform(progress, range, [0.15, 1])
+  return <motion.span style={{ opacity }}>{children} </motion.span>
+}
 
-export function WhyNova() {
+export function ScrollLitStatement() {
+  const ref = useRef(null)
+  const reduce = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.45'] })
+  const text = 'We connect strategy with execution, visibility with credibility and relationships with commercial opportunity.'
+  const parts = text.split(' ')
   return (
-    <section aria-labelledby="why-title" className="relative overflow-hidden bg-plum py-28 text-white sm:py-36 lg:py-44">
-      <LogoMark className="pointer-events-none absolute -right-40 -bottom-40 h-[40rem] w-[40rem] opacity-[0.04]" arc="#fff" mark="#fff" />
-      <div className="container-x relative grid gap-14 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <Reveal className="eyebrow flex items-center gap-4 text-accent">
-            <span aria-hidden="true" className="h-px w-10 bg-accent" />
-            Why Nova Catalysts?
-          </Reveal>
-          <Reveal as="h2" id="why-title" delay={0.08} className="mt-6 text-4xl leading-tight sm:text-5xl">
-            We connect what others keep apart.
-          </Reveal>
-          <Reveal delay={0.16} className="mt-10">
-            <Button to="/contact" variant="light">Let&rsquo;s Discuss Your Growth Ambitions</Button>
-          </Reveal>
-        </div>
-        <ul className="lg:col-span-7 lg:col-start-6">
-          {whyLines.map((l, i) => (
-            <li key={l.a} className="overflow-hidden border-b border-white/10 py-6 first:pt-0 sm:py-8">
-              <motion.p
-                initial={{ y: '100%', opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-                transition={{ duration: 1, delay: i * 0.12, ease: easePremium }}
-                className="font-display text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-[3.4rem]"
-              >
-                {l.a} <span className="text-white/40 italic">with</span>{' '}
-                <span className="text-accent italic">{l.b}.</span>
-              </motion.p>
-            </li>
+    <section aria-labelledby="why-title" className="px-5 py-28 sm:py-40">
+      <div className="mx-auto max-w-5xl">
+        <h2 id="why-title" className="eyebrow">Why Nova Catalysts?</h2>
+        <p ref={ref} className="mt-6 font-geo text-[2rem] leading-[1.15] font-medium tracking-[-0.025em] sm:text-5xl lg:text-[3.6rem]">
+          {reduce
+            ? text
+            : parts.map((w, i) => (
+                <LitWord key={i} progress={scrollYProgress} range={[i / parts.length, (i + 1) / parts.length]}>
+                  {w}
+                </LitWord>
+              ))}
+        </p>
+        <div className="mt-14 grid gap-4 sm:grid-cols-3">
+          {philosophy.map((p, i) => (
+            <Reveal key={p.word} delay={i * 0.06} className="glass rounded-2xl p-6">
+              <p className="font-geo text-sm text-glow">0{i + 1}</p>
+              <p className="mt-3 font-geo text-2xl font-semibold">{p.word}</p>
+              <p className="mt-1 text-sm text-haze">{p.text}</p>
+            </Reveal>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   )
 }
 
-/* ---------------- Industries preview ---------------- */
-export function IndustriesPreview() {
+/* ───────── Industries on glow cards ───────── */
+export function IndustriesGrid() {
   return (
-    <section aria-labelledby="industries-title" className="bg-ivory py-24 sm:py-32 lg:py-40">
+    <section aria-labelledby="industries-title" className="pb-28 sm:pb-36">
       <div className="container-x">
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading
-            id="industries-title"
-            eyebrow="Industries We Serve"
-            title="Sector Knowledge. Cross-Market Perspective."
-          />
-          <Reveal delay={0.1}>
-            <Button to="/industries" variant="outlineDark">All Industries</Button>
-          </Reveal>
+        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <SectionHeading id="industries-title" eyebrow="Industries we serve" title="Sector knowledge. Cross-market perspective." />
+          <Reveal delay={0.1}><TextLink to="/industries">All industries</TextLink></Reveal>
         </div>
-        <ul className="mt-16 grid gap-px border border-mist bg-mist sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {industries.map((ind, i) => {
             const Icon = ind.icon
             return (
-              <Reveal as="li" key={ind.id} delay={(i % 3) * 0.06} className="bg-ivory">
-                <Link to={`/industries#${ind.id}`} className="group flex h-full flex-col p-8 transition-colors duration-500 hover:bg-white sm:p-10">
-                  <Icon className="h-7 w-7 text-brand" strokeWidth={1.2} aria-hidden="true" />
-                  <h3 className="mt-8 text-2xl leading-tight text-ink">{ind.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate">{ind.focus.join(' · ')}</p>
-                  <span className="mt-auto flex items-center gap-2 pt-8 text-[0.72rem] font-semibold tracking-[0.16em] text-brand uppercase opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
-                    Learn more <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </span>
+              <Reveal as="li" key={ind.id} delay={(i % 3) * 0.06}>
+                <Link to={`/industries#${ind.id}`} className="block h-full">
+                  <GlowCard className="h-full">
+                    <div className="flex items-start justify-between">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-glow/15 text-glow"><Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" /></span>
+                      <ArrowUpRight className="h-4 w-4 text-haze transition-[color,transform] duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-8 text-[1.4rem] leading-snug">{ind.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-haze">{ind.focus.join(' · ')}</p>
+                  </GlowCard>
                 </Link>
               </Reveal>
             )
@@ -192,20 +214,18 @@ export function IndustriesPreview() {
   )
 }
 
-/* ---------------- Selected work ---------------- */
+/* ───────── Selected work ───────── */
 export function WorkPreview() {
   return (
-    <section aria-labelledby="work-title" className="bg-ink py-24 text-white sm:py-32 lg:py-40">
+    <section aria-labelledby="work-title" className="pb-28 sm:pb-36">
       <div className="container-x">
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading id="work-title" tone="dark" eyebrow="Our Work" title="Strategy in Action." />
-          <Reveal delay={0.1}>
-            <Button to="/our-work" variant="outlineLight">View Our Work</Button>
-          </Reveal>
+        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <SectionHeading id="work-title" eyebrow="Selected work" title="Strategy in action." />
+          <Reveal delay={0.1}><TextLink to="/our-work">All work</TextLink></Reveal>
         </div>
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {work.slice(0, 3).map((w, i) => (
-            <WorkCard key={w.id} item={w} index={i} />
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {work.map((w, i) => (
+            <WorkCard key={w.id} item={w} index={i} featured={i === 0} className={i === 0 ? 'md:col-span-2 lg:col-span-1 lg:row-span-2' : ''} />
           ))}
         </div>
       </div>
@@ -213,56 +233,53 @@ export function WorkPreview() {
   )
 }
 
-/* ---------------- Digital Bae teaser ---------------- */
-export function DigitalBaeTeaser() {
+/* ───────── Digital Bae band ───────── */
+export function DigitalBaeBand() {
   return (
-    <section aria-labelledby="db-title" className="relative overflow-hidden bg-white">
-      <div className="grid lg:grid-cols-2">
-        <div className="relative min-h-[22rem] lg:min-h-[40rem]">
-          <div className="absolute inset-0">
-            <RevealImage image={images.speakingStage} sizes="(min-width: 1024px) 50vw, 100vw" className="h-full" />
+    <section aria-labelledby="db-title" className="pb-28 sm:pb-36">
+      <div className="container-x">
+        <div className="relative grid overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-brand/60 via-night-2 to-night-2 lg:grid-cols-2">
+          <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-60" />
+          <div className="relative p-8 sm:p-12 lg:p-14">
+            <Reveal as="p" className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1 font-geo text-sm text-glow">
+              <Mic className="h-3.5 w-3.5" aria-hidden="true" /> Available to speak
+            </Reveal>
+            <Reveal as="h2" id="db-title" delay={0.05} className="mt-6 font-brand text-5xl font-black tracking-tight sm:text-6xl">
+              DIGITAL <span className="text-glow">BAE</span>
+            </Reveal>
+            <Reveal as="p" delay={0.08} className="mt-3 font-geo text-sm text-haze">Digital intelligence. Strategic influence. Business impact.</Reveal>
+            <Reveal as="p" delay={0.12} className="mt-6 font-geo text-2xl leading-snug font-medium">
+              The future is digital. <span className="text-glow">The opportunity is yours.</span>
+            </Reveal>
+            <Reveal as="p" delay={0.16} className="mt-4 max-w-md leading-relaxed text-haze">
+              The thought leadership platform of our founder, exploring digital innovation, artificial
+              intelligence, marketing, business growth and leadership.
+            </Reveal>
+            <Reveal delay={0.2} className="mt-9 flex flex-wrap items-center gap-5">
+              <Button to="/digital-bae">Discover Digital Bae</Button>
+              <TextLink to="/digital-bae#speaking-enquiry">Invite to speak</TextLink>
+            </Reveal>
           </div>
-        </div>
-        <div className="container-x flex flex-col justify-center py-20 sm:py-28 lg:max-w-none lg:px-16 xl:px-24">
-          <Reveal className="eyebrow flex items-center gap-4 text-brand">
-            <span aria-hidden="true" className="h-px w-10 bg-brand" />
-            Thought leadership platform
-          </Reveal>
-          <Reveal as="h2" id="db-title" delay={0.06} className="mt-6 font-brand text-5xl font-extrabold tracking-tight text-brand sm:text-6xl">
-            DIGITAL BAE
-          </Reveal>
-          <Reveal as="p" delay={0.1} className="eyebrow mt-4 text-slate">
-            Digital intelligence. Strategic influence. Business impact.
-          </Reveal>
-          <Reveal as="p" delay={0.14} className="mt-8 font-display text-3xl leading-snug text-ink">
-            The Future Is Digital. The Opportunity Is Yours.
-          </Reveal>
-          <Reveal as="p" delay={0.18} className="mt-5 max-w-lg leading-relaxed text-slate">
-            The personal brand platform of our founder, exploring the intersection of digital
-            innovation, artificial intelligence, marketing, business growth and leadership.
-          </Reveal>
-          <Reveal delay={0.22} className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Button to="/digital-bae" variant="brand">Discover Digital Bae</Button>
-            <Button to="/digital-bae#speaking-enquiry" variant="outlineDark" arrow={false}>Invite to Speak</Button>
-          </Reveal>
+          <div className="relative min-h-[18rem] lg:min-h-0">
+            <img src={images.speakingStage.src} srcSet={images.speakingStage.srcSet} sizes="(min-width: 1024px) 40vw, 100vw" alt={images.speakingStage.alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-70" />
+            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-night-2 via-night-2/30 to-transparent max-lg:bg-gradient-to-t" />
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-/* ---------------- Insights preview ---------------- */
+/* ───────── Insights preview ───────── */
 export function InsightsPreview() {
   return (
-    <section aria-labelledby="insights-title" className="bg-ivory py-24 sm:py-32 lg:py-40">
+    <section aria-labelledby="insights-title" className="pb-10">
       <div className="container-x">
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading id="insights-title" eyebrow="Insights" title="Ideas That Move Business Forward." />
-          <Reveal delay={0.1}>
-            <Button to="/insights" variant="outlineDark">All Insights</Button>
-          </Reveal>
+        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <SectionHeading id="insights-title" eyebrow="Insights" title="Ideas that move business forward." />
+          <Reveal delay={0.1}><TextLink to="/insights">All insights</TextLink></Reveal>
         </div>
-        <div className="mt-16 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {insights.slice(0, 3).map((a) => (
             <InsightCard key={a.id} article={a} />
           ))}

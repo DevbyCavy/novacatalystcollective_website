@@ -1,32 +1,29 @@
-import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { LogoMark } from '../components/Logo'
+import Button from '../components/Button'
+import { easeOut } from '../components/Reveal'
 import { useSeo } from '../components/Seo'
 
 export default function NotFound() {
   useSeo({ title: 'Page not found', description: 'The page you are looking for does not exist.' })
 
   return (
-    <section className="relative flex min-h-[80svh] items-center overflow-hidden bg-ink pt-32 pb-24 text-white">
-      <LogoMark className="pointer-events-none absolute -right-32 -bottom-32 h-[30rem] w-[30rem] opacity-[0.05]" arc="#fff" mark="#fff" />
-      <div className="container-x relative">
-        <p className="eyebrow flex items-center gap-4 text-accent">
-          <span aria-hidden="true" className="h-px w-10 bg-accent" />
-          Error 404
-        </p>
-        <h1 className="mt-8 max-w-3xl text-5xl leading-[1.02] sm:text-7xl">
-          This page has <span className="text-accent italic">moved on.</span>
-        </h1>
-        <p className="mt-6 max-w-lg text-lg text-white/70">
-          The page you&rsquo;re looking for doesn&rsquo;t exist or is no longer available.
-        </p>
-        <Link
-          to="/"
-          className="group mt-12 inline-flex items-center gap-3 bg-white px-7 py-4 text-[0.78rem] font-semibold tracking-[0.14em] text-ink uppercase transition-colors hover:bg-accent"
+    <section className="relative flex min-h-[90svh] items-center justify-center overflow-hidden px-5 pt-32 pb-24 text-center">
+      <div aria-hidden="true" className="grid-lines grid-fade pointer-events-none absolute inset-0" />
+      <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/40 blur-[140px]" />
+      <LogoMark className="animate-slow-spin pointer-events-none absolute top-1/2 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 opacity-[0.07]" arc="#fff" mark="transparent" />
+      <div className="relative">
+        <p className="eyebrow">Error 404</p>
+        <motion.h1
+          initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.9, ease: easeOut }}
+          className="mt-4 text-5xl leading-[1.02] tracking-[-0.04em] sm:text-7xl"
         >
-          Return Home
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} aria-hidden="true" />
-        </Link>
+          This page has <span className="text-glow">moved on.</span>
+        </motion.h1>
+        <p className="mx-auto mt-6 max-w-md text-lg text-haze">The page you&rsquo;re looking for doesn&rsquo;t exist or is no longer available.</p>
+        <Button to="/" className="mt-10">Return home</Button>
       </div>
     </section>
   )

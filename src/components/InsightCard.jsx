@@ -1,47 +1,48 @@
 import { forwardRef } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { easePremium } from './Reveal'
+import { easeOut } from './Reveal'
 
-const InsightCard = forwardRef(function InsightCard({ article, featured = false }, ref) {
+/** Insight card on dark. Forthcoming entries render without a link. */
+const InsightCard = forwardRef(function InsightCard({ article }, ref) {
   const published = article.status === 'published' && article.url
   const Wrapper = published ? 'a' : 'div'
-
   return (
     <motion.article
       ref={ref}
       layout
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.6, ease: easePremium }}
+      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+      exit={{ opacity: 0, transition: { duration: 0.12 } }}
+      transition={{ duration: 0.6, ease: easeOut }}
     >
-      <Wrapper {...(published ? { href: article.url } : {})} className="group block h-full">
-        <div className={`relative overflow-hidden bg-plum ${featured ? 'aspect-[4/3] lg:aspect-[5/4]' : 'aspect-[16/10]'}`}>
+      <Wrapper
+        {...(published ? { href: article.url } : {})}
+        className="group flex h-full flex-col overflow-hidden rounded-[24px] border border-white/10 bg-night-2 transition-colors duration-300 hover:border-white/20"
+      >
+        <div className="relative aspect-[16/10] overflow-hidden bg-night-3">
           <img
             src={article.image.src}
             srcSet={article.image.srcSet}
-            sizes={featured ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw'}
+            sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw"
             alt={article.image.alt}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover transition-transform duration-[1.4s] ease-[var(--ease-premium)] group-hover:scale-[1.04]"
+            className="h-full w-full object-cover opacity-80 transition-[transform,opacity] duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04] group-hover:opacity-100"
           />
-          <span className="eyebrow absolute top-4 left-4 bg-ink/85 px-3 py-2 text-accent backdrop-blur-sm">
-            {published ? 'Article' : 'Forthcoming'}
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night-2 via-transparent to-transparent" />
+          <span className="absolute top-4 left-4 rounded-full border border-white/10 bg-night/70 px-3 py-1 font-geo text-xs text-glow backdrop-blur">
+            {published ? 'Article' : 'Coming soon'}
           </span>
         </div>
-        <div className="pt-6">
-          <p className="eyebrow text-brand">{article.category}</p>
-          <h3 className={`mt-3 leading-tight text-ink ${featured ? 'text-3xl sm:text-4xl' : 'text-2xl sm:text-[1.65rem]'}`}>
-            {article.title}
-          </h3>
-          <p className="mt-3 leading-relaxed text-slate">{article.excerpt}</p>
+        <div className="flex flex-1 flex-col p-6 sm:p-7">
+          <p className="font-geo text-xs tracking-[0.16em] text-haze uppercase">{article.category}</p>
+          <h3 className="mt-3 text-xl leading-snug tracking-[-0.02em] sm:text-[1.4rem]">{article.title}</h3>
+          <p className="mt-3 text-[0.95rem] leading-relaxed text-haze">{article.excerpt}</p>
           {published && (
-            <span className="mt-5 inline-flex items-center gap-2 text-[0.78rem] font-semibold tracking-[0.16em] text-brand uppercase">
-              Read Perspective
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+            <span className="mt-auto inline-flex items-center gap-1.5 pt-6 font-geo text-sm font-medium text-glow">
+              Read perspective <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
             </span>
           )}
         </div>

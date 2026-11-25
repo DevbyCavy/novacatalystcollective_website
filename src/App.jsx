@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import WhatsAppButton from './components/WhatsAppButton'
+import ActionBar from './components/ActionBar'
 import { Analytics } from './components/Seo'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -15,6 +15,7 @@ import Insights from './pages/Insights'
 import Contact from './pages/Contact'
 import Legal from './pages/Legal'
 import NotFound from './pages/NotFound'
+import ConceptBento from './concepts/bento/ConceptBento'
 
 function ScrollManager() {
   const { pathname, hash } = useLocation()
@@ -31,17 +32,33 @@ function ScrollManager() {
 }
 
 export default function App() {
+  const { pathname } = useLocation()
+  const skipLink = (
+    <a
+      href="#main"
+      className="sr-only z-[100] bg-accent px-4 py-2 text-ink focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+    >
+      Skip to content
+    </a>
+  )
+
+  // Design concept preview: renders standalone with its own header and floating island.
+  if (pathname.startsWith('/concept-d')) {
+    return (
+      <MotionConfig reducedMotion="user">
+        <ScrollManager />
+        {skipLink}
+        <ConceptBento />
+      </MotionConfig>
+    )
+  }
+
   return (
     // reducedMotion="user": visitors who prefer reduced motion get gentle fades only.
     <MotionConfig reducedMotion="user">
       <ScrollManager />
       <Analytics />
-      <a
-        href="#main"
-        className="sr-only z-[100] bg-accent px-4 py-2 text-ink focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
-      >
-        Skip to content
-      </a>
+      {skipLink}
       <Navbar />
       <main id="main">
         <Routes>
@@ -59,7 +76,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-      <WhatsAppButton />
+      <ActionBar />
     </MotionConfig>
   )
 }

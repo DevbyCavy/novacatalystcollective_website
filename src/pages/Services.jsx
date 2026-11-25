@@ -16,76 +16,64 @@ export default function Services() {
   return (
     <>
       <PageHero
-        eyebrow="What We Do"
-        title="Strategic Expertise. Commercial Perspective. Meaningful Impact."
+        eyebrow="What we do"
+        title={<>Strategic expertise. Commercial perspective. <span className="text-glow">Meaningful impact.</span></>}
       >
-        <nav aria-label="Services" className="mt-12 flex flex-wrap gap-2">
+        <nav aria-label="Jump to a service" className="flex flex-wrap gap-2">
           {services.map((s) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              className="border border-white/15 px-4 py-2.5 text-xs tracking-[0.08em] text-white/75 transition-colors hover:border-accent hover:text-accent"
-            >
-              <span className="mr-2 text-accent">{s.number}</span>
+            <a key={s.id} href={`#${s.id}`} className="press rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 font-geo text-sm text-haze transition-colors duration-200 hover:border-white/30 hover:text-white">
+              <span className="mr-1.5 text-glow">{s.number}</span>
               {s.shortTitle}
             </a>
           ))}
         </nav>
       </PageHero>
 
-      <div className="bg-ivory">
-        {services.map((s, i) => {
-          const Icon = s.icon
-          const alt = i % 2 === 1
-          return (
-            <section
-              key={s.id}
-              id={s.id}
-              aria-labelledby={`${s.id}-title`}
-              className={`border-b border-mist py-20 sm:py-28 ${alt ? 'bg-white' : 'bg-ivory'}`}
-            >
-              <div className="container-x grid gap-12 lg:grid-cols-12">
-                <div className="lg:col-span-5">
-                  <Reveal className="flex items-center gap-5">
-                    <span className="font-display text-6xl leading-none text-brand/30 italic sm:text-7xl">{s.number}</span>
-                    <span className="flex h-14 w-14 items-center justify-center border border-brand/20 text-brand">
-                      <Icon className="h-6 w-6" strokeWidth={1.25} aria-hidden="true" />
+      {services.map((s, i) => {
+        const Icon = s.icon
+        return (
+          <section key={s.id} id={s.id} aria-labelledby={`${s.id}-title`} className={`py-20 sm:py-28 ${i > 0 ? 'border-t border-white/[0.07]' : ''}`}>
+            <div className="container-x grid gap-12 lg:grid-cols-12">
+              <div className="lg:col-span-5">
+                <div className="lg:sticky lg:top-32">
+                  <Reveal className="flex items-center gap-4">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-glow/15 text-glow">
+                      <Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
                     </span>
+                    <span className="font-geo text-sm text-haze">Service {s.number}</span>
                   </Reveal>
-                  <Reveal as="h2" id={`${s.id}-title`} delay={0.06} className="mt-8 text-4xl leading-[1.05] text-ink sm:text-5xl">
+                  <Reveal as="h2" id={`${s.id}-title`} delay={0.05} className="mt-7 text-[2.2rem] leading-[1.05] sm:text-5xl">
                     {s.title}
                   </Reveal>
-                  <Reveal as="p" delay={0.1} className="mt-6 text-lg leading-relaxed text-slate">
-                    {s.summary}
-                  </Reveal>
-                </div>
-                <div className="lg:col-span-6 lg:col-start-7 lg:pt-4">
-                  <Reveal as="p" className="eyebrow text-brand">{s.listLabel}</Reveal>
-                  <ul className="mt-6 border-t border-ink/10">
-                    {s.offerings.map((o, j) => (
-                      <Reveal as="li" key={o} delay={j * 0.04} className="flex items-center gap-4 border-b border-ink/10 py-4 text-charcoal">
-                        <Check className="h-4 w-4 shrink-0 text-brand" strokeWidth={1.75} aria-hidden="true" />
-                        {o}
-                      </Reveal>
-                    ))}
-                  </ul>
-                  <Reveal className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="font-display text-2xl leading-snug text-ink italic">{s.outcome}</p>
-                    <Button to={`/contact?interest=${encodeURIComponent(s.title)}`} variant="outlineDark" className="shrink-0">
-                      Enquire
-                    </Button>
-                  </Reveal>
+                  <Reveal as="p" delay={0.1} className="mt-5 text-lg leading-relaxed text-haze">{s.summary}</Reveal>
                 </div>
               </div>
-            </section>
-          )
-        })}
-      </div>
+              <div className="lg:col-span-6 lg:col-start-7">
+                <Reveal className="glass rounded-[28px] p-7 sm:p-10">
+                  <p className="eyebrow">{s.listLabel}</p>
+                  <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+                    {s.offerings.map((o) => (
+                      <li key={o} className="flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.03] px-4 py-3.5 text-[0.95rem] text-white/90">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-glow" strokeWidth={2} aria-hidden="true" />
+                        {o}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-8 flex flex-col items-start gap-5 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="font-geo text-lg leading-snug text-glow">{s.outcome}</p>
+                    <Button to={`/contact?interest=${encodeURIComponent(s.title)}`} size="sm" className="shrink-0">Enquire</Button>
+                  </div>
+                </Reveal>
+              </div>
+            </div>
+          </section>
+        )
+      })}
 
       <CtaBand
-        title="Need an integrated approach across disciplines?"
+        title={<>Need an <span className="text-glow">integrated approach?</span></>}
         text="Our services work best together. Tell us where you want to go and we'll shape the right combination."
-        primary={{ label: 'Discuss a Project', to: '/contact?type=project' }}
+        primary={{ label: 'Discuss a project', to: '/contact?type=project' }}
       />
     </>
   )

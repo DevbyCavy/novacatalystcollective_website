@@ -2,42 +2,34 @@ import Reveal from './Reveal'
 import Button from './Button'
 import { site } from '../data/site'
 
-/** Closing call to action used at the foot of each page. */
+/** Closing call to action: centred headline over a low purple glow. */
 export default function CtaBand({
-  eyebrow = "Let's start a conversation",
-  title = "Let's Discuss Your Growth Ambitions.",
+  title = (
+    <>
+      Let&rsquo;s discuss your <span className="text-glow">growth ambitions.</span>
+    </>
+  ),
   text = 'We welcome conversations with organisations, business leaders, investors and partners looking to explore strategic growth opportunities.',
-  primary = { label: 'Book a Consultation', to: '/contact?type=consultation' },
-  secondary = { label: 'Explore a Partnership', to: '/contact?type=partnership' },
-  showProfile = true,
+  primary = { label: 'Book a consultation', to: '/contact?type=consultation' },
+  secondary = { label: 'Explore a partnership', to: '/contact?type=partnership' },
 }) {
   return (
-    <section className="relative overflow-hidden bg-brand py-20 text-white sm:py-28">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(185,162,220,0.25),transparent_60%)]" />
-      <div className="container-x relative grid gap-10 lg:grid-cols-12 lg:items-end">
-        <div className="lg:col-span-7">
-          <Reveal className="eyebrow flex items-center gap-4 text-accent">
-            <span aria-hidden="true" className="h-px w-10 bg-accent" />
-            {eyebrow}
+    <section className="relative overflow-hidden px-5 py-28 sm:py-36">
+      <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-1/2 h-[28rem] w-[58rem] -translate-x-1/2 translate-y-1/2 rounded-full bg-brand/55 blur-[140px]" />
+      <div className="relative mx-auto max-w-4xl text-center">
+        <Reveal as="h2" className="text-[2.5rem] leading-[1.04] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
+          {title}
+        </Reveal>
+        {text && (
+          <Reveal as="p" delay={0.08} className="mx-auto mt-6 max-w-xl leading-relaxed text-haze">
+            {text}
           </Reveal>
-          <Reveal as="h2" delay={0.08} className="mt-6 text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
-            {title}
-          </Reveal>
-          {text && (
-            <Reveal as="p" delay={0.14} className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">
-              {text}
-            </Reveal>
-          )}
-        </div>
-        <Reveal delay={0.2} className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:flex-col lg:items-end xl:flex-row xl:justify-end">
-          <Button to={primary.to} variant="light">{primary.label}</Button>
-          {secondary && (
-            <Button to={secondary.to} variant="outlineLight" arrow={false}>{secondary.label}</Button>
-          )}
-          {showProfile && site.credentialsProfile && (
-            <Button href={site.credentialsProfile} variant="outlineLight" arrow={false} download>
-              Download Company Profile
-            </Button>
+        )}
+        <Reveal delay={0.14} className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button to={primary.to}>{primary.label}</Button>
+          {secondary && <Button to={secondary.to} variant="ghost" arrow={false}>{secondary.label}</Button>}
+          {site.credentialsProfile && (
+            <Button href={site.credentialsProfile} variant="ghost" arrow={false} download>Company profile</Button>
           )}
         </Reveal>
       </div>

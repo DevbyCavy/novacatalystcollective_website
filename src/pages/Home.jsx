@@ -1,11 +1,11 @@
 import Hero from '../components/home/Hero'
 import {
   Introduction,
-  Expertise,
-  WhyNova,
-  IndustriesPreview,
+  PinnedServices,
+  ScrollLitStatement,
+  IndustriesGrid,
   WorkPreview,
-  DigitalBaeTeaser,
+  DigitalBaeBand,
   InsightsPreview,
 } from '../components/home/Sections'
 import CtaBand from '../components/CtaBand'
@@ -20,11 +20,11 @@ export default function Home() {
     <>
       <Hero />
       <Introduction />
-      <Expertise />
-      <WhyNova />
-      <IndustriesPreview />
+      <PinnedServices />
+      <ScrollLitStatement />
+      <IndustriesGrid />
       <WorkPreview />
-      <DigitalBaeTeaser />
+      <DigitalBaeBand />
       <InsightsPreview />
       <CtaBand />
     </>

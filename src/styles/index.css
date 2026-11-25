@@ -1,30 +1,42 @@
 @import 'tailwindcss';
 
-/* ---------- Design tokens (derived from the Nova Catalyst Collective logo) ---------- */
+/*
+ * Nova Catalyst Collective — "Midnight Boardroom" design system
+ * Direction: refined dark theme + geometric type (ui-ux-pro-max), patterns from 21st.dev
+ * (cursor spotlight, kinetic type, glow cards), motion per Emil Kowalski's design engineering:
+ * strong ease-out, short distances, UI motion < 300ms, exit faster than enter, reduced motion respected.
+ */
 @theme {
-  --color-ink: #1a0b29; /* deepest aubergine — hero, footer */
-  --color-plum: #2a1442; /* dark sections */
-  --color-brand: #441e6b; /* logo purple — primary; accent text on light backgrounds */
-  --color-brand-soft: #5b2d88; /* hover state for brand fills */
-  --color-accent: #b9a2dc; /* soft lilac — used sparingly on dark backgrounds */
-  --color-ivory: #f6f4f1;
-  --color-charcoal: #26242b;
+  /* Surfaces */
+  --color-night: #0d0714; /* page background */
+  --color-night-2: #150b20; /* raised surface */
+  --color-night-3: #1c1029; /* cards, inputs */
+  /* Brand (logo) */
+  --color-brand: #441e6b;
+  --color-brand-soft: #5a2c8a;
+  --color-glow: #b99cf0; /* lilac accent — highlights, links, focus */
+  --color-accent: #cdbdf0;
+  /* Text */
+  --color-haze: #a59cb4; /* secondary text on night (AA) */
   --color-grey: #646369; /* logo grey */
-  --color-slate: #57565e; /* secondary text on light backgrounds (AA) */
-  --color-mist: #e7e4ec;
-  --color-error: #e7a3a3;
+  --color-ink: #0d0714;
+  --color-error: #f0a8a8;
 
-  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-geo: 'Outfit', 'Manrope', system-ui, sans-serif;
+  --font-display: 'Outfit', 'Manrope', system-ui, sans-serif;
   --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-brand: 'Montserrat', 'Manrope', system-ui, sans-serif; /* logo wordmark + Digital Bae */
+  --font-brand: 'Montserrat', 'Manrope', system-ui, sans-serif;
 
-  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* ---------- Base ---------- */
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    color-scheme: dark;
   }
   @media (prefers-reduced-motion: no-preference) {
     html {
@@ -32,50 +44,118 @@
     }
   }
   body {
-    @apply bg-ivory font-sans text-charcoal antialiased;
+    @apply bg-night font-sans text-white antialiased;
   }
   h1,
   h2,
   h3,
   h4 {
-    @apply font-display;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    @apply font-geo;
+    font-weight: 600;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
   p {
     text-wrap: pretty;
   }
   ::selection {
-    @apply bg-accent text-ink;
+    @apply bg-glow text-night;
   }
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-glow);
     outline-offset: 3px;
+    border-radius: 6px;
   }
   [id] {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 6.5rem;
+  }
+
+  /* Mobile-native: no tap delay; controls aren't text-selectable on long-press */
+  button,
+  a,
+  [role='button'],
+  [role='tab'] {
+    touch-action: manipulation;
+  }
+  button,
+  [role='button'],
+  [role='tab'] {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  /* iOS zooms into inputs below 16px */
+  @media (pointer: coarse) {
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
+  }
+  /* Press feedback (Emil: scale 0.97, 160ms ease-out) */
+  .press {
+    transition: transform 160ms var(--ease-out);
+  }
+  .press:active {
+    transform: scale(0.97);
+  }
+  /* Native date picker icon visible on dark inputs */
+  input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
   }
 }
 
-/* ---------- Utilities ---------- */
 @utility container-x {
   width: 100%;
-  max-width: 84rem;
+  max-width: 76rem;
   margin-inline: auto;
   padding-inline: 1.25rem;
   @media (width >= 48rem) {
-    padding-inline: 2.5rem;
-  }
-  @media (width >= 80rem) {
-    padding-inline: 3.5rem;
+    padding-inline: 2rem;
   }
 }
 
 @utility eyebrow {
-  font-family: var(--font-sans);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  font-family: var(--font-geo);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-glow);
+}
+
+/* Fine architectural grid */
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 88px 88px;
+}
+
+/* Grid that fades out toward the edges */
+@utility grid-fade {
+  mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+}
+
+/* Glass surface */
+@utility glass {
+  background: linear-gradient(to bottom, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
+  border: 1px solid rgb(255 255 255 / 0.1);
+}
+
+@keyframes slow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@utility animate-slow-spin {
+  animation: slow-spin 80s linear infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* ---------- Concept D preview ("Bento Atelier") ---------- */
+@theme {
+  --font-play: 'Playfair Display', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --color-canvas: #efecf4;
+  --color-plum-ink: #1d1428;
 }

@@ -4,14 +4,15 @@ import Reveal from '../components/Reveal'
 import EnquiryForm from '../components/EnquiryForm'
 import ContactDetails from '../components/ContactDetails'
 import SocialIcons, { hasSocials } from '../components/SocialIcons'
+import { LogoMark } from '../components/Logo'
 import { useSeo } from '../components/Seo'
 import { services } from '../data/services'
 import { site } from '../data/site'
 
 const enquiryTypes = [
-  { value: 'project', label: 'Discuss a Project' },
-  { value: 'partnership', label: 'Explore a Partnership' },
-  { value: 'consultation', label: 'Book a Consultation' },
+  { value: 'project', label: 'Discuss a project' },
+  { value: 'partnership', label: 'Explore a partnership' },
+  { value: 'consultation', label: 'Book a consultation' },
 ]
 
 const interests = [...services.map((s) => s.title), 'Digital Bae speaking engagement', 'General enquiry']
@@ -38,41 +39,43 @@ export default function Contact() {
   return (
     <>
       <PageHero
-        eyebrow="Contact Us"
-        title="Let's Create What's Next."
+        eyebrow="Contact"
+        title={<>Let&rsquo;s create <span className="text-glow">what&rsquo;s next.</span></>}
         intro="We welcome conversations with organisations, business leaders, investors and partners looking to explore strategic growth opportunities."
       />
 
-      <section aria-labelledby="form-title" className="bg-white py-20 sm:py-28">
-        <div className="container-x grid gap-16 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-7">
-            <Reveal as="h2" id="form-title" className="text-4xl text-ink sm:text-5xl">
-              Let&rsquo;s start a conversation.
-            </Reveal>
-            <Reveal delay={0.08} className="mt-12">
+      <section aria-labelledby="form-title" className="py-16 sm:py-24">
+        <div className="container-x grid gap-6 lg:grid-cols-12">
+          <Reveal className="glass rounded-[28px] p-6 sm:p-10 lg:col-span-8">
+            <h2 id="form-title" className="text-3xl sm:text-4xl">Let&rsquo;s start a conversation.</h2>
+            <p className="mt-2 text-haze">Tell us a little about your organisation and what you would like to achieve.</p>
+            <div className="mt-10">
               <EnquiryForm
                 key={`${typeParam}-${interestParam}`}
                 formName="enquiry"
-                tone="light"
                 fields={fields}
                 types={enquiryTypes}
                 initialType={typeParam}
                 initialValues={{ interest: interestParam }}
               />
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
 
-          <Reveal delay={0.12} as="aside" aria-label="Contact details" className="lg:col-span-4 lg:col-start-9">
-            <div className="bg-ink p-8 text-white sm:p-10">
-              <p className="eyebrow text-accent">Get in touch</p>
-              <p className="mt-4 font-display text-3xl leading-tight">{site.tagline}</p>
-              <div className="mt-10 border-t border-white/10 pt-10">
+          <Reveal delay={0.08} as="aside" aria-label="Contact details" className="lg:col-span-4">
+            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-b from-brand/60 to-night-2 p-8 sm:p-10 lg:sticky lg:top-32">
+              <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-60" />
+              <LogoMark className="pointer-events-none absolute -right-12 -bottom-12 h-48 w-48 opacity-[0.08]" arc="#fff" mark="#fff" />
+              <p className="eyebrow relative">Get in touch</p>
+              <p className="relative mt-3 font-geo text-[1.9rem] leading-tight font-semibold tracking-[-0.03em]">
+                Clarity. Credibility. <span className="text-glow">Impact.</span>
+              </p>
+              <div className="relative mt-8 border-t border-white/10 pt-8">
                 <ContactDetails />
               </div>
-              {hasSocials && <SocialIcons className="mt-10" />}
+              {hasSocials && <SocialIcons className="relative mt-8" />}
               {site.credentialsProfile && (
-                <a href={site.credentialsProfile} download className="mt-10 inline-block border-b border-accent pb-1 text-[0.75rem] font-semibold tracking-[0.14em] text-accent uppercase">
-                  Download Company Profile
+                <a href={site.credentialsProfile} download className="relative mt-8 inline-block font-geo text-sm font-medium text-glow hover:text-white">
+                  Download company profile ↗
                 </a>
               )}
             </div>
