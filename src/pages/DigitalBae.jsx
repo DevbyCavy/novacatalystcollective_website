@@ -143,7 +143,7 @@ export default function DigitalBae() {
           </div>
           <div className="space-y-5 text-lg leading-relaxed text-haze lg:col-span-7 lg:col-start-6">
             <Reveal as="p">
-              Digital Bae is the personal brand of Nova Catalysts&rsquo; founder, Taffy L. Gotora, a strategic
+              Digital Bae is the personal brand of Nova Catalyst Collective&rsquo;s founder, Taffy L. Gotora, a strategic
               marketing and communications professional, speaker and business leader.
             </Reveal>
             <Reveal as="p" delay={0.06}>

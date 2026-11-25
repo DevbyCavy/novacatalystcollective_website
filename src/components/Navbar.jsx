@@ -108,10 +108,10 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2">
             <Link
-              to="/contact"
+              to="/contact?type=consultation"
               className="press group hidden items-stretch overflow-hidden rounded-md bg-white font-geo text-[0.9rem] font-medium text-night transition-colors duration-200 hover:bg-brand sm:inline-flex"
             >
-              <span className="flex items-center px-4 py-2.5">Let&rsquo;s talk</span>
+              <span className="flex items-center px-4 py-2.5">Book a consultation</span>
             </Link>
             <button
               ref={toggleRef}
@@ -169,8 +169,8 @@ export default function Navbar() {
               transition={{ delay: 0.35 }}
               className="container-x relative mt-auto pt-10 pb-[max(2.5rem,env(safe-area-inset-bottom))]"
             >
-              <Link to="/contact" className="press flex w-full items-center justify-center gap-2 rounded-md bg-white px-6 py-4 font-geo font-medium text-night">
-                Let&rsquo;s talk
+              <Link to="/contact?type=consultation" className="press flex w-full items-center justify-center gap-2 rounded-md bg-white px-6 py-4 font-geo font-medium text-night">
+                Book a consultation
               </Link>
               <p className="mt-6 text-center font-geo text-sm text-haze">{site.tagline}</p>
             </motion.div>

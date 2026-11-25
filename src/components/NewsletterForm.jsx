@@ -53,7 +53,7 @@ export default function NewsletterForm({ idPrefix = 'newsletter' }) {
           aria-invalid={Boolean(error)}
           aria-describedby={error ? `${id}-error` : undefined}
           enterKeyHint="send"
-          className="min-w-0 flex-1 bg-transparent py-2 text-base text-white placeholder:text-white/50 focus:outline-none"
+          className="min-w-0 flex-1 bg-transparent py-2 text-base text-white placeholder:text-haze focus:outline-none"
         />
         <button
           type="submit"

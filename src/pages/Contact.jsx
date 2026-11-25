@@ -70,7 +70,7 @@ export default function Contact() {
                 Clarity. Credibility. <span className="text-glow">Impact.</span>
               </p>
               <div className="relative mt-8 border-t border-white/10 pt-8">
-                <ContactDetails />
+                <ContactDetails enquiryTo="/contact#form-title" />
               </div>
               {hasSocials && <SocialIcons className="relative mt-8" />}
               {site.credentialsProfile && (

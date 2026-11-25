@@ -61,7 +61,7 @@ export default function Footer() {
               </a>
             )}
           </div>
-          <div className="lg:col-span-2 lg:col-start-6">
+          <div className="lg:col-span-2">
             <Column title="Navigate">
               <ul className="space-y-3">
                 <li><Link to="/" className={linkClass}>Home</Link></li>

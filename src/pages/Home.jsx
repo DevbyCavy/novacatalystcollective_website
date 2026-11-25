@@ -1,5 +1,6 @@
 import Hero from '../components/home/Hero'
 import {
+  ProofStrip,
   Introduction,
   PinnedServices,
   ScrollLitStatement,
@@ -19,6 +20,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <ProofStrip />
       <Introduction />
       <PinnedServices />
       <ScrollLitStatement />

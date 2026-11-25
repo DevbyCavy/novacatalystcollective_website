@@ -127,7 +127,7 @@ components:
 
 Drafting-table precision: grids, hairlines and measured purple ink. The site should feel like strategy you can see the structure of. A faint 88px architectural grid sits behind heroes and dark-tone bands; headlines are set in a tight geometric sans; colour is spent sparingly, so that Catalyst Plum and Blueprint Violet read as decisions, not decoration. Surfaces are light, calm and lilac-tinted, with depth expressed through soft, plum-tinted shadows and a cursor-following glow on cards rather than heavy fills.
 
-Density is spacious and editorial: large type, generous section rhythm (96–128px), and short, confident copy. Motion is quiet and purposeful: content rises 10–14px into place with a strong ease-out, headlines come into focus from a light blur, and interactive feedback is immediate (press scale 0.97). Nothing bounces, nothing loops for attention except the very slow logo ring in the hero.
+Density is spacious and editorial: large type, generous section rhythm (96–128px), and short, confident copy. Motion is quiet and purposeful: content rises 10–14px into place with a strong ease-out, headlines come into focus from a light blur, and interactive feedback is immediate (press scale 0.97). Nothing bounces, nothing loops for attention except the very slow logo ring in the hero, which is the homepage's one signature effect.
 
 Confirmed rejections: the firm must never look like a social media agency (founder's direction). Gradient text is not used (removed on the Impeccable detector finding). Pill-shaped buttons, boxed labels and chip backgrounds were explicitly removed by the user.
 
@@ -174,11 +174,11 @@ A restrained plum-and-ink palette on a lilac-tinted paper, where colour is a sig
 **Character:** A geometric, tightly tracked display sans gives headlines an engineered, architectural confidence; Manrope keeps long-form copy open and readable. Montserrat's black weight is reserved for the Digital Bae sub-brand so it stays bolder than the firm.
 
 ### Hierarchy
-- **Display** (600, 2.75rem → 6.2rem, line-height 1.02, tracking -0.045em): the homepage hero headline only.
-- **Headline** (600, 2.25rem → 3.4rem, 1.05, -0.03em): section titles; inner-page heroes run larger (2.7rem → 4.6rem).
-- **Title** (600, 1.4rem → 2.1rem, 1.2, -0.02em): card and service titles, client names.
+- **Display** (600, 2.75rem → 6rem, line-height 1.02, tracking -0.04em): the homepage hero headline only.
+- **Headline** (600, 2.25rem → 3.4rem, 1.05, -0.03em): section titles. Inner-page heroes 2.7rem → 4.6rem; closing call to action 2.5rem → 4.5rem; footer statement 2.4rem → 3.75rem; scroll-lit statement 2rem → 3.6rem.
+- **Title** (600, 1.4rem → 2.1rem, 1.2, -0.02em): card and service titles, client names; mobile menu links 1.9rem.
 - **Body** (400, 1rem → 1.125rem, line-height 1.625): paragraphs in Slate Haze; lead paragraphs at 1.125rem in ink at 80%. Keep measure around 65–75ch (max-w-xl to max-w-2xl).
-- **Eyebrow** (500, 0.875rem): Blueprint Violet section kickers above headlines ("Our expertise").
+- **Eyebrow** (500, 0.875rem): Blueprint Violet small text. Being retired as a kicker above headlines (Impeccable bans kickers above headings); new work should let the heading stand alone.
 - **Label** (600, 0.72rem, tracking 0.18em, uppercase): short standalone labels such as "NOVA CATALYST COLLECTIVE", "COMING SOON", sector names; Blueprint Violet.
 
 ### Named Rules
@@ -191,9 +191,10 @@ A restrained plum-and-ink palette on a lilac-tinted paper, where colour is a sig
 A centred container of 76rem max with 20px gutters on mobile and 32px from tablet up. Sections breathe on a 96px / 128px vertical rhythm (py-24 / py-32), with inner content on a 12-column grid that is used asymmetrically (5 + 7, or 6 + 5 offset) rather than in even halves.
 
 Signature structures:
-- **Hero:** centred, full-viewport (100svh) composition over the blueprint grid, a soft lilac glow and a very slowly rotating logo ring.
-- **Pinned services:** on desktop the services section is pinned for five screen-heights; a left index and progress line track which service is shown in the right-hand card. On mobile it becomes a stacked list of cards.
-- **Inner-page hero:** left-aligned, breadcrumb then headline then intro, over the same grid with a cursor spotlight.
+- **Hero:** centred composition (88svh) over the faint blueprint grid with one signature effect, the very slowly rotating logo ring. No kicker above the headline, no cursor spotlight, no rotating words.
+- **Proof strip:** directly under the hero, a text-only band on Card White between hairlines: selected client names joined by violet slashes, the one substantiated result (1.3M reported impressions) and the base (Zimbabwe; Africa & international).
+- **Pinned services:** on desktop the services section is pinned for 2.5 screen-heights (50vh per service). The left index is a list of buttons that jump to each step, with a progress line and an `01 / 05` counter; a visually hidden list keeps all five services available to assistive technology. On mobile it becomes a stacked list of cards.
+- **Inner-page hero:** left-aligned, breadcrumb then headline then intro, over the same grid with a soft cursor spotlight (`rgba(185,156,240,0.14)`, 480px radial).
 
 Breakpoints follow Tailwind defaults (640 / 768 / 1024 / 1280px). Below 1280px the navbar collapses to a menu button and full-screen menu. Nothing scrolls sideways at 375px.
 
@@ -224,7 +225,8 @@ Precise and composed.
 - **Primary:** Boardroom Ink fill, Lilac Paper text, Outfit 500 at 0.95rem, 14px × 20px. Turns Catalyst Plum on hover (200ms colour transition).
 - **Ghost:** transparent with a 1px ink border at 20%, ink text; border strengthens to 50% with a faint tint on hover.
 - **Brand:** Catalyst Plum fill with white text; Catalyst Plum Soft on hover.
-- **Arrow cell:** only the hero's primary call to action ("Start a conversation") carries an arrow, set in its own cell behind a hairline divider (`[ Label │ → ]`); the arrow nudges 2px on hover. All other buttons are text only.
+- **One primary label:** the consultation action is always "Book a consultation" and always links to `/contact?type=consultation` (hero, navbar, mobile menu, action bar, closing band). The speaking action is always "Invite to speak".
+- **Arrow cell:** only the hero's primary call to action ("Book a consultation") carries an arrow, set in its own cell behind a hairline divider (`[ Label │ → ]`); the arrow nudges 2px on hover. All other buttons are text only.
 - **Press:** every pressable scales to 0.97 on `:active` (160ms ease-out).
 
 ### Labels and Tag Lists
@@ -247,11 +249,11 @@ Precise and composed.
 ### Navigation
 - **Bar:** full width; transparent over the hero, then Card White at 85% with backdrop blur and a hairline once scrolled. Hides while scrolling down past 400px and returns on any upward scroll (drawer curve, 300ms); always returns on keyboard focus.
 - **Links:** Outfit 0.9rem in Slate Haze, ink on hover and when active. A single 2px Blueprint Violet underline rests under the active page and glides (spring) to whichever link is hovered. No background shapes behind links.
-- **Call to action:** squared ink "Let's talk" button.
+- **Call to action:** squared ink "Book a consultation" button.
 - **Mobile:** menu button opens a full-screen paper menu with large Outfit links, numbered, staggering in with a soft blur.
 
 ### Floating Action Bar (signature)
-Bottom-centre glass bar (Card White 90%, 12px corners, backdrop blur) that appears after half a screen of scrolling. Holds "Book a consultation" (solid ink), icon buttons for speaking, WhatsApp, email and back-to-top (6px, with 150ms tooltips), and a 2px Blueprint Violet line along its base that tracks reading progress.
+Bottom-centre glass bar (Card White 90%, 12px corners, backdrop blur) that appears after half a screen of scrolling. Holds "Book a consultation" (solid ink) and icon buttons for speaking, WhatsApp, email and back-to-top (6px). Pointer devices get 150ms tooltips; touch devices show a short text label beside each icon (Speak, Email, Top). It also has and a 2px Blueprint Violet line along its base that tracks reading progress.
 
 ### Pinned Services Story (signature)
 A five-step scroll story: left column lists services with a hairline that extends from 16px to 40px for the active one; the right card swaps with a blur crossfade (enter 400ms, exit 150ms).
@@ -266,12 +268,16 @@ A five-step scroll story: left column lists services with a hairline that extend
 - **Do** use the strong ease-out (`cubic-bezier(0.23, 1, 0.32, 1)`), keep UI transitions under 300ms, make exits faster than entrances, and respect `prefers-reduced-motion`.
 - **Do** re-scope `--color-white: #ffffff` inside Catalyst Plum panels instead of hard-coding white text.
 - **Do** keep the Digital Bae sub-brand bolder (Montserrat black) than the firm.
+- **Do** show only contact channels that exist; never print "to be confirmed". Fall back to the enquiry form and the confirmed base (Zimbabwe).
+- **Do** keep the philosophy (Clarity · Credibility · Impact) to at most two appearances per page.
 
 ### Don't:
 - **Don't** use gradient text.
 - **Don't** use pill-shaped buttons, pill tabs, chips with backgrounds, or boxed badges.
 - **Don't** add arrows to buttons other than the hero's primary call to action.
 - **Don't** put a background shape behind navbar links; the underline is the only indicator.
+- **Don't** place a kicker or eyebrow label above a heading.
+- **Don't** show "Coming soon" content on the homepage; replace unpublished sections with a single subscribe line.
 - **Don't** read `text-white` or `bg-white` literally; they are Boardroom Ink (the Inverted Name Rule).
 - **Don't** use Lilac Haze for text on light surfaces.
 - **Don't** make the firm look like a social media agency: no stickers, emoji, neon or playful bounce.
