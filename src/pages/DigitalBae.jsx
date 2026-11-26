@@ -126,7 +126,7 @@ export default function DigitalBae() {
             </ul>
           </div>
           <div className="lg:col-span-6">
-            <RevealImage image={images.aboutPrimary} sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5]" />
+            <RevealImage image={images.digitalBaeSpeaking} sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5]" />
           </div>
         </div>
       </section>

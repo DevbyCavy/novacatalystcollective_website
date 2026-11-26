@@ -4,6 +4,7 @@
  * Each photo ships at 960px and 1920px wide; components read `src`, `srcSet` and `alt` only.
  */
 import aboutBoardroom from '../assets/about-boardroom.jpg'
+import digitalBaeSpeaking from '../assets/digitalbae-speaking.jpg'
 
 const files = import.meta.glob('../assets/photos/*.jpg', { eager: true, import: 'default' })
 
@@ -22,6 +23,11 @@ export const images = {
     src: aboutBoardroom,
     alt: 'A strategy session in a boardroom: a leader presents plans across a glass table to four colleagues, with data dashboards on the wall behind',
     position: '58% center',
+  },
+  digitalBaeSpeaking: {
+    src: digitalBaeSpeaking,
+    alt: 'Taffy L. Gotora speaking at a lectern on stage at AD-Day Zambia, with panellists seated behind her',
+    position: '40% center',
   },
   aboutSecondary: {
     ...photo('office-meeting'),
