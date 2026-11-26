@@ -2,14 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { ArrowUpRight, Mic } from 'lucide-react'
-import Reveal, { RevealImage, easeOut } from '../Reveal'
+import Reveal, { easeOut } from '../Reveal'
+import { LogoMark } from '../Logo'
 import SectionHeading from '../SectionHeading'
 import Button, { TextLink } from '../Button'
-import GlowCard from '../GlowCard'
-import WorkCard from '../WorkCard'
 import InsightCard from '../InsightCard'
 import NewsletterForm from '../NewsletterForm'
-import { images } from '../../data/images'
 import digitalBaeHero from '../../assets/digitalbae-hero.jpg'
 import { services } from '../../data/services'
 import { industries, work, philosophy } from '../../data/content'
@@ -54,7 +52,7 @@ export function FounderBlock() {
     <section aria-labelledby="founder-title" className="py-20 sm:py-28">
       <div className="container-x grid gap-10 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-6">
-          <Reveal as="h2" id="founder-title" className="text-[2.5rem] leading-[1.02] tracking-[-0.04em] sm:text-6xl">
+          <Reveal as="h2" id="founder-title" className="text-[2.25rem] leading-[1.05] tracking-[-0.03em] text-balance sm:text-5xl lg:text-[3.4rem]">
             Led by <span className="text-glow">Taffy L. Gotora</span>
           </Reveal>
           <Reveal as="p" delay={0.06} className="mt-4 font-geo text-lg font-medium text-white">
@@ -63,11 +61,16 @@ export function FounderBlock() {
         </div>
         <div className="border-white/10 lg:col-span-5 lg:col-start-8 lg:border-l lg:pl-10">
           <Reveal as="p" delay={0.08} className="text-lg leading-relaxed text-white/80">
-            A strategic marketing and communications professional, speaker and business leader. Her work
-            centres on helping organisations and individuals understand the power of digital innovation,
-            strategic communication and purposeful brand positioning.
+            A strategic digital marketing executive, author, speaker and multi-award-winning strategist. Her
+            work spans financial services, capital markets and national brand campaigns, including
+            Zimbabwe&rsquo;s first LinkedIn-livestreamed analyst briefing by a listed bank and investor relations
+            support in capital markets.
           </Reveal>
-          <Reveal delay={0.12} className="mt-7 flex flex-wrap items-center gap-6">
+          <Reveal as="p" delay={0.1} className="mt-4 text-sm leading-relaxed text-haze">
+            Certified AI practitioner. Speaker at AD-Day Zambia, the Institute of Marketing in Malawi and the
+            ZimTrade Conference; moderator at the Women in Financial Markets Indaba.
+          </Reveal>
+          <Reveal delay={0.14} className="mt-7 flex flex-wrap items-center gap-6">
             <TextLink to="/about">About the firm</TextLink>
             <TextLink to="/digital-bae">Her platform, Digital Bae</TextLink>
           </Reveal>
@@ -94,10 +97,7 @@ export function AudienceRoutes() {
             <Reveal as="li" key={r.who} delay={i * 0.05} className={`py-8 md:px-8 ${i > 0 ? 'border-t border-white/10 md:border-t-0 md:border-l' : 'md:pl-0'}`}>
               <h3 className="text-xl leading-snug">{r.who}</h3>
               <p className="mt-2 text-[0.95rem] leading-relaxed text-haze">{r.what}</p>
-              <Link to={r.to} className="press group mt-5 inline-flex items-center gap-1.5 font-geo text-sm font-medium text-glow">
-                <span className="underline decoration-glow/40 underline-offset-4 transition-colors group-hover:decoration-glow">{r.label}</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
-              </Link>
+              <TextLink to={r.to} className="mt-5">{r.label}</TextLink>
             </Reveal>
           ))}
         </ul>
@@ -106,31 +106,53 @@ export function AudienceRoutes() {
   )
 }
 
-/* ───────── Introduction ───────── */
+/* ───────── Introduction: the one positioning statement, lit word by word ───────── */
+function LitWord({ children, progress, range }) {
+  // Starts dimmed but legible (not "disabled"), then lights to full ink.
+  const opacity = useTransform(progress, range, [0.5, 1])
+  return <motion.span style={{ opacity }}>{children} </motion.span>
+}
+
+const statement = 'We connect strategy with execution, visibility with credibility and relationships with commercial opportunity.'
+
 export function Introduction() {
+  const ref = useRef(null)
+  const reduce = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.5'] })
+  const parts = statement.split(' ')
   return (
     <section aria-labelledby="intro-title" className="py-24 sm:py-32">
       <div className="container-x grid items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <SectionHeading id="intro-title" title="Growth requires more than ambition." />
-          <Reveal as="p" delay={0.1} className="mt-6 text-lg leading-relaxed text-white/80">
-            It requires clarity of direction, credibility in the marketplace, meaningful relationships and
-            the ability to recognise and act on opportunity.
+          <h2 id="intro-title" ref={ref} aria-label={statement} className="text-[2rem] leading-[1.12] font-medium tracking-[-0.025em] sm:text-[2.6rem] lg:text-[2.9rem]">
+            {reduce
+              ? statement
+              : parts.map((w, i) => (
+                  <LitWord key={i} progress={scrollYProgress} range={[i / parts.length, (i + 1) / parts.length]}>
+                    {w}
+                  </LitWord>
+                ))}
+          </h2>
+          <Reveal as="p" delay={0.1} className="mt-7 text-lg leading-relaxed text-white/80">
+            Nova Catalyst Collective partners with ambitious organisations to strengthen their market position,
+            build influence and open new routes to growth, combining strategic thinking, communications
+            expertise and commercial insight.
           </Reveal>
-          <Reveal as="p" delay={0.14} className="mt-4 leading-relaxed text-haze">
-            Nova Catalyst Collective partners with ambitious organisations to strengthen their market
-            position, elevate their influence and unlock new pathways for growth, bringing together
-            strategic thinking, communications expertise, commercial insight and relationship capital.
-          </Reveal>
-          <Reveal delay={0.18} className="mt-9 flex flex-wrap items-center gap-6">
-            <Button to="/our-work" variant="ghost">See our work</Button>
+          <Reveal delay={0.16} className="mt-8">
+            <TextLink to="/our-work">See our work</TextLink>
           </Reveal>
         </div>
         <div className="relative lg:col-span-5 lg:col-start-8">
-          <RevealImage image={images.aboutSecondary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/5]" />
-          {/* Purple frosted glass: the photo shows through, blurred and tinted */}
+          {/* Blueprint panel: the firm's own mark on the drafting grid (no stock photography) */}
+          <Reveal className="relative aspect-[4/5] overflow-hidden rounded-[24px] border border-white/10 bg-night-3">
+            <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <LogoMark className="animate-slow-spin h-[115%] w-[115%] shrink-0 opacity-[0.2]" arc="#441E6B" mark="#5F3393" />
+            </div>
+          </Reveal>
+          {/* Purple frosted glass over the blueprint (kept at the client's request) */}
           <Reveal
-            delay={0.4}
+            delay={0.3}
             className="absolute -bottom-6 -left-4 rounded-2xl border border-snow/20 bg-brand/80 px-5 py-4 text-snow shadow-[0_16px_40px_-16px_rgba(68,30,107,0.6)] backdrop-blur-xl backdrop-saturate-150 sm:-left-8"
           >
             <p className="font-geo text-sm text-snow/90">Our philosophy</p>
@@ -269,82 +291,66 @@ export function PinnedServices() {
 }
 
 /* ───────── Statement that lights up word by word ───────── */
-function LitWord({ children, progress, range }) {
-  // Starts dimmed but legible (not "disabled"), then lights to full ink.
-  const opacity = useTransform(progress, range, [0.5, 1])
-  return <motion.span style={{ opacity }}>{children} </motion.span>
-}
-
-export function ScrollLitStatement() {
-  const ref = useRef(null)
-  const reduce = useReducedMotion()
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.45'] })
-  const text = 'We connect strategy with execution, visibility with credibility and relationships with commercial opportunity.'
-  const parts = text.split(' ')
-  return (
-    <section aria-labelledby="why-title" className="px-5 py-28 sm:py-40">
-      <div className="mx-auto max-w-5xl">
-        <h2 id="why-title" ref={ref} aria-label={text} className="font-geo text-[2rem] leading-[1.15] font-medium tracking-[-0.025em] sm:text-5xl lg:text-[3.6rem]">
-          {reduce
-            ? text
-            : parts.map((w, i) => (
-                <LitWord key={i} progress={scrollYProgress} range={[i / parts.length, (i + 1) / parts.length]}>
-                  {w}
-                </LitWord>
-              ))}
-        </h2>
-      </div>
-    </section>
-  )
-}
-
-/* ───────── Industries on glow cards ───────── */
+/* ───────── Industries: typographic index (type, not boxes) ───────── */
 export function IndustriesGrid() {
   return (
     <section aria-labelledby="industries-title" className="pb-28 sm:pb-36">
       <div className="container-x">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-          <SectionHeading id="industries-title" eyebrow="Industries we serve" title="Sector knowledge. Cross-market perspective." />
+          <SectionHeading id="industries-title" title={'Sector knowledge. Cross‑market perspective.'} />
           <Reveal delay={0.1}><TextLink to="/industries">All industries</TextLink></Reveal>
         </div>
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {industries.map((ind, i) => {
-            const Icon = ind.icon
-            return (
-              <Reveal as="li" key={ind.id} delay={(i % 3) * 0.06}>
-                <Link to={`/industries#${ind.id}`} className="block h-full">
-                  <GlowCard className="h-full">
-                    <div className="flex items-start justify-between">
-                      <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-glow/15 text-glow"><Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" /></span>
-                      <ArrowUpRight className="h-4 w-4 text-haze transition-[color,transform] duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" aria-hidden="true" />
-                    </div>
-                    <h3 className="mt-8 text-[1.4rem] leading-snug">{ind.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-haze">{ind.focus.join(' · ')}</p>
-                  </GlowCard>
-                </Link>
-              </Reveal>
-            )
-          })}
+        <ul className="mt-12 grid border-t border-white/10 md:grid-cols-2 md:gap-x-12">
+          {industries.map((ind, i) => (
+            <Reveal as="li" key={ind.id} delay={(i % 2) * 0.05} className="border-b border-white/10">
+              <Link to={`/industries#${ind.id}`} className="press group flex items-start justify-between gap-6 py-6">
+                <span>
+                  <span className="block font-geo text-[1.4rem] leading-snug font-medium text-white transition-colors duration-200 group-hover:text-glow">{ind.title}</span>
+                  <span className="mt-2 flex flex-wrap gap-x-2.5 gap-y-1 text-sm text-haze">
+                    {ind.focus.map((f) => (
+                      <span key={f} className="after:ml-2.5 after:text-glow after:content-['/'] last:after:content-none">{f}</span>
+                    ))}
+                  </span>
+                </span>
+                <ArrowUpRight className="mt-1.5 h-4 w-4 shrink-0 text-haze transition-[color,transform] duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-glow" aria-hidden="true" />
+              </Link>
+            </Reveal>
+          ))}
         </ul>
       </div>
     </section>
   )
 }
 
-/* ───────── Selected work ───────── */
+/* ───────── Selected work: a ledger, one engagement per row ───────── */
 export function WorkPreview() {
   return (
     <section aria-labelledby="work-title" className="pb-28 sm:pb-36">
       <div className="container-x">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-          <SectionHeading id="work-title" eyebrow="Selected work" title="Strategy in action." />
+          <SectionHeading id="work-title" title="Strategy in action." />
           <Reveal delay={0.1}><TextLink to="/our-work">All work</TextLink></Reveal>
         </div>
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-12 border-t border-white/10">
           {work.map((w, i) => (
-            <WorkCard key={w.id} item={w} index={i} featured={i === 0} to={`/our-work#${w.id}`} showHighlight={false} className={i === 0 ? 'md:col-span-2 lg:col-span-1 lg:row-span-2' : ''} />
+            <Reveal as="li" key={w.id} delay={i * 0.04} className="border-b border-white/10">
+              <Link to={`/our-work#${w.id}`} className="press group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] md:items-baseline">
+                <span>
+                  <span className="block font-geo text-[1.4rem] leading-snug font-medium text-white transition-colors duration-200 group-hover:text-glow">{w.client}</span>
+                  <span className="mt-0.5 block text-sm text-haze">{w.project} · {w.sector}</span>
+                </span>
+                <span className="flex flex-wrap gap-x-2.5 gap-y-1 text-sm text-white/80">
+                  {w.scope.map((sc) => (
+                    <span key={sc} className="after:ml-2.5 after:text-glow after:content-['/'] last:after:content-none">{sc}</span>
+                  ))}
+                </span>
+                <span className="flex items-center gap-4 md:justify-end">
+                  <ArrowUpRight className="hidden h-4 w-4 text-haze transition-[color,transform] duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-glow md:block" aria-hidden="true" />
+                </span>
+              </Link>
+            </Reveal>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )
@@ -362,11 +368,11 @@ export function DigitalBaeBand() {
               DIGITAL <span className="text-glow">BAE</span>
             </Reveal>
             <Reveal as="p" delay={0.05} className="mt-3 font-geo text-sm text-haze">Digital intelligence. Strategic influence. Business impact.</Reveal>
-            <Reveal as="p" delay={0.08} className="mt-4 inline-flex items-center gap-2 font-geo text-sm font-medium text-glow">
-              <Mic className="h-4 w-4" aria-hidden="true" /> Available for conferences, masterclasses and leadership programmes
+            <Reveal as="p" delay={0.08} className="mt-4 inline-flex items-center gap-2 font-geo text-sm font-medium text-white">
+              <Mic className="h-4 w-4 text-glow" aria-hidden="true" /> Available for conferences, masterclasses and leadership programmes
             </Reveal>
             <Reveal as="p" delay={0.12} className="mt-6 font-geo text-2xl leading-snug font-medium">
-              The future is digital. <span className="text-glow">The opportunity is yours.</span>
+              The future is digital. The opportunity is yours.
             </Reveal>
             <Reveal as="p" delay={0.16} className="mt-4 max-w-md leading-relaxed text-haze">
               The thought leadership platform of our founder, exploring digital innovation, artificial

@@ -30,7 +30,8 @@ function Tip({ label, short = label }) {
 
 /**
  * Floating glass action bar, bottom-centre.
- * Appears after half a screen of scrolling; a line along its bottom tracks reading progress.
+ * Appears after half a screen of scrolling (a fifth on phones, where the header has no room
+ * for the consultation button); a line along its bottom tracks reading progress.
  */
 export default function ActionBar() {
   const [show, setShow] = useState(false)
@@ -41,7 +42,7 @@ export default function ActionBar() {
   const onContact = pathname === '/contact'
 
   useEffect(() => {
-    const on = () => setShow(window.scrollY > window.innerHeight * 0.5)
+    const on = () => setShow(window.scrollY > window.innerHeight * (window.innerWidth < 640 ? 0.2 : 0.5))
     on()
     window.addEventListener('scroll', on, { passive: true })
     return () => window.removeEventListener('scroll', on)

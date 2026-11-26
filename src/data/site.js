@@ -24,11 +24,11 @@ export const site = {
 
   // WhatsApp enquiries: international format, digits only, e.g. '263771234567'.
   // The floating WhatsApp button and contact-page link appear once this is set.
-  whatsapp: null,
+  whatsapp: '263719694235',
   whatsappMessage: "Hello Nova Catalyst Collective, I'd like to discuss a growth opportunity.",
 
   social: {
-    linkedin: null, // full profile/company URL
+    linkedin: 'https://www.linkedin.com/company/nova-catalyst-collective/',
     facebook: null,
     instagram: null,
   },

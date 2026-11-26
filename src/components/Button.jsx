@@ -38,10 +38,10 @@ export default function Button({ to, href, variant = 'primary', arrow = false, s
 
 /** Quiet text link with a diagonal arrow. `external` opens in a new tab. */
 export function TextLink({ to, href, external = false, children, className = '' }) {
-  const cls = `press group inline-flex items-center gap-1.5 font-geo text-sm font-medium text-haze transition-colors duration-200 hover:text-white ${className}`
+  const cls = `press group inline-flex items-center gap-1.5 font-geo text-sm font-medium text-glow ${className}`
   const inner = (
     <>
-      {children}
+      <span className="underline decoration-glow/40 underline-offset-4 transition-colors duration-200 group-hover:decoration-glow">{children}</span>
       {external && <span className="sr-only"> (opens in a new tab)</span>}
       <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
     </>

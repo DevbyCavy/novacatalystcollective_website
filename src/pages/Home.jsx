@@ -5,7 +5,6 @@ import {
   AudienceRoutes,
   Introduction,
   PinnedServices,
-  ScrollLitStatement,
   IndustriesGrid,
   WorkPreview,
   DigitalBaeBand,
@@ -26,7 +25,6 @@ export default function Home() {
       <AudienceRoutes />
       <Introduction />
       <PinnedServices />
-      <ScrollLitStatement />
       <IndustriesGrid />
       <WorkPreview />
       <DigitalBaeBand />

@@ -175,7 +175,7 @@ A restrained plum-and-ink palette on a lilac-tinted paper, where colour is a sig
 
 ### Hierarchy
 - **Display** (600, 2.75rem → 6rem, line-height 1.02, tracking -0.04em): the homepage hero headline only.
-- **Headline** (600, 2.25rem → 3.4rem, 1.05, -0.03em): section titles. Inner-page heroes 2.7rem → 4.6rem; closing call to action 2.5rem → 4.5rem; footer statement 2.4rem → 3.75rem; scroll-lit statement 2rem → 3.6rem.
+- **Headline** (600, 2.25rem → 3.4rem, 1.05, -0.03em): section titles. Inner-page heroes 2.7rem → 4.6rem; closing call to action 2.5rem → 4.5rem; founder heading uses the headline token; the introduction's scroll-lit statement is the section heading at 2rem → 2.9rem.
 - **Title** (600, 1.4rem → 2.1rem, 1.2, -0.02em): card and service titles, client names; mobile menu links 1.9rem.
 - **Body** (400, 1rem → 1.125rem, line-height 1.625): paragraphs in Slate Haze; lead paragraphs at 1.125rem in ink at 80%. Keep measure around 65–75ch (max-w-xl to max-w-2xl).
 - **Eyebrow** (500, 0.875rem): retired as a kicker above headings. `SectionHeading` ignores its `eyebrow` prop; headings stand alone. Small uppercase labels survive only as field or card labels (e.g. "Selected clients", a sector name), never directly above a heading.
@@ -193,8 +193,12 @@ A centred container of 76rem max with 20px gutters on mobile and 32px from table
 Signature structures:
 - **Hero:** centred composition (88svh) over the faint blueprint grid with one signature effect, the very slowly rotating logo ring. No kicker above the headline, no cursor spotlight, no rotating words.
 - **Proof strip:** directly under the hero, a text-only band on Card White between hairlines: selected client names joined by violet slashes, and the one substantiated result (1.3M reported impressions, always static text, never a count-up). The base (Zimbabwe; Africa & international) lives in the hero subline.
-- **Founder block:** "Led by Taffy L. Gotora" in display type with a violet name, role line, a short biography beside a hairline, and two text links (About the firm, Digital Bae). Typographic until a licensed portrait exists.
+- **Founder block:** "Led by Taffy L. Gotora" in display type with a violet name, role line, a short biography beside a hairline, and two text links (About the firm, Digital Bae). Heading on the headline token (never larger). Typographic until a licensed portrait exists.
 - **Audience routes:** three hairline-divided columns (organisation, partner/investor, event organiser), each with one violet text link to its action. Never more than three.
+- **Introduction:** the single positioning statement, lit word by word as it scrolls (0.5 → 1 opacity), is the section heading, with one supporting paragraph. Beside it a blueprint panel (the logo mark turning slowly on the drafting grid) carries the plum frosted philosophy card. No stock photography.
+- **Industries index:** two-column hairline rows, sector name in title type, focus areas joined by violet slashes, a corner arrow. No icons, no cards.
+- **Work ledger:** one engagement per hairline row: client (title type) with project and sector, scope joined by violet slashes, arrow to its entry on Our Work. The result figure appears only in the proof strip.
+- **Text links:** one style everywhere: violet Outfit 500 at 0.875rem with a 40% violet underline that strengthens on hover, plus the corner arrow.
 - **One ending:** the CTA band ends the page; the footer opens with the strapline at body-display size, not a second display statement. Insights stays off the homepage and out of the main nav until an article is published.
 - **Pinned services:** on desktop the services section is pinned for 2.5 screen-heights (50vh per service). The left index is a list of buttons that jump to each step, with a progress line and an `01 / 05` counter; a visually hidden list keeps all five services available to assistive technology. On mobile it becomes a stacked list of cards.
 - **Inner-page hero:** left-aligned, breadcrumb then headline then intro, over the same grid with a soft cursor spotlight (`rgba(185,156,240,0.14)`, 480px radial).
@@ -203,7 +207,7 @@ Breakpoints follow Tailwind defaults (640 / 768 / 1024 / 1280px). Below 1280px t
 
 ## Elevation & Depth
 
-Depth is soft and plum-tinted: surfaces are flat at rest on the paper, and lift comes from long, low-opacity shadows tinted with ink or plum rather than neutral black. Cards add a second cue: a 1px border that glows Lilac where the cursor is (pointer devices only). Blur is used for glass: the scrolled navbar and action bar (backdrop blur over 85–90% white) and the plum frosted "Our philosophy" card over its photo.
+Depth is soft and plum-tinted: surfaces are flat at rest on the paper, and lift comes from long, low-opacity shadows tinted with ink or plum rather than neutral black. Cards add a second cue: a 1px border that glows Lilac where the cursor is (pointer devices only). Blur is used for glass: the scrolled navbar and action bar (backdrop blur over 85–90% white) and the plum frosted "Our philosophy" card over the blueprint panel.
 
 ### Shadow Vocabulary
 - **Raised card** (`0 1px 2px rgb(29 20 40 / .04), 0 12px 32px -16px rgb(68 30 107 / .18)`): the `glass` surface: service card, philosophy tiles, form panels.
@@ -256,7 +260,7 @@ Precise and composed.
 - **Mobile:** menu button opens a full-screen paper menu with large Outfit links, numbered, staggering in with a soft blur.
 
 ### Floating Action Bar (signature)
-Bottom-centre glass bar (Card White 90%, 12px corners, backdrop blur) that appears after half a screen of scrolling. Holds "Book a consultation" (solid ink) and icon buttons for speaking, WhatsApp, email and back-to-top (6px). Pointer devices get 150ms tooltips; touch devices show a short text label beside each icon (Speak, Email, Top). It also has and a 2px Blueprint Violet line along its base that tracks reading progress.
+Bottom-centre glass bar (Card White 90%, 12px corners, backdrop blur) that appears after half a screen of scrolling (a fifth of a screen on phones, where the header has no room for the consultation button). Holds "Book a consultation" (solid ink) and icon buttons for speaking, WhatsApp, email and back-to-top (6px). Pointer devices get 150ms tooltips; touch devices show a short text label beside each icon (Speak, WhatsApp, Email, Top). It also has a 2px Blueprint Violet line along its base that tracks reading progress.
 
 ### Pinned Services Story (signature)
 A five-step scroll story: left column lists services with a hairline that extends from 16px to 40px for the active one; the right card swaps with a blur crossfade (enter 400ms, exit 150ms).
