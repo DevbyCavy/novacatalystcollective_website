@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { ArrowUpRight, Mic } from 'lucide-react'
-import Reveal, { easeOut } from '../Reveal'
-import { LogoMark } from '../Logo'
+import Reveal, { RevealImage, easeOut } from '../Reveal'
 import SectionHeading from '../SectionHeading'
 import Button, { TextLink } from '../Button'
 import InsightCard from '../InsightCard'
@@ -13,6 +12,7 @@ import { services } from '../../data/services'
 import { industries, work, philosophy } from '../../data/content'
 import { insights } from '../../data/insights'
 import { site } from '../../data/site'
+import { images } from '../../data/images'
 
 /* ───────── Proof strip: who, where, for whom, with what result (text only) ───────── */
 export function ProofStrip() {
@@ -143,14 +143,8 @@ export function Introduction() {
           </Reveal>
         </div>
         <div className="relative lg:col-span-5 lg:col-start-8">
-          {/* Blueprint panel: the firm's own mark on the drafting grid (no stock photography) */}
-          <Reveal className="relative aspect-[4/5] overflow-hidden rounded-[24px] border border-white/10 bg-night-3">
-            <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0" />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <LogoMark className="animate-slow-spin h-[115%] w-[115%] shrink-0 opacity-[0.2]" arc="#441E6B" mark="#5F3393" />
-            </div>
-          </Reveal>
-          {/* Purple frosted glass over the blueprint (kept at the client's request) */}
+          <RevealImage image={images.aboutSecondary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/5]" />
+          {/* Purple frosted glass: the photo shows through, blurred and tinted */}
           <Reveal
             delay={0.3}
             className="absolute -bottom-6 -left-4 rounded-2xl border border-snow/20 bg-brand/80 px-5 py-4 text-snow shadow-[0_16px_40px_-16px_rgba(68,30,107,0.6)] backdrop-blur-xl backdrop-saturate-150 sm:-left-8"

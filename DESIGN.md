@@ -195,7 +195,7 @@ Signature structures:
 - **Proof strip:** directly under the hero, a text-only band on Card White between hairlines: selected client names joined by violet slashes, and the one substantiated result (1.3M reported impressions, always static text, never a count-up). The base (Zimbabwe; Africa & international) lives in the hero subline.
 - **Founder block:** "Led by Taffy L. Gotora" in display type with a violet name, role line, a short biography beside a hairline, and two text links (About the firm, Digital Bae). Heading on the headline token (never larger). Typographic until a licensed portrait exists.
 - **Audience routes:** three hairline-divided columns (organisation, partner/investor, event organiser), each with one violet text link to its action. Never more than three.
-- **Introduction:** the single positioning statement, lit word by word as it scrolls (0.5 → 1 opacity), is the section heading, with one supporting paragraph. Beside it a blueprint panel (the logo mark turning slowly on the drafting grid) carries the plum frosted philosophy card. No stock photography.
+- **Introduction:** the single positioning statement, lit word by word as it scrolls (0.5 → 1 opacity), is the section heading, with one supporting paragraph. Beside it a 4:5 photograph carries the plum frosted philosophy card.
 - **Industries index:** two-column hairline rows, sector name in title type, focus areas joined by violet slashes, a corner arrow. No icons, no cards.
 - **Work ledger:** one engagement per hairline row: client (title type) with project and sector, scope joined by violet slashes, arrow to its entry on Our Work. The result figure appears only in the proof strip.
 - **Text links:** one style everywhere: violet Outfit 500 at 0.875rem with a 40% violet underline that strengthens on hover, plus the corner arrow.
@@ -207,7 +207,7 @@ Breakpoints follow Tailwind defaults (640 / 768 / 1024 / 1280px). Below 1280px t
 
 ## Elevation & Depth
 
-Depth is soft and plum-tinted: surfaces are flat at rest on the paper, and lift comes from long, low-opacity shadows tinted with ink or plum rather than neutral black. Cards add a second cue: a 1px border that glows Lilac where the cursor is (pointer devices only). Blur is used for glass: the scrolled navbar and action bar (backdrop blur over 85–90% white) and the plum frosted "Our philosophy" card over the blueprint panel.
+Depth is soft and plum-tinted: surfaces are flat at rest on the paper, and lift comes from long, low-opacity shadows tinted with ink or plum rather than neutral black. Cards add a second cue: a 1px border that glows Lilac where the cursor is (pointer devices only). Blur is used for glass: the scrolled navbar and action bar (backdrop blur over 85–90% white) and the plum frosted "Our philosophy" card over its photo.
 
 ### Shadow Vocabulary
 - **Raised card** (`0 1px 2px rgb(29 20 40 / .04), 0 12px 32px -16px rgb(68 30 107 / .18)`): the `glass` surface: service card, philosophy tiles, form panels.
