@@ -45,6 +45,7 @@ export function RevealImage({ image, className = '', imgClassName = '', sizes, e
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
         className={`h-full w-full object-cover ${imgClassName}`}
+        style={image.position ? { objectPosition: image.position } : undefined}
         initial={{ scale: 1.06 }}
         whileInView={{ scale: 1 }}
         viewport={viewport}

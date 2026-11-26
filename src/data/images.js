@@ -3,6 +3,8 @@
  * imagery. To switch to brand photography, replace `src` / `srcSet` with imported
  * assets from src/assets — components only read these fields.
  */
+import aboutBoardroom from '../assets/about-boardroom.jpg'
+
 const unsplash = (id) => {
   const base = `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=75`
   return {
@@ -17,8 +19,9 @@ export const images = {
     alt: 'Glass office towers rising toward an overcast sky in a financial district',
   },
   aboutPrimary: {
-    ...unsplash('1507679799987-c73779587ccf'),
-    alt: 'Executive in a tailored navy suit fastening his jacket',
+    src: aboutBoardroom,
+    alt: 'A strategy session in a boardroom: a leader presents plans across a glass table to four colleagues, with data dashboards on the wall behind',
+    position: '58% center',
   },
   aboutSecondary: {
     ...unsplash('1541746972996-4e0b0f43e02a'),
