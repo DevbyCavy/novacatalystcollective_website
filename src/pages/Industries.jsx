@@ -18,7 +18,7 @@ export default function Industries() {
     <>
       <PageHero
         eyebrow="Industries"
-        title={<>Sector knowledge. <span className="text-glow">Cross-market perspective.</span></>}
+        title={<>Sector knowledge. <span className="text-glow">Cross&#8209;market perspective.</span></>}
         intro="Our expertise is relevant across industries where reputation, strategic positioning, relationships and growth are critical."
       />
 

@@ -1,21 +1,21 @@
 /**
- * Image library. Photography is served from Unsplash (free licence) as interim
- * imagery. To switch to brand photography, replace `src` / `srcSet` with imported
- * assets from src/assets — components only read these fields.
+ * Image library. Every photo is stored in the project (src/assets) so the site never depends
+ * on a third-party image server; stock photos came from Unsplash (free licence).
+ * Each photo ships at 960px and 1920px wide; components read `src`, `srcSet` and `alt` only.
  */
 import aboutBoardroom from '../assets/about-boardroom.jpg'
 
-const unsplash = (id) => {
-  const base = `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=75`
-  return {
-    src: `${base}&w=1600`,
-    srcSet: [640, 960, 1280, 1600, 2200].map((w) => `${base}&w=${w} ${w}w`).join(', '),
-  }
+const files = import.meta.glob('../assets/photos/*.jpg', { eager: true, import: 'default' })
+
+const photo = (name) => {
+  const small = files[`../assets/photos/${name}-960.jpg`]
+  const large = files[`../assets/photos/${name}-1920.jpg`]
+  return { src: large, srcSet: `${small} 960w, ${large} 1920w` }
 }
 
 export const images = {
   hero: {
-    ...unsplash('1486406146926-c627a92ad1ab'),
+    ...photo('hero'),
     alt: 'Glass office towers rising toward an overcast sky in a financial district',
   },
   aboutPrimary: {
@@ -24,43 +24,43 @@ export const images = {
     position: '58% center',
   },
   aboutSecondary: {
-    ...unsplash('1541746972996-4e0b0f43e02a'),
+    ...photo('office-meeting'),
     alt: 'A leadership team meeting in a glass-walled boardroom in the evening',
   },
   africa: {
-    ...unsplash('1580060839134-75a5edca2e99'),
+    ...photo('cape-town'),
     alt: 'Aerial view of Cape Town with Table Mountain behind the city and coastline',
   },
   johannesburg: {
-    ...unsplash('1577948000111-9c970dfe3743'),
+    ...photo('johannesburg'),
     alt: 'The Johannesburg skyline with the Hillbrow Tower under a dramatic sky',
   },
   speakingAudience: {
-    ...unsplash('1540575467063-178a50c2df87'),
+    ...photo('conference-audience'),
     alt: 'A conference audience seated in a dark auditorium',
   },
   speakingStage: {
-    ...unsplash('1505373877841-8d25f7d46678'),
+    ...photo('speaker-stage'),
     alt: 'A speaker presenting on stage in front of a large screen and audience',
   },
   insightVisibility: {
-    ...unsplash('1475721027785-f74eccf877e2'),
+    ...photo('stage-microphone'),
     alt: 'A microphone on stage in front of a blurred audience',
   },
   insightAi: {
-    ...unsplash('1573164713988-8665fc963095'),
+    ...photo('tech-professional'),
     alt: 'A technology professional with a laptop standing beside server racks',
   },
   insightReputation: {
-    ...unsplash('1521791136064-7986c2920216'),
+    ...photo('handshake'),
     alt: 'Two business people shaking hands across a desk',
   },
   insightComms: {
-    ...unsplash('1542744173-8e7e53415bb0'),
+    ...photo('boardroom-presentation'),
     alt: 'A team gathered around a boardroom table during a presentation',
   },
   insightAfrica: {
-    ...unsplash('1577948000111-9c970dfe3743'),
+    ...photo('johannesburg'),
     alt: 'The Johannesburg skyline with the Hillbrow Tower under a dramatic sky',
   },
 }

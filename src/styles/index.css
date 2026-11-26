@@ -174,3 +174,33 @@
   --color-canvas: #efecf4;
   --color-plum-ink: #1d1428;
 }
+
+/* Date fields: same height and alignment as text inputs on every browser (iOS collapses an
+   empty date input and centres its value), muted until a date is chosen, clear picker icon. */
+.date-input {
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 0;
+  min-height: 3.375rem;
+  text-align: left;
+  color-scheme: light;
+  cursor: pointer;
+}
+.date-input::-webkit-date-and-time-value {
+  text-align: left;
+  margin: 0;
+}
+.date-input::-webkit-datetime-edit {
+  padding: 0;
+}
+.date-input.is-empty:not(:focus)::-webkit-datetime-edit {
+  color: var(--color-haze);
+}
+.date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 150ms ease;
+}
+.date-input:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}

@@ -147,6 +147,8 @@ export default function EnquiryForm({
   }
 
   const inputBase = `mt-2 w-full rounded-xl border px-4 py-3.5 text-base transition-all focus:ring-4 focus:outline-none`
+  // Local date as YYYY-MM-DD: event dates can't be in the past
+  const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10)
 
   return (
     <form ref={formRef} onSubmit={onSubmit} noValidate className="relative grid gap-6 sm:grid-cols-2">
@@ -211,7 +213,13 @@ export default function EnquiryForm({
                 <ChevronDown className={`pointer-events-none absolute top-[calc(50%+4px)] right-4 h-4 w-4 -translate-y-1/2 ${t.icon}`} strokeWidth={1.5} aria-hidden="true" />
               </div>
             ) : (
-              <input type={f.type || 'text'} inputMode={f.type === 'tel' ? 'tel' : undefined} {...common} className={cls} />
+              <input
+                type={f.type || 'text'}
+                inputMode={f.type === 'tel' ? 'tel' : undefined}
+                {...common}
+                {...(f.type === 'date' ? { min: today } : {})}
+                className={f.type === 'date' ? `${cls} date-input ${values[f.name] ? '' : 'is-empty'}` : cls}
+              />
             )}
             <AnimatePresence initial={false}>
               {err && (
