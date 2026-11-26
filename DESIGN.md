@@ -148,7 +148,7 @@ A restrained plum-and-ink palette on a lilac-tinted paper, where colour is a sig
 - **Catalyst Plum Soft** (catalyst-plum-soft): hover state for plum fills only.
 
 ### Secondary
-- **Blueprint Violet** (blueprint-violet): the working accent. Emphasis words inside headlines ("commercial impact."), eyebrows, uppercase labels, link text, the navbar underline, the action-bar progress line, tag-list slashes, count-up figures and focus rings. AA on lilac-paper.
+- **Blueprint Violet** (blueprint-violet): the working accent. Emphasis words inside headlines ("commercial impact."), eyebrows, uppercase labels, link text, the navbar underline, the action-bar progress line, tag-list slashes, result figures and focus rings. AA on lilac-paper.
 - **Lilac Haze** (lilac-haze): decorative only. Background glows (blurred 110–160px), and accents inside plum panels. Never body text on light surfaces.
 
 ### Neutral
@@ -178,7 +178,7 @@ A restrained plum-and-ink palette on a lilac-tinted paper, where colour is a sig
 - **Headline** (600, 2.25rem → 3.4rem, 1.05, -0.03em): section titles. Inner-page heroes 2.7rem → 4.6rem; closing call to action 2.5rem → 4.5rem; footer statement 2.4rem → 3.75rem; scroll-lit statement 2rem → 3.6rem.
 - **Title** (600, 1.4rem → 2.1rem, 1.2, -0.02em): card and service titles, client names; mobile menu links 1.9rem.
 - **Body** (400, 1rem → 1.125rem, line-height 1.625): paragraphs in Slate Haze; lead paragraphs at 1.125rem in ink at 80%. Keep measure around 65–75ch (max-w-xl to max-w-2xl).
-- **Eyebrow** (500, 0.875rem): Blueprint Violet small text. Being retired as a kicker above headlines (Impeccable bans kickers above headings); new work should let the heading stand alone.
+- **Eyebrow** (500, 0.875rem): retired as a kicker above headings. `SectionHeading` ignores its `eyebrow` prop; headings stand alone. Small uppercase labels survive only as field or card labels (e.g. "Selected clients", a sector name), never directly above a heading.
 - **Label** (600, 0.72rem, tracking 0.18em, uppercase): short standalone labels such as "NOVA CATALYST COLLECTIVE", "COMING SOON", sector names; Blueprint Violet.
 
 ### Named Rules
@@ -192,7 +192,10 @@ A centred container of 76rem max with 20px gutters on mobile and 32px from table
 
 Signature structures:
 - **Hero:** centred composition (88svh) over the faint blueprint grid with one signature effect, the very slowly rotating logo ring. No kicker above the headline, no cursor spotlight, no rotating words.
-- **Proof strip:** directly under the hero, a text-only band on Card White between hairlines: selected client names joined by violet slashes, the one substantiated result (1.3M reported impressions) and the base (Zimbabwe; Africa & international).
+- **Proof strip:** directly under the hero, a text-only band on Card White between hairlines: selected client names joined by violet slashes, and the one substantiated result (1.3M reported impressions, always static text, never a count-up). The base (Zimbabwe; Africa & international) lives in the hero subline.
+- **Founder block:** "Led by Taffy L. Gotora" in display type with a violet name, role line, a short biography beside a hairline, and two text links (About the firm, Digital Bae). Typographic until a licensed portrait exists.
+- **Audience routes:** three hairline-divided columns (organisation, partner/investor, event organiser), each with one violet text link to its action. Never more than three.
+- **One ending:** the CTA band ends the page; the footer opens with the strapline at body-display size, not a second display statement. Insights stays off the homepage and out of the main nav until an article is published.
 - **Pinned services:** on desktop the services section is pinned for 2.5 screen-heights (50vh per service). The left index is a list of buttons that jump to each step, with a progress line and an `01 / 05` counter; a visually hidden list keeps all five services available to assistive technology. On mobile it becomes a stacked list of cards.
 - **Inner-page hero:** left-aligned, breadcrumb then headline then intro, over the same grid with a soft cursor spotlight (`rgba(185,156,240,0.14)`, 480px radial).
 

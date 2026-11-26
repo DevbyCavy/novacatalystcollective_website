@@ -33,7 +33,7 @@ export default function Hero() {
           className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-haze"
         >
           Strategic advisory, corporate communications and market development for organisations ready to
-          grow, lead and compete.
+          grow, lead and compete. Headquartered in Zimbabwe, serving Africa and international markets.
         </motion.p>
 
         <motion.div

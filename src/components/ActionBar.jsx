@@ -6,7 +6,7 @@ import { whatsappUrl, WhatsAppGlyph } from './WhatsAppButton'
 import { site } from '../data/site'
 
 const iconBtn =
-  'press relative flex h-10 min-w-10 items-center justify-center gap-1.5 rounded-md text-haze transition-colors duration-200 hover:bg-white/10 hover:text-white pointer-coarse:px-2.5'
+  'press relative flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-md text-haze transition-colors duration-200 hover:bg-white/10 hover:text-white pointer-coarse:px-2.5'
 
 /**
  * Label for an icon button. Pointer devices get a 150ms tooltip on hover/focus;
@@ -59,8 +59,8 @@ export default function ActionBar() {
         >
           <div role="toolbar" aria-label="Quick actions" className="relative flex items-center gap-1 rounded-xl border border-white/12 bg-night-2/90 p-1.5 shadow-[0_16px_40px_-16px_rgba(29,20,40,0.28)] backdrop-blur-xl">
             {!onContact && (
-              <Link to="/contact?type=consultation" className="press inline-flex items-center gap-2 rounded-md bg-white px-4 py-2.5 font-geo text-sm font-medium whitespace-nowrap text-night transition-colors duration-200 hover:bg-brand">
-                <CalendarCheck className="h-4 w-4" aria-hidden="true" /><span><span className="hidden sm:inline">Book a </span>consultation</span>
+              <Link to="/contact?type=consultation" className="press inline-flex h-11 items-center gap-2 rounded-md bg-white px-4 font-geo text-sm font-medium whitespace-nowrap text-night transition-colors duration-200 hover:bg-brand">
+                <CalendarCheck className="h-4 w-4" aria-hidden="true" /><span>Book a consultation</span>
               </Link>
             )}
             {pathname !== '/digital-bae' && (

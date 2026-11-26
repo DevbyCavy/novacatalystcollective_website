@@ -13,7 +13,6 @@ export default function NotFound() {
       <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/45 blur-[140px]" />
       <LogoMark className="animate-slow-spin pointer-events-none absolute top-1/2 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 opacity-[0.07]" arc="#441E6B" mark="transparent" />
       <div className="relative">
-        <p className="eyebrow">Error 404</p>
         <motion.h1
           initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}

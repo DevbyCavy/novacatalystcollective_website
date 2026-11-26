@@ -23,7 +23,7 @@ export function ProofStrip() {
     <section aria-label="Selected clients and results" className="border-y border-white/10 bg-night-2">
       <div className="container-x grid gap-6 py-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-16">
         <div>
-          <p className="font-geo text-sm text-haze">Selected clients</p>
+          <p className="font-geo text-[0.72rem] font-semibold tracking-[0.18em] text-haze uppercase">Selected clients</p>
           <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
             {work.map((w) => (
               <li
@@ -34,9 +34,6 @@ export function ProofStrip() {
               </li>
             ))}
           </ul>
-          <p className="mt-2 font-geo text-sm text-haze">
-            Headquartered in <span className="text-white">Zimbabwe</span> · serving Africa &amp; international markets
-          </p>
         </div>
         {stat && (
           <div className="lg:border-l lg:border-white/10 lg:pl-16">
@@ -51,13 +48,71 @@ export function ProofStrip() {
   )
 }
 
+/* ───────── Founder: the firm's seniority, named (typographic until a licensed portrait exists) ───────── */
+export function FounderBlock() {
+  return (
+    <section aria-labelledby="founder-title" className="py-20 sm:py-28">
+      <div className="container-x grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div className="lg:col-span-6">
+          <Reveal as="h2" id="founder-title" className="text-[2.5rem] leading-[1.02] tracking-[-0.04em] sm:text-6xl">
+            Led by <span className="text-glow">Taffy L. Gotora</span>
+          </Reveal>
+          <Reveal as="p" delay={0.06} className="mt-4 font-geo text-lg font-medium text-white">
+            Founder, Nova Catalyst Collective
+          </Reveal>
+        </div>
+        <div className="border-white/10 lg:col-span-5 lg:col-start-8 lg:border-l lg:pl-10">
+          <Reveal as="p" delay={0.08} className="text-lg leading-relaxed text-white/80">
+            A strategic marketing and communications professional, speaker and business leader. Her work
+            centres on helping organisations and individuals understand the power of digital innovation,
+            strategic communication and purposeful brand positioning.
+          </Reveal>
+          <Reveal delay={0.12} className="mt-7 flex flex-wrap items-center gap-6">
+            <TextLink to="/about">About the firm</TextLink>
+            <TextLink to="/digital-bae">Her platform, Digital Bae</TextLink>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ───────── Audience routes: one clear next step for each of the three audiences ───────── */
+const routes = [
+  { who: 'Leading an organisation', what: 'Grow, compete or enter a new market with senior strategic support.', label: 'Book a consultation', to: '/contact?type=consultation' },
+  { who: 'Partnering or investing', what: 'Explore relationships and opportunities across African and international markets.', label: 'Explore a partnership', to: '/contact?type=partnership' },
+  { who: 'Organising an event', what: 'Book Digital Bae for a keynote, masterclass or leadership programme.', label: 'Invite to speak', to: '/digital-bae#speaking-enquiry' },
+]
+
+export function AudienceRoutes() {
+  return (
+    <section aria-labelledby="routes-title" className="pb-8">
+      <div className="container-x">
+        <h2 id="routes-title" className="sr-only">Where to start</h2>
+        <ul className="grid border-y border-white/10 md:grid-cols-3">
+          {routes.map((r, i) => (
+            <Reveal as="li" key={r.who} delay={i * 0.05} className={`py-8 md:px-8 ${i > 0 ? 'border-t border-white/10 md:border-t-0 md:border-l' : 'md:pl-0'}`}>
+              <h3 className="text-xl leading-snug">{r.who}</h3>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-haze">{r.what}</p>
+              <Link to={r.to} className="press group mt-5 inline-flex items-center gap-1.5 font-geo text-sm font-medium text-glow">
+                <span className="underline decoration-glow/40 underline-offset-4 transition-colors group-hover:decoration-glow">{r.label}</span>
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+              </Link>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
 /* ───────── Introduction ───────── */
 export function Introduction() {
   return (
     <section aria-labelledby="intro-title" className="py-24 sm:py-32">
       <div className="container-x grid items-center gap-14 lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <SectionHeading id="intro-title" eyebrow="Introduction" title="Growth requires more than ambition." />
+          <SectionHeading id="intro-title" title="Growth requires more than ambition." />
           <Reveal as="p" delay={0.1} className="mt-6 text-lg leading-relaxed text-white/80">
             It requires clarity of direction, credibility in the marketplace, meaningful relationships and
             the ability to recognise and act on opportunity.
@@ -67,13 +122,8 @@ export function Introduction() {
             position, elevate their influence and unlock new pathways for growth, bringing together
             strategic thinking, communications expertise, commercial insight and relationship capital.
           </Reveal>
-          <Reveal as="p" delay={0.16} className="mt-6 border-t border-white/10 pt-6 leading-relaxed text-haze">
-            Founded and led by <span className="font-semibold text-white">Taffy L. Gotora</span>, a strategic
-            marketing and communications professional, speaker and business leader.
-          </Reveal>
           <Reveal delay={0.18} className="mt-9 flex flex-wrap items-center gap-6">
-            <Button to="/about">About the firm</Button>
-            <TextLink to="/our-work">See our work</TextLink>
+            <Button to="/our-work" variant="ghost">See our work</Button>
           </Reveal>
         </div>
         <div className="relative lg:col-span-5 lg:col-start-8">
@@ -130,7 +180,7 @@ export function PinnedServices() {
         ))}
       </ul>
 
-      <div ref={ref} className="relative hidden lg:block" style={{ height: `${services.length * 50}vh` }}>
+      <div ref={ref} className="relative hidden lg:block" style={{ height: `${services.length * 35 + 100}vh` }}>
         <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
           <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-50" />
           <div className="container-x relative grid grid-cols-12 gap-10">
@@ -155,7 +205,7 @@ export function PinnedServices() {
                 <div className="h-px flex-1 bg-white/10">
                   <motion.div className="h-px origin-left bg-glow" style={{ scaleX: bar }} />
                 </div>
-                <p className="font-geo text-sm text-haze tabular-nums" aria-live="polite">
+                <p className="font-geo text-sm text-haze tabular-nums" aria-hidden="true">
                   <span className="text-white">{String(active + 1).padStart(2, '0')}</span> / {total}
                 </p>
               </div>
@@ -234,8 +284,7 @@ export function ScrollLitStatement() {
   return (
     <section aria-labelledby="why-title" className="px-5 py-28 sm:py-40">
       <div className="mx-auto max-w-5xl">
-        <h2 id="why-title" className="eyebrow">Why Nova Catalyst Collective?</h2>
-        <p ref={ref} className="mt-6 font-geo text-[2rem] leading-[1.15] font-medium tracking-[-0.025em] sm:text-5xl lg:text-[3.6rem]">
+        <h2 id="why-title" ref={ref} aria-label={text} className="font-geo text-[2rem] leading-[1.15] font-medium tracking-[-0.025em] sm:text-5xl lg:text-[3.6rem]">
           {reduce
             ? text
             : parts.map((w, i) => (
@@ -243,7 +292,7 @@ export function ScrollLitStatement() {
                   {w}
                 </LitWord>
               ))}
-        </p>
+        </h2>
       </div>
     </section>
   )
@@ -293,7 +342,7 @@ export function WorkPreview() {
         </div>
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {work.map((w, i) => (
-            <WorkCard key={w.id} item={w} index={i} featured={i === 0} className={i === 0 ? 'md:col-span-2 lg:col-span-1 lg:row-span-2' : ''} />
+            <WorkCard key={w.id} item={w} index={i} featured={i === 0} to={`/our-work#${w.id}`} showHighlight={false} className={i === 0 ? 'md:col-span-2 lg:col-span-1 lg:row-span-2' : ''} />
           ))}
         </div>
       </div>

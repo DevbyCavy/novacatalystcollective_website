@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
 import { ArrowRight, LoaderCircle } from 'lucide-react'
 import { validateFields, submitForm } from './forms'
@@ -72,7 +73,12 @@ export default function NewsletterForm({ idPrefix = 'newsletter' }) {
         <input type="text" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
       </div>
       {error && <p id={`${id}-error`} className="mt-2 text-sm text-error">{error}</p>}
-      {status === 'error' && <p role="alert" className="mt-2 text-sm text-error">Subscription failed. Please try again shortly.</p>}
+      {status === 'error' && (
+        <p role="alert" className="mt-2 text-sm text-error">
+          We couldn&rsquo;t add you just now. Try again shortly, or{' '}
+          <Link to="/contact" className="underline underline-offset-2">send us a message</Link> instead.
+        </p>
+      )}
     </form>
   )
 }

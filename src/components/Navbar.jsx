@@ -4,8 +4,13 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Logo from './Logo'
 import { easeOut } from './Reveal'
 import { navItems, site } from '../data/site'
+import { insights } from '../data/insights'
 
-const primaryLinks = [{ label: 'Home', to: '/' }, ...navItems.filter((n) => n.to !== '/contact')]
+// Until an article is published, Insights stays out of the main navigation (footer keeps it).
+const hasInsights = insights.some((a) => a.status === 'published' && a.url)
+const visibleNav = navItems.filter((n) => hasInsights || n.to !== '/insights')
+
+const primaryLinks = [{ label: 'Home', to: '/' }, ...visibleNav.filter((n) => n.to !== '/contact')]
 
 /**
  * Full-width header bar.
@@ -144,7 +149,7 @@ export default function Navbar() {
             <div aria-hidden="true" className="grid-lines grid-fade pointer-events-none absolute inset-0" />
             <div aria-hidden="true" className="pointer-events-none absolute -top-20 left-1/2 h-80 w-[36rem] -translate-x-1/2 rounded-full bg-accent/45 blur-[110px]" />
             <ul className="container-x relative flex flex-col">
-              {[{ label: 'Home', to: '/' }, ...navItems].map((item, i) => (
+              {[{ label: 'Home', to: '/' }, ...visibleNav].map((item, i) => (
                 <motion.li
                   key={item.to}
                   initial={{ opacity: 0, y: 14, filter: 'blur(6px)' }}

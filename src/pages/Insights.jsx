@@ -71,7 +71,6 @@ export default function Insights() {
           <div className="relative grid gap-10 overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-brand/10 to-night-2 p-8 sm:p-12 lg:grid-cols-12 lg:items-center">
             <div aria-hidden="true" className="grid-lines pointer-events-none absolute inset-0 opacity-60" />
             <div className="relative lg:col-span-6">
-              <Reveal as="p" className="eyebrow">Newsletter</Reveal>
               <Reveal as="h2" id="newsletter-title" delay={0.05} className="mt-3 text-4xl sm:text-5xl">Perspectives, delivered.</Reveal>
               <Reveal as="p" delay={0.1} className="mt-3 max-w-md leading-relaxed text-haze">
                 Be the first to read new insights on growth, communications, AI and African markets.

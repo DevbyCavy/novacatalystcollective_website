@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Mic, Sparkles } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import Reveal, { RevealImage, easeOut } from '../components/Reveal'
 import Button, { TextLink } from '../components/Button'
 import GlowCard from '../components/GlowCard'
@@ -65,7 +65,6 @@ export default function DigitalBae() {
       <section aria-labelledby="db-about-title" className="py-24 sm:py-32">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Reveal as="p" className="eyebrow">The platform</Reveal>
             <Reveal as="h2" id="db-about-title" delay={0.05} className="mt-3 font-brand text-4xl leading-[1.05] font-extrabold tracking-tight sm:text-5xl">
               Think differently. Adapt confidently.
             </Reveal>
@@ -116,8 +115,7 @@ export default function DigitalBae() {
       <section aria-labelledby="db-speaking-title" className="pb-24 sm:pb-32">
         <div className="container-x grid items-center gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <Reveal as="p" className="eyebrow inline-flex items-center gap-2"><Mic className="h-4 w-4" aria-hidden="true" /> Speaking and masterclasses</Reveal>
-            <Reveal as="h2" id="db-speaking-title" delay={0.05} className="mt-3 font-brand text-4xl font-extrabold tracking-tight sm:text-5xl">Available for</Reveal>
+            <Reveal as="h2" id="db-speaking-title" delay={0.05} className="mt-3 font-brand text-4xl font-extrabold tracking-tight sm:text-5xl">Speaking and masterclasses</Reveal>
             <ul className="mt-10 border-t border-white/10">
               {digitalBae.formats.map((f, i) => (
                 <Reveal as="li" key={f} delay={i * 0.04} className="group flex items-baseline gap-5 border-b border-white/10 py-4">
@@ -137,7 +135,6 @@ export default function DigitalBae() {
       <section aria-labelledby="db-founder-title" className="border-y border-white/[0.07] bg-night-2 py-24 sm:py-32">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Reveal as="p" className="eyebrow">About the founder</Reveal>
             <Reveal as="h2" id="db-founder-title" delay={0.05} className="mt-3 text-5xl leading-tight">Taffy L. Gotora</Reveal>
             <Reveal as="p" delay={0.1} className="mt-2 text-haze">Founder, Nova Catalyst Collective</Reveal>
           </div>
@@ -162,7 +159,6 @@ export default function DigitalBae() {
       <section id="speaking-enquiry" aria-labelledby="db-form-title" className="py-24 sm:py-32">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Reveal as="p" className="eyebrow">Speaking enquiry</Reveal>
             <Reveal as="h2" id="db-form-title" delay={0.05} className="mt-3 font-brand text-4xl leading-[1.05] font-extrabold tracking-tight sm:text-5xl">
               Invite Digital Bae to speak.
             </Reveal>

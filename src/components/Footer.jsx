@@ -26,10 +26,8 @@ export default function Footer() {
       <div className="container-x relative">
         <div className="grid gap-12 border-b border-white/[0.07] py-16 sm:py-20 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="font-geo text-[2.4rem] leading-[1.02] font-semibold tracking-[-0.04em] sm:text-6xl">
-              Clarity. Credibility. <span className="text-glow">Impact.</span>
-            </p>
-            <p className="mt-5 font-geo text-sm text-haze">{site.disciplines.join('  ·  ')}</p>
+            <p className="max-w-md font-geo text-2xl leading-snug font-medium tracking-[-0.02em]">{site.strapline}</p>
+            <p className="mt-3 font-geo text-sm text-haze">{site.disciplines.join('  ·  ')}</p>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
             <h2 className="font-geo text-xl font-medium">Insights, in your inbox</h2>

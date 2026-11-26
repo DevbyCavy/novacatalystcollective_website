@@ -1,12 +1,15 @@
 import Reveal from './Reveal'
 
-/** Section heading: lilac eyebrow, geometric title, optional intro. */
+/**
+ * Section heading: geometric title + optional intro.
+ * `eyebrow` is accepted for backwards compatibility but never rendered: kickers above
+ * headings are banned by the design system (DESIGN.md, Impeccable craft floor).
+ */
 export default function SectionHeading({ eyebrow, title, intro, align = 'left', as = 'h2', id, className = '' }) {
   const centered = align === 'center'
   return (
     <div className={`${centered ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl'} ${className}`}>
-      {eyebrow && <Reveal as="p" className="eyebrow">{eyebrow}</Reveal>}
-      <Reveal as={as} id={id} delay={0.05} className="mt-3 text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-[3.4rem]">
+      <Reveal as={as} id={id} delay={0.05} className="text-[2.25rem] leading-[1.05] sm:text-5xl lg:text-[3.4rem]">
         {title}
       </Reveal>
       {intro && (
