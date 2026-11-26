@@ -28,13 +28,39 @@ export function validateFields(fields, values) {
 }
 
 /**
- * Sends a form submission. Applies the honeypot + time-trap checks, simulates
- * delivery during `npm run dev`, otherwise POSTs JSON to the configured endpoint.
+ * Sends a form submission. Applies the honeypot + time-trap checks, then delivers it by
+ * email through Web3Forms when a key is configured; otherwise POSTs JSON to the PHP
+ * endpoint (simulated during `npm run dev`).
  * Resolves on success, throws Error(message) on failure.
  */
 export async function submitForm(formName, values, { honeypot, startedAt }) {
   const elapsed = (Date.now() - startedAt) / 1000
   if (honeypot || elapsed < site.forms.minSecondsToSubmit) return // silently drop bots
+
+  const { web3formsKey } = site.forms
+  if (web3formsKey) {
+    const subjects = {
+      enquiry: `New enquiry${values.enquiryType ? `: ${values.enquiryType}` : ''}`,
+      speaking: 'New speaking enquiry (Digital Bae)',
+      newsletter: 'New newsletter subscriber',
+    }
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: web3formsKey,
+        subject: `${subjects[formName] ?? 'New website submission'} | ${site.name}`,
+        from_name: `${site.name} website`,
+        form: formName,
+        ...values,
+        ...(values.email ? { replyto: values.email } : {}),
+        botcheck: '',
+      }),
+    })
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok || !data.success) throw new Error(data.message || '')
+    return
+  }
 
   const payload = { form: formName, ...values, website: honeypot, elapsed: Math.round(elapsed) }
 

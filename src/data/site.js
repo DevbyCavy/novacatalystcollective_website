@@ -47,8 +47,11 @@ export const site = {
   gaMeasurementId: null,
 
   forms: {
-    // Enquiry, speaking and newsletter forms POST JSON here (handler: public/api/contact.php).
-    // During `npm run dev` submissions are simulated so the UI can be tested.
+    // Web3Forms access key (public by design: it only lets visitors send to the inbox it was
+    // created for). When set, every form is delivered by email through Web3Forms, in dev too.
+    web3formsKey: '445b1fe6-90ff-4a3b-b1e6-fe7c2962a1f8',
+    // Fallback when no key is set: forms POST JSON here (handler: public/api/contact.php),
+    // and `npm run dev` only simulates delivery.
     endpoint: `${import.meta.env.BASE_URL}api/contact.php`,
     minSecondsToSubmit: 3, // bot time-trap
   },
