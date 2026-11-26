@@ -42,7 +42,7 @@ export default function About() {
             </Reveal>
           </div>
           <div className="lg:col-span-5 lg:col-start-8">
-            <RevealImage image={images.aboutPrimary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/5]" />
+            <RevealImage image={images.aboutPrimary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5]" />
           </div>
         </div>
       </section>

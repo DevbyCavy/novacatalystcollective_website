@@ -25,11 +25,11 @@ export default function CtaBand({
             {text}
           </Reveal>
         )}
-        <Reveal delay={0.14} className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button to={primary.to}>{primary.label}</Button>
-          {secondary && <Button to={secondary.to} variant="ghost" arrow={false}>{secondary.label}</Button>}
+        <Reveal delay={0.14} className="mx-auto mt-10 grid w-max max-w-full gap-3 sm:grid-flow-col sm:auto-cols-fr">
+          <Button to={primary.to} className="w-full">{primary.label}</Button>
+          {secondary && <Button to={secondary.to} variant="ghost" arrow={false} className="w-full">{secondary.label}</Button>}
           {site.credentialsProfile && (
-            <Button href={site.credentialsProfile} variant="ghost" arrow={false} download>Company profile</Button>
+            <Button href={site.credentialsProfile} variant="ghost" arrow={false} download className="w-full">Company profile</Button>
           )}
         </Reveal>
       </div>

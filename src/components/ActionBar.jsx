@@ -6,13 +6,13 @@ import { whatsappUrl, WhatsAppGlyph } from './WhatsAppButton'
 import { site } from '../data/site'
 
 const iconBtn =
-  'press relative flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-md text-haze transition-colors duration-200 hover:bg-white/10 hover:text-white pointer-coarse:px-2.5'
+  'press relative flex h-10 w-10 items-center justify-center rounded-md text-haze transition-colors duration-200 hover:bg-white/10 hover:text-white'
 
 /**
- * Label for an icon button. Pointer devices get a 150ms tooltip on hover/focus;
- * touch devices (no hover) get the short label written beside the icon instead.
+ * Tooltip for an icon button on pointer devices (150ms on hover/focus). Touch devices rely on
+ * the button's aria-label; the bar stays compact.
  */
-function Tip({ label, short = label }) {
+function Tip({ label }) {
   return (
     <>
       <span
@@ -20,9 +20,6 @@ function Tip({ label, short = label }) {
         className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 scale-95 rounded-md border border-white/10 bg-night-3 px-2.5 py-1 font-geo text-xs whitespace-nowrap text-white opacity-0 transition-[opacity,transform] duration-150 ease-[var(--ease-out)] group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100 pointer-coarse:hidden"
       >
         {label}
-      </span>
-      <span aria-hidden="true" className="hidden font-geo text-xs font-medium pointer-coarse:inline">
-        {short}
       </span>
     </>
   )
@@ -58,16 +55,16 @@ export default function ActionBar() {
           transition={{ type: 'spring', stiffness: 420, damping: 32 }}
           className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 z-30 -translate-x-1/2"
         >
-          <div role="toolbar" aria-label="Quick actions" className="relative flex items-center gap-1 rounded-xl border border-white/12 bg-night-2/90 p-1.5 shadow-[0_16px_40px_-16px_rgba(29,20,40,0.28)] backdrop-blur-xl">
+          <div role="toolbar" aria-label="Quick actions" className="relative flex items-center gap-0.5 rounded-xl border border-white/12 bg-night-2/90 p-1 shadow-[0_16px_40px_-16px_rgba(29,20,40,0.28)] backdrop-blur-xl">
             {!onContact && (
-              <Link to="/contact?type=consultation" className="press inline-flex h-11 items-center gap-2 rounded-md bg-white px-4 font-geo text-sm font-medium whitespace-nowrap text-night transition-colors duration-200 hover:bg-brand">
+              <Link to="/contact?type=consultation" className="press inline-flex h-10 items-center gap-2 rounded-md bg-white px-3.5 font-geo text-[0.85rem] font-medium whitespace-nowrap text-night transition-colors duration-200 hover:bg-brand">
                 <CalendarCheck className="h-4 w-4" aria-hidden="true" /><span>Book a consultation</span>
               </Link>
             )}
             {pathname !== '/digital-bae' && (
               <Link to="/digital-bae#speaking-enquiry" aria-label="Invite Digital Bae to speak" className={`group ${iconBtn}`}>
                 <Mic className="h-4 w-4" aria-hidden="true" />
-                <Tip label="Invite to speak" short="Speak" />
+                <Tip label="Invite to speak" />
               </Link>
             )}
             {whatsappUrl && (
@@ -79,7 +76,7 @@ export default function ActionBar() {
             {site.contact.email && (
               <a href={`mailto:${site.contact.email}`} aria-label="Email us" className={`group ${iconBtn}`}>
                 <Mail className="h-4 w-4" aria-hidden="true" />
-                <Tip label="Email us" short="Email" />
+                <Tip label="Email us" />
               </a>
             )}
             <button
@@ -89,7 +86,7 @@ export default function ActionBar() {
               className={`group ${iconBtn}`}
             >
               <ArrowUp className="h-4 w-4" aria-hidden="true" />
-              <Tip label="Back to top" short="Top" />
+              <Tip label="Back to top" />
             </button>
             <motion.span aria-hidden="true" className="absolute inset-x-3 bottom-0 h-[2px] origin-left bg-glow" style={{ scaleX: progress }} />
           </div>

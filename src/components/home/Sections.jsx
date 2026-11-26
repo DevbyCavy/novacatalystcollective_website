@@ -19,7 +19,7 @@ export function ProofStrip() {
   const stat = work.find((w) => w.highlight)
   return (
     <section aria-label="Selected clients and results" className="border-y border-white/10 bg-night-2">
-      <div className="container-x grid gap-6 py-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-16">
+      <div className="container-x grid gap-6 py-8 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-center xl:gap-16">
         <div>
           <p className="font-geo text-[0.72rem] font-semibold tracking-[0.18em] text-haze uppercase">Selected clients</p>
           <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
@@ -34,7 +34,7 @@ export function ProofStrip() {
           </ul>
         </div>
         {stat && (
-          <div className="lg:border-l lg:border-white/10 lg:pl-16">
+          <div className="xl:border-l xl:border-white/10 xl:pl-16">
             <p className="font-geo text-4xl font-semibold tracking-[-0.03em] text-glow">
               {stat.highlight.value} <span className="text-base font-medium tracking-normal text-white">{stat.highlight.label}</span>
             </p>
@@ -53,7 +53,7 @@ export function FounderBlock() {
       <div className="container-x grid gap-10 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-6">
           <Reveal as="h2" id="founder-title" className="text-[2.25rem] leading-[1.05] tracking-[-0.03em] text-balance sm:text-5xl lg:text-[3.4rem]">
-            Led by <span className="text-glow">Taffy L. Gotora</span>
+            Led by <span className="whitespace-nowrap text-glow">Taffy L. Gotora</span>
           </Reveal>
           <Reveal as="p" delay={0.06} className="mt-4 font-geo text-lg font-medium text-white">
             Founder, Nova Catalyst Collective
@@ -92,9 +92,9 @@ export function AudienceRoutes() {
     <section aria-labelledby="routes-title" className="pb-8">
       <div className="container-x">
         <h2 id="routes-title" className="sr-only">Where to start</h2>
-        <ul className="grid border-y border-white/10 md:grid-cols-3">
+        <ul className="grid border-y border-white/10 lg:grid-cols-3">
           {routes.map((r, i) => (
-            <Reveal as="li" key={r.who} delay={i * 0.05} className={`py-8 md:px-8 ${i > 0 ? 'border-t border-white/10 md:border-t-0 md:border-l' : 'md:pl-0'}`}>
+            <Reveal as="li" key={r.who} delay={i * 0.05} className={`py-8 lg:px-8 ${i > 0 ? 'border-t border-white/10 lg:border-t-0 lg:border-l' : 'lg:pl-0'}`}>
               <h3 className="text-xl leading-snug">{r.who}</h3>
               <p className="mt-2 text-[0.95rem] leading-relaxed text-haze">{r.what}</p>
               <TextLink to={r.to} className="mt-5">{r.label}</TextLink>
@@ -143,7 +143,7 @@ export function Introduction() {
           </Reveal>
         </div>
         <div className="relative lg:col-span-5 lg:col-start-8">
-          <RevealImage image={images.aboutSecondary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/5]" />
+          <RevealImage image={images.aboutSecondary} sizes="(min-width: 1024px) 38vw, 100vw" className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5]" />
           {/* Purple frosted glass: the photo shows through, blurred and tinted */}
           <Reveal
             delay={0.3}

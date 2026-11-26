@@ -116,6 +116,16 @@
   @media (width >= 48rem) {
     padding-inline: 2rem;
   }
+  @media (width >= 100rem) {
+    max-width: 86rem;
+  }
+}
+
+/* Large desktop monitors (≥1760px): scale the whole rem-based system up ~6% */
+@media (width >= 110rem) {
+  html {
+    font-size: 106.25%;
+  }
 }
 
 @utility eyebrow {

@@ -51,9 +51,9 @@ export default function DigitalBae() {
             <p className="font-geo text-3xl leading-tight font-medium tracking-[-0.03em] sm:text-[2.6rem] lg:col-span-7">
               The future is digital. <span className="text-glow">The opportunity is yours.</span>
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:justify-end">
-              <Button href="#speaking-enquiry">Invite Digital Bae to speak</Button>
-              <Button href={site.digitalBae.url} target="_blank" rel="noopener noreferrer" variant="ghost" arrow={false}>
+            <div className="grid w-max max-w-full gap-3 sm:grid-flow-col sm:auto-cols-fr lg:col-span-5 lg:ml-auto">
+              <Button href="#speaking-enquiry" className="w-full">Invite Digital Bae to speak</Button>
+              <Button href={site.digitalBae.url} target="_blank" rel="noopener noreferrer" variant="ghost" arrow={false} className="w-full">
                 Visit {site.digitalBae.label} ↗<span className="sr-only"> (opens in a new tab)</span>
               </Button>
             </div>
@@ -126,7 +126,7 @@ export default function DigitalBae() {
             </ul>
           </div>
           <div className="lg:col-span-6">
-            <RevealImage image={images.aboutPrimary} sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/5]" />
+            <RevealImage image={images.aboutPrimary} sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5]" />
           </div>
         </div>
       </section>

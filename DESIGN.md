@@ -232,6 +232,7 @@ Precise and composed.
 - **Primary:** Boardroom Ink fill, Lilac Paper text, Outfit 500 at 0.95rem, 14px × 20px. Turns Catalyst Plum on hover (200ms colour transition).
 - **Ghost:** transparent with a 1px ink border at 20%, ink text; border strengthens to 50% with a faint tint on hover.
 - **Brand:** Catalyst Plum fill with white text; Catalyst Plum Soft on hover.
+- **Button groups:** buttons that sit together are always equal width: sized to the widest label (no wider), stacked on phones and equal columns side by side from 640px.
 - **One primary label:** the consultation action is always "Book a consultation" and always links to `/contact?type=consultation` (hero, navbar, mobile menu, action bar, closing band). The speaking action is always "Invite to speak".
 - **Arrow cell:** only the hero's primary call to action ("Book a consultation") carries an arrow, set in its own cell behind a hairline divider (`[ Label │ → ]`); the arrow nudges 2px on hover. All other buttons are text only.
 - **Press:** every pressable scales to 0.97 on `:active` (160ms ease-out).
@@ -260,7 +261,7 @@ Precise and composed.
 - **Mobile:** menu button opens a full-screen paper menu with large Outfit links, numbered, staggering in with a soft blur.
 
 ### Floating Action Bar (signature)
-Bottom-centre glass bar (Card White 90%, 12px corners, backdrop blur) that appears after half a screen of scrolling (a fifth of a screen on phones, where the header has no room for the consultation button). Holds "Book a consultation" (solid ink) and icon buttons for speaking, WhatsApp, email and back-to-top (6px). Pointer devices get 150ms tooltips; touch devices show a short text label beside each icon (Speak, WhatsApp, Email, Top). It also has a 2px Blueprint Violet line along its base that tracks reading progress.
+Bottom-centre glass bar (Card White 90%, 12px corners, backdrop blur) that appears after half a screen of scrolling (a fifth of a screen on phones, where the header has no room for the consultation button). Holds "Book a consultation" (solid ink) and icon buttons for speaking, WhatsApp, email and back-to-top (6px). Controls are 40px; icons carry aria-labels, with 150ms tooltips on pointer devices. No text labels beside icons, so the island stays compact on phones. It also has a 2px Blueprint Violet line along its base that tracks reading progress.
 
 ### Pinned Services Story (signature)
 A five-step scroll story: left column lists services with a hairline that extends from 16px to 40px for the active one; the right card swaps with a blur crossfade (enter 400ms, exit 150ms).

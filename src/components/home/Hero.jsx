@@ -40,10 +40,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.55, ease: easeOut }}
-          className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          className="mx-auto mt-10 grid w-max max-w-full gap-3 sm:grid-flow-col sm:auto-cols-fr"
         >
-          <Button to="/contact?type=consultation" arrow>Book a consultation</Button>
-          <Button href="#expertise" variant="ghost">Explore our expertise</Button>
+          <Button to="/contact?type=consultation" arrow className="w-full">Book a consultation</Button>
+          <Button href="#expertise" variant="ghost" className="w-full">Explore our expertise</Button>
         </motion.div>
       </div>
     </section>
